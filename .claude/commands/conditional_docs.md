@@ -36,3 +36,10 @@ This prompt helps you determine what documentation you should read based on the 
     - When working with the BirthDataForm or LocationSearch components
     - When troubleshooting timezone-related issues in chart calculations
     - When working with the geo-tz library or src/lib/timezone.ts
+
+- app_docs/chore-switch-to-nominatim-geocoding.md
+  - Conditions:
+    - When working with the geocoding API route (/api/geocode)
+    - When modifying location search functionality
+    - When troubleshooting Nominatim API issues or rate limits
+    - When working with OpenStreetMap data or location results

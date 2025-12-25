@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validated = requestSchema.parse(body);
     
-    const response = generateChartResponse(
+    const response = await generateChartResponse(
       validated.datetime_utc,
       validated.lat,
       validated.lng,
