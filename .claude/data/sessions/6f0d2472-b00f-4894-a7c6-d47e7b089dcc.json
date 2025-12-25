@@ -1,0 +1,6 @@
+{
+  "session_id": "6f0d2472-b00f-4894-a7c6-d47e7b089dcc",
+  "prompts": [
+    "I'm getting this in claude usage config: Error: Failed to load usage data: {\"type\":\"error\",\"error\":{\"type\":\"permission_error\",\"message\":\"OAuth token does not meet scope requirement \n user:profile\",\"details\":{\"error_visibility\":\"user_facing\"}},\"request_id\":\"req_011CWMxwNtkzMshQBCoQiK26\"}"
+  ]
+}

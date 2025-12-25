@@ -1,0 +1,138 @@
+[
+  {
+    "session_id": "6f0d2472-b00f-4894-a7c6-d47e7b089dcc",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/6f0d2472-b00f-4894-a7c6-d47e7b089dcc.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "I'm getting this in claude usage config: Error: Failed to load usage data: {\"type\":\"error\",\"error\":{\"type\":\"permission_error\",\"message\":\"OAuth token does not meet scope requirement \n user:profile\",\"details\":{\"error_visibility\":\"user_facing\"}},\"request_id\":\"req_011CWMxwNtkzMshQBCoQiK26\"}"
+  },
+  {
+    "session_id": "b0a5c3c4-c392-4929-a7ab-be023147c0b5",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/b0a5c3c4-c392-4929-a7ab-be023147c0b5.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "dontAsk",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "logout"
+  },
+  {
+    "session_id": "b0a5c3c4-c392-4929-a7ab-be023147c0b5",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/b0a5c3c4-c392-4929-a7ab-be023147c0b5.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "dontAsk",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "I need to logout and log back in to my claude maxx account to update permissions scope"
+  },
+  {
+    "session_id": "7ff7a700-c723-42dd-977c-6d01868e6272",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/7ff7a700-c723-42dd-977c-6d01868e6272.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "dontAsk",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "logout"
+  },
+  {
+    "session_id": "9e6825b3-fd2a-468e-93f5-ee9b920b9848",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/9e6825b3-fd2a-468e-93f5-ee9b920b9848.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "dontAsk",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "login"
+  },
+  {
+    "session_id": "8bdfb403-9d19-4917-b705-e12f599847ad",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/8bdfb403-9d19-4917-b705-e12f599847ad.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "Connect this project to https://github.com/nmitch17/intangible-me.git"
+  },
+  {
+    "session_id": "8d1ac848-a5ce-4c93-996d-ac3675cca9f2",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/8d1ac848-a5ce-4c93-996d-ac3675cca9f2.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "plan",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "View the prd in @specs/Human_Design_API_PRD_v2.md and come up with a development plan for this app. The logical end point for the first phase of development is an MVP prototype."
+  },
+  {
+    "session_id": "8d1ac848-a5ce-4c93-996d-ac3675cca9f2",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/8d1ac848-a5ce-4c93-996d-ac3675cca9f2.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/start "
+  },
+  {
+    "session_id": "8d1ac848-a5ce-4c93-996d-ac3675cca9f2",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/8d1ac848-a5ce-4c93-996d-ac3675cca9f2.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/start "
+  },
+  {
+    "session_id": "422947e2-91eb-41cb-8ccf-ddcdd7521e2f",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/422947e2-91eb-41cb-8ccf-ddcdd7521e2f.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/start "
+  },
+  {
+    "session_id": "422947e2-91eb-41cb-8ccf-ddcdd7521e2f",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/422947e2-91eb-41cb-8ccf-ddcdd7521e2f.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/document "
+  },
+  {
+    "session_id": "c6c5f0c0-d0b9-48ef-833e-bf9aff227244",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c6c5f0c0-d0b9-48ef-833e-bf9aff227244.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/chore \"Replace the existing latitude and longitude inputs with a location search, so people will start typing in their city and then it will show a real-time dropdown of location results: city, state, province, country. Optionally, people can just put in a zip code or a city. Use the maptiler api. I added the key in @.env.local and it's MAPTILER_API_KEY\\\n\\\nSee docs here: https://docs.maptiler.com/cloud/api/geolocation/\""
+  },
+  {
+    "session_id": "93670e30-d08c-4bbf-8f23-206fc2fc688a",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/93670e30-d08c-4bbf-8f23-206fc2fc688a.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/implement specs/chore-location-search-maptiler.md"
+  },
+  {
+    "session_id": "93670e30-d08c-4bbf-8f23-206fc2fc688a",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/93670e30-d08c-4bbf-8f23-206fc2fc688a.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/document "
+  },
+  {
+    "session_id": "192e7084-3976-45ee-82e1-0a057c5ce8c6",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/192e7084-3976-45ee-82e1-0a057c5ce8c6.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/chore \"Now instead of manually selecting the time zone, the time zone should be set in the backend. Not in the backend, but not in the UI. It should be set when you select the birth location. The birth location should determine the time zone. It's right there.\""
+  },
+  {
+    "session_id": "fbe4708f-c6ca-4614-afab-e41b0367f11d",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/fbe4708f-c6ca-4614-afab-e41b0367f11d.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/implement specs/chore-auto-timezone-from-location.md"
+  },
+  {
+    "session_id": "fbe4708f-c6ca-4614-afab-e41b0367f11d",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/fbe4708f-c6ca-4614-afab-e41b0367f11d.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/ship "
+  }
+]

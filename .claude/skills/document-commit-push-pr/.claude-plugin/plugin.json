@@ -1,0 +1,21 @@
+{
+  "name": "document-commit-push-pr",
+  "description": "Executes a complete shipping workflow by running /document, /commit, and /pr commands in sequence. Use when the user wants to ship their work, document progress, commit changes, and create or update a pull request.",
+  "version": "1.0.0",
+  "author": {
+    "name": "White Rabbit Development Team"
+  },
+  "license": "SEE LICENSE.txt",
+  "keywords": [
+    "shipping",
+    "workflow",
+    "git",
+    "commit",
+    "pull-request",
+    "documentation",
+    "automation"
+  ],
+  "skills": [
+    "."
+  ]
+}

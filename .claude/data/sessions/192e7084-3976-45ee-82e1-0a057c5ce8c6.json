@@ -1,0 +1,6 @@
+{
+  "session_id": "192e7084-3976-45ee-82e1-0a057c5ce8c6",
+  "prompts": [
+    "/chore \"Now instead of manually selecting the time zone, the time zone should be set in the backend. Not in the backend, but not in the UI. It should be set when you select the birth location. The birth location should determine the time zone. It's right there.\""
+  ]
+}

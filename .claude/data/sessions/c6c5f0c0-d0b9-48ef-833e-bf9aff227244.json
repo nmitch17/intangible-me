@@ -1,0 +1,6 @@
+{
+  "session_id": "c6c5f0c0-d0b9-48ef-833e-bf9aff227244",
+  "prompts": [
+    "/chore \"Replace the existing latitude and longitude inputs with a location search, so people will start typing in their city and then it will show a real-time dropdown of location results: city, state, province, country. Optionally, people can just put in a zip code or a city. Use the maptiler api. I added the key in @.env.local and it's MAPTILER_API_KEY\\\n\\\nSee docs here: https://docs.maptiler.com/cloud/api/geolocation/\""
+  ]
+}
