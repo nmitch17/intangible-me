@@ -9,31 +9,24 @@
 import SwissEPH from 'sweph-wasm';
 import { longitudeToGateLine } from './mandala';
 import type { Activation, Activations, Planet } from '@/types';
-import path from 'path';
-import { pathToFileURL } from 'url';
-import { readFileSync } from 'fs';
 
 // Singleton instance of SwissEPH
 let sweInstance: SwissEPH | null = null;
 
 /**
  * Initialize SwissEPH WASM module (singleton pattern)
- * Uses local WASM file for Node.js environments
+ * Uses public WASM file served as a static asset
  */
 async function getSwe(): Promise<SwissEPH> {
   if (!sweInstance) {
-    // In Node.js, provide the local path to the WASM file as a file:// URL
-    if (typeof window === 'undefined') {
-      const wasmPath = path.join(
-        process.cwd(),
-        'node_modules/sweph-wasm/dist/wasm/swisseph.wasm'
-      );
-      const wasmUrl = pathToFileURL(wasmPath).href;
-      sweInstance = await SwissEPH.init(wasmUrl);
-    } else {
-      // In browser, let it use the default CDN
-      sweInstance = await SwissEPH.init();
-    }
+    // Construct absolute URL to the public WASM file
+    // In production (Vercel), use VERCEL_URL; in development, use localhost
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000';
+    const wasmUrl = `${baseUrl}/swisseph.wasm`;
+
+    sweInstance = await SwissEPH.init(wasmUrl);
   }
   return sweInstance;
 }

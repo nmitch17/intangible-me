@@ -1,0 +1,7 @@
+{
+  "session_id": "a5b04c78-ce52-4de7-8b9c-ef9ecc363121",
+  "prompts": [
+    "/bug \"Got this in prod: 2025-12-26 07:14:53.962 [error] wasm streaming compile failed: TypeError: fetch failed\n2025-12-26 07:14:53.962 [error] falling back to ArrayBuffer instantiation\n2025-12-26 07:14:53.963 [error] failed to asynchronously prepare wasm: both async and sync fetching of the wasm failed\n2025-12-26 07:14:53.963 [error] Aborted(both async and sync fetching of the wasm failed)\n2025-12-26 07:14:53.973 [error] Chart calculation error: RuntimeError: Aborted(both async and sync fetching of the wasm failed). Build with -sASSERTIONS for more info.\n    at async P.init (.next/server/chunks/[root-of-the-server]__b105cbf6._.js:1:14057)\n    at async K (.next/server/chunks/[root-of-the-server]__b105cbf6._.js:1:38992)\n    at async j (.next/server/chunks/[root-of-the-server]__b105cbf6._.js:1:39649)\n    at async J (.next/server/chunks/[root-of-the-server]__b105cbf6._.js:1:44393)\n    at async W (.next/server/chunks/[root-of-the-server]__b105cbf6._.js:1:49301)\n    at async Q (.next/server/chunks/[root-of-the-server]__b105cbf6._.js:1:49550)\"",
+    "What is the \"built in CDN fallback\"? What cdn is it retreiving from?"
+  ]
+}

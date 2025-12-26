@@ -166,5 +166,61 @@
     "cwd": "/Users/nickmitchell/intangible-me",
     "hook_event_name": "SessionStart",
     "source": "startup"
+  },
+  {
+    "session_id": "b50fb499-d479-49f2-91d4-0bd5dbcf759c",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/b50fb499-d479-49f2-91d4-0bd5dbcf759c.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
+  },
+  {
+    "session_id": "f71db28b-5af1-4157-9e93-27040e8b1211",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/f71db28b-5af1-4157-9e93-27040e8b1211.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
+  },
+  {
+    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
+  },
+  {
+    "session_id": "615fbbae-d9e3-4ab9-9131-6153dd8acc90",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/615fbbae-d9e3-4ab9-9131-6153dd8acc90.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "c160329d-0e67-43e7-9e7d-f99870544145",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c160329d-0e67-43e7-9e7d-f99870544145.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
+  },
+  {
+    "session_id": "a5b04c78-ce52-4de7-8b9c-ef9ecc363121",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/a5b04c78-ce52-4de7-8b9c-ef9ecc363121.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
+  },
+  {
+    "session_id": "a3afb852-688f-4968-9dd7-86b3de2b9c10",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/a3afb852-688f-4968-9dd7-86b3de2b9c10.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
   }
 ]

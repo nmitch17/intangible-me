@@ -52,3 +52,11 @@ This prompt helps you determine what documentation you should read based on the 
     - When implementing new UI components or animations
     - When troubleshooting glass-morphism or backdrop-filter effects
     - When working with the page layout or parallax effects
+
+- app_docs/bug-wasm-fetch-failed-vercel-production.md
+  - Conditions:
+    - When working with the sweph-wasm library or ephemeris calculations
+    - When troubleshooting WASM loading issues in production
+    - When modifying src/lib/calculation/ephemeris.ts
+    - When deploying to Vercel or other serverless platforms
+    - When working with the /api/chart endpoint and seeing 500 errors
