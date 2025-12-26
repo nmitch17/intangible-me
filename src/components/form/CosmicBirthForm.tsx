@@ -135,36 +135,34 @@ export function CosmicBirthForm({ onSubmit, isLoading, error }: CosmicBirthFormP
   return (
     <form onSubmit={handleSubmit}>
       {displayError && (
-        <div className="mb-6 p-3 bg-red-500/20 border border-red-500/50 rounded text-red-300 text-sm font-mono">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl text-red-600 text-sm font-mono">
           {displayError}
         </div>
       )}
 
-      <div className="cosmic-input-group">
+      <div className="solar-input-group">
         <label>Birth Date</label>
         <input
           type="date"
           value={birthDate}
           onChange={(e) => setBirthDate(e.target.value)}
-          className="cosmic-input"
+          className="solar-input"
           required
         />
-        <div className="cosmic-input-bar" />
       </div>
 
-      <div className="cosmic-input-group">
+      <div className="solar-input-group">
         <label>Birth Time</label>
         <input
           type="time"
           value={birthTime}
           onChange={(e) => setBirthTime(e.target.value)}
-          className="cosmic-input"
+          className="solar-input"
           required
         />
-        <div className="cosmic-input-bar" />
       </div>
 
-      <div ref={containerRef} className="cosmic-input-group">
+      <div ref={containerRef} className="solar-input-group">
         <label>Birth Location</label>
         <div className="relative">
           <input
@@ -179,13 +177,12 @@ export function CosmicBirthForm({ onSubmit, isLoading, error }: CosmicBirthFormP
               if (results.length > 0 && !hasSelected) setIsOpen(true);
             }}
             placeholder="Search city or location..."
-            className="cosmic-input pr-8"
+            className="solar-input pr-10"
             autoComplete="off"
           />
-          <div className="cosmic-input-bar" />
           {isSearching && (
-            <div className="absolute right-0 top-1/2 -translate-y-1/2">
-              <svg className="animate-spin h-5 w-5 text-nebula-cyan" viewBox="0 0 24 24">
+            <div className="absolute right-4 top-1/2 -translate-y-1/2">
+              <svg className="animate-spin h-5 w-5 text-solar-glow" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
@@ -194,14 +191,14 @@ export function CosmicBirthForm({ onSubmit, isLoading, error }: CosmicBirthFormP
         </div>
 
         {isOpen && (
-          <ul className="absolute z-50 w-full mt-2 cosmic-dropdown rounded-md shadow-lg max-h-60 overflow-auto">
+          <ul className="absolute z-50 w-full mt-2 solar-dropdown rounded-xl shadow-lg max-h-60 overflow-auto">
             {results.map((result, index) => (
               <li
                 key={result.id}
                 className={`px-4 py-3 cursor-pointer text-sm transition-colors ${
                   index === selectedIndex
-                    ? 'bg-nebula-cyan/20 text-white'
-                    : 'text-white/70 hover:bg-white/5'
+                    ? 'bg-solar-glow/20 text-deep-cosmos'
+                    : 'text-deep-cosmos/70 hover:bg-haze-pink/10'
                 }`}
                 onClick={() => handleSelectLocation(result)}
                 onMouseEnter={() => setSelectedIndex(index)}
@@ -213,7 +210,7 @@ export function CosmicBirthForm({ onSubmit, isLoading, error }: CosmicBirthFormP
         )}
 
         {location && (
-          <p className="text-xs text-nebula-cyan/70 mt-2 font-mono">
+          <p className="text-xs text-solar-glow mt-2 font-mono ml-1.5">
             {location.lat.toFixed(4)}, {location.lng.toFixed(4)} | {location.timezone}
           </p>
         )}
@@ -222,7 +219,7 @@ export function CosmicBirthForm({ onSubmit, isLoading, error }: CosmicBirthFormP
       <button
         type="submit"
         disabled={isLoading}
-        className="cosmic-button mt-4"
+        className="solar-button mt-6"
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-3">

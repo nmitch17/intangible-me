@@ -25,7 +25,7 @@ export function ChartResult({ chart, birth }: ChartResultProps) {
 
   return (
     <div className="space-y-6">
-      <div className="text-center text-sm text-white/50 font-mono">
+      <div className="text-center text-sm text-white/60 font-mono">
         Calculated for {formattedDate}
       </div>
 

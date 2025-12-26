@@ -18,12 +18,12 @@ export function ChartOverview({ chart }: ChartOverviewProps) {
       {metrics.map((metric) => (
         <div
           key={metric.label}
-          className="bg-white/5 border border-white/10 p-4 rounded-lg text-center"
+          className="bg-input-bg/60 p-4 rounded-2xl text-center shadow-neumorphic"
         >
-          <p className="text-xs font-mono text-nebula-cyan uppercase tracking-wider mb-1">
+          <p className="text-xs font-mono text-solar-glow uppercase tracking-wider mb-1">
             {metric.label}
           </p>
-          <p className="text-lg font-semibold text-white">
+          <p className="text-lg font-medium text-deep-cosmos">
             {metric.value}
           </p>
         </div>

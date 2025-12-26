@@ -12,6 +12,56 @@ Comprehensive Human Design chart calculation and analysis platform.
 - **AI Agent**: Pydantic AI (Python)
 - **Deployment**: Vercel
 
+## Design System: Solar Haze Portal
+
+The app uses a custom "Solar Haze Portal" design system featuring claymorphism, neumorphic inputs, and warm gradient accents.
+
+### Colors
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--solar-glow` | `#ff9d6c` | Primary accent, buttons, labels |
+| `--haze-pink` | `#f0a2b1` | Secondary accent, gradients |
+| `--deep-cosmos` | `#2e1a47` | Text, dark backgrounds |
+| `--clay-surface` | `#ffffff` | Card backgrounds |
+| `--input-bg` | `#f7f3ff` | Form input backgrounds |
+
+### Typography
+
+- **Outfit** (300, 500): Primary sans-serif for body text
+- **DM Serif Display**: Elegant serif for display headings
+- **JetBrains Mono**: Monospace for labels and data points
+
+### Components
+
+#### Claymorphic Cards
+White surfaces with soft inset/outset shadows creating a 3D clay-like appearance.
+- Large cards: 60px border-radius
+- Chart cards: 40px border-radius
+
+#### Neumorphic Inputs
+Inset shadows on light purple backgrounds (#f7f3ff) for a pressed-in effect.
+- Border radius: 30px
+- No borders, shadow-based depth
+
+#### Gradient Buttons
+Linear gradient from solar-glow to haze-pink with glow shadow.
+- Static position on hover (shadow changes only)
+- No size or position transforms
+
+### Background
+
+- Radial gradient from #4a227a to #2e1a47
+- Three animated blurred orbs (orange, pink, purple)
+- Sparkle particles
+- 4% opacity grain overlay
+
+### Animations
+
+- **drift**: 20s ambient orb movement
+- **slideUp**: 1.2s card entrance animation
+- **sparkle**: Particle fade effect
+
 ## Project Structure
 
 ```

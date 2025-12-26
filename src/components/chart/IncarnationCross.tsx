@@ -11,7 +11,7 @@ export function IncarnationCross({ cross }: IncarnationCrossProps) {
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-lg font-medium text-white">
+        <span className="text-lg font-medium text-deep-cosmos">
           {cross.name}
         </span>
         <Badge variant="purple">{cross.type}</Badge>
