@@ -7,311 +7,6 @@
     "hook_event_name": "PostToolUse",
     "tool_name": "Bash",
     "tool_input": {
-      "command": "grep -r \"wasmPath\\|locateFile\\|initOptions\" node_modules/sweph-wasm/dist/index.d.ts 2>/dev/null | head -20",
-      "description": "Check sweph-wasm init options"
-    },
-    "tool_response": {
-      "stdout": "",
-      "stderr": "",
-      "interrupted": false,
-      "isImage": false
-    },
-    "tool_use_id": "toolu_01MHadftmjFXvMgVhYVUQpmb"
-  },
-  {
-    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
-    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
-    "cwd": "/Users/nickmitchell/intangible-me",
-    "permission_mode": "bypassPermissions",
-    "hook_event_name": "PostToolUse",
-    "tool_name": "Bash",
-    "tool_input": {
-      "command": "grep \"static init\" node_modules/sweph-wasm/dist/index.d.ts",
-      "description": "Check init method signature"
-    },
-    "tool_response": {
-      "stdout": "    static init(wasm_path?: string): Promise<SwissEPH>;",
-      "stderr": "",
-      "interrupted": false,
-      "isImage": false
-    },
-    "tool_use_id": "toolu_01CnaU1sj6Qi2G4UE21KD5RP"
-  },
-  {
-    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
-    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
-    "cwd": "/Users/nickmitchell/intangible-me",
-    "permission_mode": "bypassPermissions",
-    "hook_event_name": "PostToolUse",
-    "tool_name": "Edit",
-    "tool_input": {
-      "file_path": "/Users/nickmitchell/intangible-me/src/lib/calculation/ephemeris.ts",
-      "old_string": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    sweInstance = await SwissEPH.init();\n  }\n  return sweInstance;\n}",
-      "new_string": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\nimport path from 'path';\nimport { fileURLToPath } from 'url';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses local WASM file for Node.js environments\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // In Node.js, provide the local path to the WASM file\n    if (typeof window === 'undefined') {\n      const wasmPath = path.join(\n        process.cwd(),\n        'node_modules/sweph-wasm/dist/wasm/swisseph.wasm'\n      );\n      sweInstance = await SwissEPH.init(wasmPath);\n    } else {\n      // In browser, let it use the default CDN\n      sweInstance = await SwissEPH.init();\n    }\n  }\n  return sweInstance;\n}"
-    },
-    "tool_response": {
-      "filePath": "/Users/nickmitchell/intangible-me/src/lib/calculation/ephemeris.ts",
-      "oldString": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    sweInstance = await SwissEPH.init();\n  }\n  return sweInstance;\n}",
-      "newString": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\nimport path from 'path';\nimport { fileURLToPath } from 'url';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses local WASM file for Node.js environments\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // In Node.js, provide the local path to the WASM file\n    if (typeof window === 'undefined') {\n      const wasmPath = path.join(\n        process.cwd(),\n        'node_modules/sweph-wasm/dist/wasm/swisseph.wasm'\n      );\n      sweInstance = await SwissEPH.init(wasmPath);\n    } else {\n      // In browser, let it use the default CDN\n      sweInstance = await SwissEPH.init();\n    }\n  }\n  return sweInstance;\n}",
-      "originalFile": "/**\n * Swiss Ephemeris Wrapper\n *\n * Calculates planetary positions for Human Design chart generation.\n * Uses sweph-wasm, a WebAssembly implementation of Swiss Ephemeris\n * that works across all platforms including serverless environments.\n */\n\nimport SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    sweInstance = await SwissEPH.init();\n  }\n  return sweInstance;\n}\n\n// Calculation flags\nconst SEFLG_SWIEPH = 2; // Use Swiss Ephemeris\nconst SEFLG_SPEED = 256; // Include speed\n\n/**\n * Convert Date to Julian Day\n */\nfunction dateToJulianDay(swe: SwissEPH, date: Date): number {\n  const year = date.getUTCFullYear();\n  const month = date.getUTCMonth() + 1;\n  const day = date.getUTCDate();\n  const hour = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;\n\n  return swe.swe_julday(year, month, day, hour, swe.SE_GREG_CAL);\n}\n\n/**\n * Get planetary position at a given Julian Day\n * Returns longitude in degrees\n */\nfunction getPlanetPosition(swe: SwissEPH, julianDay: number, planet: number): number {\n  const result = swe.swe_calc_ut(julianDay, planet, SEFLG_SWIEPH | SEFLG_SPEED);\n  // Result is array: [longitude, latitude, distance, lonSpeed, latSpeed, distSpeed]\n  return result[0];\n}\n\n/**\n * Calculate the Design time (88\u00b0 solar arc before birth)\n *\n * This finds the exact moment when the Sun was 88\u00b0 behind its birth position.\n */\nfunction calculateDesignTime(swe: SwissEPH, birthJulianDay: number): number {\n  const birthSunLongitude = getPlanetPosition(swe, birthJulianDay, swe.SE_SUN);\n  const targetLongitude = (birthSunLongitude - 88 + 360) % 360;\n\n  // Approximate: Sun moves ~1\u00b0 per day, so 88\u00b0 \u2248 88 days\n  let searchJD = birthJulianDay - 88;\n\n  // Binary search to find exact moment\n  let low = searchJD - 5;\n  let high = searchJD + 5;\n\n  for (let i = 0; i < 50; i++) {\n    const mid = (low + high) / 2;\n    const sunLong = getPlanetPosition(swe, mid, swe.SE_SUN);\n\n    // Calculate angular difference\n    let diff = sunLong - targetLongitude;\n    if (diff > 180) diff -= 360;\n    if (diff < -180) diff += 360;\n\n    if (Math.abs(diff) < 0.0001) {\n      return mid;\n    }\n\n    if (diff > 0) {\n      high = mid;\n    } else {\n      low = mid;\n    }\n  }\n\n  return (low + high) / 2;\n}\n\n/**\n * Get all planetary activations for a given Julian Day\n */\nfunction getActivations(swe: SwissEPH, julianDay: number): Activations {\n  const planets: Array<{ name: Planet; code: number }> = [\n    { name: 'sun', code: swe.SE_SUN },\n    { name: 'moon', code: swe.SE_MOON },\n    { name: 'mercury', code: swe.SE_MERCURY },\n    { name: 'venus', code: swe.SE_VENUS },\n    { name: 'mars', code: swe.SE_MARS },\n    { name: 'jupiter', code: swe.SE_JUPITER },\n    { name: 'saturn', code: swe.SE_SATURN },\n    { name: 'uranus', code: swe.SE_URANUS },\n    { name: 'neptune', code: swe.SE_NEPTUNE },\n    { name: 'pluto', code: swe.SE_PLUTO },\n  ];\n\n  const activations: Partial<Activations> = {};\n\n  for (const { name, code } of planets) {\n    const longitude = getPlanetPosition(swe, julianDay, code);\n    const { gate, line } = longitudeToGateLine(longitude);\n    activations[name] = { gate, line };\n  }\n\n  // North Node\n  const northNodeLong = getPlanetPosition(swe, julianDay, swe.SE_TRUE_NODE);\n  const northNode = longitudeToGateLine(northNodeLong);\n  activations.north_node = northNode;\n\n  // South Node is always opposite (180\u00b0)\n  const southNodeLong = (northNodeLong + 180) % 360;\n  const southNode = longitudeToGateLine(southNodeLong);\n  activations.south_node = southNode;\n\n  // Earth is always opposite Sun (180\u00b0)\n  const sunLong = getPlanetPosition(swe, julianDay, swe.SE_SUN);\n  const earthLong = (sunLong + 180) % 360;\n  const earth = longitudeToGateLine(earthLong);\n  activations.earth = earth;\n\n  return activations as Activations;\n}\n\n/**\n * Calculate both Personality and Design activations\n */\nexport async function calculateActivations(birthDateUtc: Date): Promise<{\n  personality: Activations;\n  design: Activations;\n  designTime: Date;\n}> {\n  const swe = await getSwe();\n\n  const birthJD = dateToJulianDay(swe, birthDateUtc);\n  const designJD = calculateDesignTime(swe, birthJD);\n\n  const personality = getActivations(swe, birthJD);\n  const design = getActivations(swe, designJD);\n\n  // Convert design JD back to Date\n  const designResult = swe.swe_revjul(designJD, swe.SE_GREG_CAL);\n  const designTime = new Date(Date.UTC(\n    designResult.year,\n    designResult.month - 1,\n    designResult.day,\n    Math.floor(designResult.hour),\n    Math.floor((designResult.hour % 1) * 60),\n    Math.floor(((designResult.hour % 1) * 60 % 1) * 60)\n  ));\n\n  return { personality, design, designTime };\n}\n\n/**\n * Calculate current transit positions\n */\nexport async function calculateTransits(dateUtc: Date = new Date()): Promise<Activations> {\n  const swe = await getSwe();\n  const jd = dateToJulianDay(swe, dateUtc);\n  return getActivations(swe, jd);\n}\n",
-      "structuredPatch": [
-        {
-          "oldStart": 9,
-          "oldLines": 16,
-          "newStart": 9,
-          "newLines": 29,
-          "lines": [
-            " import SwissEPH from 'sweph-wasm';",
-            " import { longitudeToGateLine } from './mandala';",
-            " import type { Activation, Activations, Planet } from '@/types';",
-            "+import path from 'path';",
-            "+import { fileURLToPath } from 'url';",
-            " ",
-            " // Singleton instance of SwissEPH",
-            " let sweInstance: SwissEPH | null = null;",
-            " ",
-            " /**",
-            "  * Initialize SwissEPH WASM module (singleton pattern)",
-            "+ * Uses local WASM file for Node.js environments",
-            "  */",
-            " async function getSwe(): Promise<SwissEPH> {",
-            "   if (!sweInstance) {",
-            "-    sweInstance = await SwissEPH.init();",
-            "+    // In Node.js, provide the local path to the WASM file",
-            "+    if (typeof window === 'undefined') {",
-            "+      const wasmPath = path.join(",
-            "+        process.cwd(),",
-            "+        'node_modules/sweph-wasm/dist/wasm/swisseph.wasm'",
-            "+      );",
-            "+      sweInstance = await SwissEPH.init(wasmPath);",
-            "+    } else {",
-            "+      // In browser, let it use the default CDN",
-            "+      sweInstance = await SwissEPH.init();",
-            "+    }",
-            "   }",
-            "   return sweInstance;",
-            " }"
-          ]
-        }
-      ],
-      "userModified": false,
-      "replaceAll": false
-    },
-    "tool_use_id": "toolu_01F3wHQyjTNG8b7Kr8SAaTJw"
-  },
-  {
-    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
-    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
-    "cwd": "/Users/nickmitchell/intangible-me",
-    "permission_mode": "bypassPermissions",
-    "hook_event_name": "PostToolUse",
-    "tool_name": "Edit",
-    "tool_input": {
-      "file_path": "/Users/nickmitchell/intangible-me/src/lib/calculation/ephemeris.ts",
-      "old_string": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\nimport path from 'path';\nimport { fileURLToPath } from 'url';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses local WASM file for Node.js environments\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // In Node.js, provide the local path to the WASM file\n    if (typeof window === 'undefined') {\n      const wasmPath = path.join(\n        process.cwd(),\n        'node_modules/sweph-wasm/dist/wasm/swisseph.wasm'\n      );\n      sweInstance = await SwissEPH.init(wasmPath);\n    } else {\n      // In browser, let it use the default CDN\n      sweInstance = await SwissEPH.init();\n    }\n  }\n  return sweInstance;\n}",
-      "new_string": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\nimport path from 'path';\nimport { pathToFileURL } from 'url';\nimport { readFileSync } from 'fs';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses local WASM file for Node.js environments\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // In Node.js, provide the local path to the WASM file as a file:// URL\n    if (typeof window === 'undefined') {\n      const wasmPath = path.join(\n        process.cwd(),\n        'node_modules/sweph-wasm/dist/wasm/swisseph.wasm'\n      );\n      const wasmUrl = pathToFileURL(wasmPath).href;\n      sweInstance = await SwissEPH.init(wasmUrl);\n    } else {\n      // In browser, let it use the default CDN\n      sweInstance = await SwissEPH.init();\n    }\n  }\n  return sweInstance;\n}"
-    },
-    "tool_response": {
-      "filePath": "/Users/nickmitchell/intangible-me/src/lib/calculation/ephemeris.ts",
-      "oldString": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\nimport path from 'path';\nimport { fileURLToPath } from 'url';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses local WASM file for Node.js environments\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // In Node.js, provide the local path to the WASM file\n    if (typeof window === 'undefined') {\n      const wasmPath = path.join(\n        process.cwd(),\n        'node_modules/sweph-wasm/dist/wasm/swisseph.wasm'\n      );\n      sweInstance = await SwissEPH.init(wasmPath);\n    } else {\n      // In browser, let it use the default CDN\n      sweInstance = await SwissEPH.init();\n    }\n  }\n  return sweInstance;\n}",
-      "newString": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\nimport path from 'path';\nimport { pathToFileURL } from 'url';\nimport { readFileSync } from 'fs';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses local WASM file for Node.js environments\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // In Node.js, provide the local path to the WASM file as a file:// URL\n    if (typeof window === 'undefined') {\n      const wasmPath = path.join(\n        process.cwd(),\n        'node_modules/sweph-wasm/dist/wasm/swisseph.wasm'\n      );\n      const wasmUrl = pathToFileURL(wasmPath).href;\n      sweInstance = await SwissEPH.init(wasmUrl);\n    } else {\n      // In browser, let it use the default CDN\n      sweInstance = await SwissEPH.init();\n    }\n  }\n  return sweInstance;\n}",
-      "originalFile": "/**\n * Swiss Ephemeris Wrapper\n *\n * Calculates planetary positions for Human Design chart generation.\n * Uses sweph-wasm, a WebAssembly implementation of Swiss Ephemeris\n * that works across all platforms including serverless environments.\n */\n\nimport SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\nimport path from 'path';\nimport { fileURLToPath } from 'url';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses local WASM file for Node.js environments\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // In Node.js, provide the local path to the WASM file\n    if (typeof window === 'undefined') {\n      const wasmPath = path.join(\n        process.cwd(),\n        'node_modules/sweph-wasm/dist/wasm/swisseph.wasm'\n      );\n      sweInstance = await SwissEPH.init(wasmPath);\n    } else {\n      // In browser, let it use the default CDN\n      sweInstance = await SwissEPH.init();\n    }\n  }\n  return sweInstance;\n}\n\n// Calculation flags\nconst SEFLG_SWIEPH = 2; // Use Swiss Ephemeris\nconst SEFLG_SPEED = 256; // Include speed\n\n/**\n * Convert Date to Julian Day\n */\nfunction dateToJulianDay(swe: SwissEPH, date: Date): number {\n  const year = date.getUTCFullYear();\n  const month = date.getUTCMonth() + 1;\n  const day = date.getUTCDate();\n  const hour = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;\n\n  return swe.swe_julday(year, month, day, hour, swe.SE_GREG_CAL);\n}\n\n/**\n * Get planetary position at a given Julian Day\n * Returns longitude in degrees\n */\nfunction getPlanetPosition(swe: SwissEPH, julianDay: number, planet: number): number {\n  const result = swe.swe_calc_ut(julianDay, planet, SEFLG_SWIEPH | SEFLG_SPEED);\n  // Result is array: [longitude, latitude, distance, lonSpeed, latSpeed, distSpeed]\n  return result[0];\n}\n\n/**\n * Calculate the Design time (88\u00b0 solar arc before birth)\n *\n * This finds the exact moment when the Sun was 88\u00b0 behind its birth position.\n */\nfunction calculateDesignTime(swe: SwissEPH, birthJulianDay: number): number {\n  const birthSunLongitude = getPlanetPosition(swe, birthJulianDay, swe.SE_SUN);\n  const targetLongitude = (birthSunLongitude - 88 + 360) % 360;\n\n  // Approximate: Sun moves ~1\u00b0 per day, so 88\u00b0 \u2248 88 days\n  let searchJD = birthJulianDay - 88;\n\n  // Binary search to find exact moment\n  let low = searchJD - 5;\n  let high = searchJD + 5;\n\n  for (let i = 0; i < 50; i++) {\n    const mid = (low + high) / 2;\n    const sunLong = getPlanetPosition(swe, mid, swe.SE_SUN);\n\n    // Calculate angular difference\n    let diff = sunLong - targetLongitude;\n    if (diff > 180) diff -= 360;\n    if (diff < -180) diff += 360;\n\n    if (Math.abs(diff) < 0.0001) {\n      return mid;\n    }\n\n    if (diff > 0) {\n      high = mid;\n    } else {\n      low = mid;\n    }\n  }\n\n  return (low + high) / 2;\n}\n\n/**\n * Get all planetary activations for a given Julian Day\n */\nfunction getActivations(swe: SwissEPH, julianDay: number): Activations {\n  const planets: Array<{ name: Planet; code: number }> = [\n    { name: 'sun', code: swe.SE_SUN },\n    { name: 'moon', code: swe.SE_MOON },\n    { name: 'mercury', code: swe.SE_MERCURY },\n    { name: 'venus', code: swe.SE_VENUS },\n    { name: 'mars', code: swe.SE_MARS },\n    { name: 'jupiter', code: swe.SE_JUPITER },\n    { name: 'saturn', code: swe.SE_SATURN },\n    { name: 'uranus', code: swe.SE_URANUS },\n    { name: 'neptune', code: swe.SE_NEPTUNE },\n    { name: 'pluto', code: swe.SE_PLUTO },\n  ];\n\n  const activations: Partial<Activations> = {};\n\n  for (const { name, code } of planets) {\n    const longitude = getPlanetPosition(swe, julianDay, code);\n    const { gate, line } = longitudeToGateLine(longitude);\n    activations[name] = { gate, line };\n  }\n\n  // North Node\n  const northNodeLong = getPlanetPosition(swe, julianDay, swe.SE_TRUE_NODE);\n  const northNode = longitudeToGateLine(northNodeLong);\n  activations.north_node = northNode;\n\n  // South Node is always opposite (180\u00b0)\n  const southNodeLong = (northNodeLong + 180) % 360;\n  const southNode = longitudeToGateLine(southNodeLong);\n  activations.south_node = southNode;\n\n  // Earth is always opposite Sun (180\u00b0)\n  const sunLong = getPlanetPosition(swe, julianDay, swe.SE_SUN);\n  const earthLong = (sunLong + 180) % 360;\n  const earth = longitudeToGateLine(earthLong);\n  activations.earth = earth;\n\n  return activations as Activations;\n}\n\n/**\n * Calculate both Personality and Design activations\n */\nexport async function calculateActivations(birthDateUtc: Date): Promise<{\n  personality: Activations;\n  design: Activations;\n  designTime: Date;\n}> {\n  const swe = await getSwe();\n\n  const birthJD = dateToJulianDay(swe, birthDateUtc);\n  const designJD = calculateDesignTime(swe, birthJD);\n\n  const personality = getActivations(swe, birthJD);\n  const design = getActivations(swe, designJD);\n\n  // Convert design JD back to Date\n  const designResult = swe.swe_revjul(designJD, swe.SE_GREG_CAL);\n  const designTime = new Date(Date.UTC(\n    designResult.year,\n    designResult.month - 1,\n    designResult.day,\n    Math.floor(designResult.hour),\n    Math.floor((designResult.hour % 1) * 60),\n    Math.floor(((designResult.hour % 1) * 60 % 1) * 60)\n  ));\n\n  return { personality, design, designTime };\n}\n\n/**\n * Calculate current transit positions\n */\nexport async function calculateTransits(dateUtc: Date = new Date()): Promise<Activations> {\n  const swe = await getSwe();\n  const jd = dateToJulianDay(swe, dateUtc);\n  return getActivations(swe, jd);\n}\n",
-      "structuredPatch": [
-        {
-          "oldStart": 10,
-          "oldLines": 7,
-          "newStart": 10,
-          "newLines": 8,
-          "lines": [
-            " import { longitudeToGateLine } from './mandala';",
-            " import type { Activation, Activations, Planet } from '@/types';",
-            " import path from 'path';",
-            "-import { fileURLToPath } from 'url';",
-            "+import { pathToFileURL } from 'url';",
-            "+import { readFileSync } from 'fs';",
-            " ",
-            " // Singleton instance of SwissEPH",
-            " let sweInstance: SwissEPH | null = null;"
-          ]
-        },
-        {
-          "oldStart": 21,
-          "oldLines": 13,
-          "newStart": 22,
-          "newLines": 14,
-          "lines": [
-            "  */",
-            " async function getSwe(): Promise<SwissEPH> {",
-            "   if (!sweInstance) {",
-            "-    // In Node.js, provide the local path to the WASM file",
-            "+    // In Node.js, provide the local path to the WASM file as a file:// URL",
-            "     if (typeof window === 'undefined') {",
-            "       const wasmPath = path.join(",
-            "         process.cwd(),",
-            "         'node_modules/sweph-wasm/dist/wasm/swisseph.wasm'",
-            "       );",
-            "-      sweInstance = await SwissEPH.init(wasmPath);",
-            "+      const wasmUrl = pathToFileURL(wasmPath).href;",
-            "+      sweInstance = await SwissEPH.init(wasmUrl);",
-            "     } else {",
-            "       // In browser, let it use the default CDN",
-            "       sweInstance = await SwissEPH.init();"
-          ]
-        }
-      ],
-      "userModified": false,
-      "replaceAll": false
-    },
-    "tool_use_id": "toolu_01TR3dDanmkvnLjqrr8xVcak"
-  },
-  {
-    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
-    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
-    "cwd": "/Users/nickmitchell/intangible-me",
-    "permission_mode": "bypassPermissions",
-    "hook_event_name": "PostToolUse",
-    "tool_name": "Bash",
-    "tool_input": {
-      "command": "npm search swisseph 2>&1 | head -30",
-      "description": "Search for Swiss Ephemeris packages"
-    },
-    "tool_response": {
-      "stdout": "swisseph\nSwiss Ephemeris binding for node.js\nVersion 0.5.17 published 2022-01-25 by keel\nMaintainers: mivion keel\nKeywords: swiss ephemeris astrology astronomy\nhttps://npm.im/swisseph\n\nswisseph-v2\nEnhanced Swiss Ephemeris Bindings for Modern Node.js: Leveraging the latest Node.js features for precise astronomical calculations\nVersion 1.0.4 published 2025-03-29 by drvinaayaks\nMaintainers: drvinaayaks\nKeywords: swiss ephemeris astrology astronomy\nhttps://npm.im/swisseph-v2\n\nnode-swisseph\nSwisseph bindings for Node.js\nVersion 0.1.3 published 2015-03-11 by lamnn1807\nMaintainers: lamnn1807\nKeywords: swisseph astrology astronomy\nhttps://npm.im/node-swisseph\n\nswisseph-wasm\nHigh-precision Swiss Ephemeris WebAssembly library for astronomical calculations in JavaScript\nVersion 0.0.2 published 2025-07-05 by prolaxu\nMaintainers: prolaxu\nKeywords: swiss-ephemeris astronomy astrology ephemeris webassembly wasm planetary-positions astronomical-calculations julian-day sidereal tropical birth-chart horoscope celestial-mechanics\nhttps://npm.im/swisseph-wasm\n\nswissephemeris\nSwisseph bindings for Node.js",
-      "stderr": "",
-      "interrupted": false,
-      "isImage": false
-    },
-    "tool_use_id": "toolu_01Su2LdEhfZ27yu36uUcBjcP"
-  },
-  {
-    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
-    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
-    "cwd": "/Users/nickmitchell/intangible-me",
-    "permission_mode": "bypassPermissions",
-    "hook_event_name": "PostToolUse",
-    "tool_name": "Read",
-    "tool_input": {
-      "file_path": "/Users/nickmitchell/intangible-me/vitest.config.ts"
-    },
-    "tool_response": {
-      "type": "text",
-      "file": {
-        "filePath": "/Users/nickmitchell/intangible-me/vitest.config.ts",
-        "content": "import { defineConfig } from 'vitest/config';\nimport path from 'path';\n\nexport default defineConfig({\n  test: {\n    globals: true,\n    environment: 'node',\n    include: ['src/**/*.test.ts', 'tests/**/*.test.ts'],\n    testTimeout: 30000,\n  },\n  resolve: {\n    alias: {\n      '@': path.resolve(__dirname, './src'),\n    },\n  },\n});\n",
-        "numLines": 17,
-        "startLine": 1,
-        "totalLines": 17
-      }
-    },
-    "tool_use_id": "toolu_01Am8wokJZjaaHpXKjY9NaV2"
-  },
-  {
-    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
-    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
-    "cwd": "/Users/nickmitchell/intangible-me",
-    "permission_mode": "bypassPermissions",
-    "hook_event_name": "PostToolUse",
-    "tool_name": "Write",
-    "tool_input": {
-      "file_path": "/Users/nickmitchell/intangible-me/tests/setup.ts",
-      "content": "/**\n * Vitest Setup\n *\n * Patches global fetch to handle file:// URLs for WASM loading in Node.js\n */\n\nimport { readFileSync } from 'fs';\nimport { fileURLToPath } from 'url';\n\nconst originalFetch = global.fetch;\n\nglobal.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {\n  const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;\n\n  if (url.startsWith('file://')) {\n    const filePath = fileURLToPath(url);\n    const buffer = readFileSync(filePath);\n    return new Response(buffer, {\n      status: 200,\n      headers: { 'Content-Type': 'application/wasm' },\n    });\n  }\n\n  return originalFetch(input, init);\n};\n"
-    },
-    "tool_response": {
-      "type": "create",
-      "filePath": "/Users/nickmitchell/intangible-me/tests/setup.ts",
-      "content": "/**\n * Vitest Setup\n *\n * Patches global fetch to handle file:// URLs for WASM loading in Node.js\n */\n\nimport { readFileSync } from 'fs';\nimport { fileURLToPath } from 'url';\n\nconst originalFetch = global.fetch;\n\nglobal.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {\n  const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;\n\n  if (url.startsWith('file://')) {\n    const filePath = fileURLToPath(url);\n    const buffer = readFileSync(filePath);\n    return new Response(buffer, {\n      status: 200,\n      headers: { 'Content-Type': 'application/wasm' },\n    });\n  }\n\n  return originalFetch(input, init);\n};\n",
-      "structuredPatch": [],
-      "originalFile": null
-    },
-    "tool_use_id": "toolu_01NPLyhQewqsk5986ZeMw111"
-  },
-  {
-    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
-    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
-    "cwd": "/Users/nickmitchell/intangible-me",
-    "permission_mode": "bypassPermissions",
-    "hook_event_name": "PostToolUse",
-    "tool_name": "Edit",
-    "tool_input": {
-      "file_path": "/Users/nickmitchell/intangible-me/vitest.config.ts",
-      "old_string": "  test: {\n    globals: true,\n    environment: 'node',\n    include: ['src/**/*.test.ts', 'tests/**/*.test.ts'],\n    testTimeout: 30000,\n  },",
-      "new_string": "  test: {\n    globals: true,\n    environment: 'node',\n    include: ['src/**/*.test.ts', 'tests/**/*.test.ts'],\n    testTimeout: 30000,\n    setupFiles: ['./tests/setup.ts'],\n  },"
-    },
-    "tool_response": {
-      "filePath": "/Users/nickmitchell/intangible-me/vitest.config.ts",
-      "oldString": "  test: {\n    globals: true,\n    environment: 'node',\n    include: ['src/**/*.test.ts', 'tests/**/*.test.ts'],\n    testTimeout: 30000,\n  },",
-      "newString": "  test: {\n    globals: true,\n    environment: 'node',\n    include: ['src/**/*.test.ts', 'tests/**/*.test.ts'],\n    testTimeout: 30000,\n    setupFiles: ['./tests/setup.ts'],\n  },",
-      "originalFile": "import { defineConfig } from 'vitest/config';\nimport path from 'path';\n\nexport default defineConfig({\n  test: {\n    globals: true,\n    environment: 'node',\n    include: ['src/**/*.test.ts', 'tests/**/*.test.ts'],\n    testTimeout: 30000,\n  },\n  resolve: {\n    alias: {\n      '@': path.resolve(__dirname, './src'),\n    },\n  },\n});\n",
-      "structuredPatch": [
-        {
-          "oldStart": 7,
-          "oldLines": 6,
-          "newStart": 7,
-          "newLines": 7,
-          "lines": [
-            "     environment: 'node',",
-            "     include: ['src/**/*.test.ts', 'tests/**/*.test.ts'],",
-            "     testTimeout: 30000,",
-            "+    setupFiles: ['./tests/setup.ts'],",
-            "   },",
-            "   resolve: {",
-            "     alias: {"
-          ]
-        }
-      ],
-      "userModified": false,
-      "replaceAll": false
-    },
-    "tool_use_id": "toolu_01V9FcgFjtvHbcRXZ2b8wP89"
-  },
-  {
-    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
-    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
-    "cwd": "/Users/nickmitchell/intangible-me",
-    "permission_mode": "bypassPermissions",
-    "hook_event_name": "PostToolUse",
-    "tool_name": "Bash",
-    "tool_input": {
-      "command": "npm run test 2>&1",
-      "timeout": 180000,
-      "description": "Run tests with fetch patch for file URLs"
-    },
-    "tool_response": {
-      "stdout": "> intangible-me@0.1.0 test\n> vitest run\n\n\n\u001b[1m\u001b[46m RUN \u001b[49m\u001b[22m \u001b[36mv4.0.16 \u001b[39m\u001b[90m/Users/nickmitchell/intangible-me\u001b[39m\n\n \u001b[32m\u2713\u001b[39m tests/mandala.test.ts \u001b[2m(\u001b[22m\u001b[2m20 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 10\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m\u2713\u001b[39m tests/ephemeris.test.ts \u001b[2m(\u001b[22m\u001b[2m15 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 78\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m\u2713\u001b[39m tests/chart.test.ts \u001b[2m(\u001b[22m\u001b[2m22 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 99\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m3 passed\u001b[39m\u001b[22m\u001b[90m (3)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m57 passed\u001b[39m\u001b[22m\u001b[90m (57)\u001b[39m\n\u001b[2m   Start at \u001b[22m 22:35:57\n\u001b[2m   Duration \u001b[22m 269ms\u001b[2m (transform 143ms, setup 62ms, import 144ms, tests 186ms, environment 0ms)\u001b[22m",
-      "stderr": "",
-      "interrupted": false,
-      "isImage": false
-    },
-    "tool_use_id": "toolu_011bGiBchcPNwhnRMHKSUKcw"
-  },
-  {
-    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
-    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
-    "cwd": "/Users/nickmitchell/intangible-me",
-    "permission_mode": "bypassPermissions",
-    "hook_event_name": "PostToolUse",
-    "tool_name": "Bash",
-    "tool_input": {
-      "command": "npm run build 2>&1",
-      "timeout": 300000,
-      "description": "Run Next.js build"
-    },
-    "tool_response": {
-      "stdout": "> intangible-me@0.1.0 build\n> next build\n\n\u25b2 Next.js 16.1.1 (Turbopack)\n- Environments: .env.local\n\n  Creating an optimized production build ...\n\u2713 Compiled successfully in 2.5s\n  Running TypeScript ...\n  Collecting page data using 9 workers ...\n[Error [BetterAuthError]: Invalid BETTER_AUTH_SECRET: must be at least 32 characters long for adequate security. Generate one with `npx @better-auth/cli secret` or `openssl rand -base64 32`.] {\n  cause: undefined\n}\n  Generating static pages using 9 workers (0/5) ...\n  Generating static pages using 9 workers (1/5) \r\n  Generating static pages using 9 workers (2/5) \r\n  Generating static pages using 9 workers (3/5) \r\n\u2713 Generating static pages using 9 workers (5/5) in 231.6ms\n  Finalizing page optimization ...\n\nRoute (app)\n\u250c \u25cb /\n\u251c \u25cb /_not-found\n\u251c \u0192 /api/auth/[...all]\n\u251c \u0192 /api/chart\n\u2514 \u0192 /api/geocode\n\n\n\u25cb  (Static)   prerendered as static content\n\u0192  (Dynamic)  server-rendered on demand",
-      "stderr": "",
-      "interrupted": false,
-      "isImage": false
-    },
-    "tool_use_id": "toolu_01LhZZHZ8meRryvVdyQQkkWX"
-  },
-  {
-    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
-    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
-    "cwd": "/Users/nickmitchell/intangible-me",
-    "permission_mode": "bypassPermissions",
-    "hook_event_name": "PostToolUse",
-    "tool_name": "Bash",
-    "tool_input": {
       "command": "npx eslint src --ext .ts,.tsx 2>&1 | head -50",
       "description": "Run ESLint directly"
     },
@@ -2935,5 +2630,249 @@
       "isImage": false
     },
     "tool_use_id": "toolu_01NK6YJdY4wP13tBFh77zdib"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git push -u origin feature/cosmic-ui-redesign 2>&1",
+      "description": "Push branch to remote"
+    },
+    "tool_response": {
+      "stdout": "remote: \nremote: Create a pull request for 'feature/cosmic-ui-redesign' on GitHub by visiting:        \nremote:      https://github.com/nmitch17/intangible-me/pull/new/feature/cosmic-ui-redesign        \nremote: \nTo https://github.com/nmitch17/intangible-me.git\n * [new branch]      feature/cosmic-ui-redesign -> feature/cosmic-ui-redesign\nbranch 'feature/cosmic-ui-redesign' set up to track 'origin/feature/cosmic-ui-redesign'.",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "tool_use_id": "toolu_01TefFEhHE1KVsCuUWnnGf1k"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git log chore/auto-timezone-from-location...HEAD --oneline",
+      "description": "Get commits for PR summary"
+    },
+    "tool_response": {
+      "stdout": "7be4743 test direct push\nb5078bd fix: use public WASM URL for Vercel serverless compatibility\nde2c399 fix: replace swisseph with sweph-wasm for Vercel compatibility\nc1a84ed chore: add vitest test infrastructure and update docs\n887e282 feat: add cosmic UI redesign with glass-morphism theme\n9dc4cba feat: replace swisseph with sweph-wasm for cross-platform builds\ne8c9712 chore: add .nvmrc and build:ci script for local CI testing\nc2f8831 fix: pin Node.js version to 20.x for Vercel compatibility\n107f1cf chore: update drizzle and neon dependencies\n3b4a903 fix: remove unused functions config from vercel.json\nc1bac45 fix: remove invalid runtime config from vercel.json",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "tool_use_id": "toolu_01Fka22K8sSoCqa3huYDzVvn"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "gh pr create --base chore/auto-timezone-from-location --title \"fix: WASM loading for Vercel production + Cosmic UI redesign\" --body \"$(cat <<'EOF'\n## Summary\n\n- Fix critical WASM fetch failure in Vercel serverless production by serving swisseph.wasm as a public static asset\n- Add cosmic UI redesign with glass-morphism theme and parallax effects\n- Replace swisseph native module with sweph-wasm for cross-platform compatibility\n- Add Vitest test infrastructure with 57 passing tests\n- Pin Node.js version to 20.x for Vercel compatibility\n\n## Test plan\n\n- [x] All 57 Vitest tests pass (`npm run test`)\n- [x] Build succeeds (`npm run build`)\n- [x] Dev server starts without errors\n- [ ] Verify chart calculations work on Vercel production deployment\n- [ ] Test WASM loading on preview deployment URL\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.com/claude-code)\nEOF\n)\"",
+      "description": "Create pull request"
+    },
+    "tool_response": {
+      "stdout": "https://github.com/nmitch17/intangible-me/pull/15\nWarning: 4 uncommitted changes",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "tool_use_id": "toolu_016EYEUMKRpsk4Ar3kbWCw36"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "/Users/nickmitchell/intangible-me/.npmrc",
+      "content": "legacy-peer-deps=true\n"
+    },
+    "tool_response": {
+      "type": "create",
+      "filePath": "/Users/nickmitchell/intangible-me/.npmrc",
+      "content": "legacy-peer-deps=true\n",
+      "structuredPatch": [],
+      "originalFile": null
+    },
+    "tool_use_id": "toolu_0162pQmbf9BVdJeq9u1uK1P8"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add .npmrc && git commit -m \"$(cat <<'EOF'\nfix: add .npmrc with legacy-peer-deps for Vercel\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\" && git push",
+      "description": "Commit and push .npmrc fix"
+    },
+    "tool_response": {
+      "stdout": "[feature/cosmic-ui-redesign 5a2562c] fix: add .npmrc with legacy-peer-deps for Vercel\n 1 file changed, 1 insertion(+)\n create mode 100644 .npmrc\nTo https://github.com/nmitch17/intangible-me.git\n   7be4743..5a2562c  feature/cosmic-ui-redesign -> feature/cosmic-ui-redesign",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "tool_use_id": "toolu_01W4bJCxYb5kUnykUAFD5AXY"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git ls-files public/swisseph.wasm",
+      "description": "Check if WASM file is in git"
+    },
+    "tool_response": {
+      "stdout": "public/swisseph.wasm",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "tool_use_id": "toolu_015gzRJHHQSsWb8vLXXpSu4d"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/Users/nickmitchell/intangible-me/src/lib/calculation/ephemeris.ts"
+    },
+    "tool_response": {
+      "type": "text",
+      "file": {
+        "filePath": "/Users/nickmitchell/intangible-me/src/lib/calculation/ephemeris.ts",
+        "content": "/**\n * Swiss Ephemeris Wrapper\n *\n * Calculates planetary positions for Human Design chart generation.\n * Uses sweph-wasm, a WebAssembly implementation of Swiss Ephemeris\n * that works across all platforms including serverless environments.\n */\n\nimport SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses public WASM file served as a static asset\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // Construct absolute URL to the public WASM file\n    // In production (Vercel), use VERCEL_URL; in development, use localhost\n    const baseUrl = process.env.VERCEL_URL\n      ? `https://${process.env.VERCEL_URL}`\n      : 'http://localhost:3000';\n    const wasmUrl = `${baseUrl}/swisseph.wasm`;\n\n    sweInstance = await SwissEPH.init(wasmUrl);\n  }\n  return sweInstance;\n}\n\n// Calculation flags\nconst SEFLG_SWIEPH = 2; // Use Swiss Ephemeris\nconst SEFLG_SPEED = 256; // Include speed\n\n/**\n * Convert Date to Julian Day\n */\nfunction dateToJulianDay(swe: SwissEPH, date: Date): number {\n  const year = date.getUTCFullYear();\n  const month = date.getUTCMonth() + 1;\n  const day = date.getUTCDate();\n  const hour = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;\n\n  return swe.swe_julday(year, month, day, hour, swe.SE_GREG_CAL);\n}\n\n/**\n * Get planetary position at a given Julian Day\n * Returns longitude in degrees\n */\nfunction getPlanetPosition(swe: SwissEPH, julianDay: number, planet: number): number {\n  const result = swe.swe_calc_ut(julianDay, planet, SEFLG_SWIEPH | SEFLG_SPEED);\n  // Result is array: [longitude, latitude, distance, lonSpeed, latSpeed, distSpeed]\n  return result[0];\n}\n\n/**\n * Calculate the Design time (88\u00b0 solar arc before birth)\n *\n * This finds the exact moment when the Sun was 88\u00b0 behind its birth position.\n */\nfunction calculateDesignTime(swe: SwissEPH, birthJulianDay: number): number {\n  const birthSunLongitude = getPlanetPosition(swe, birthJulianDay, swe.SE_SUN);\n  const targetLongitude = (birthSunLongitude - 88 + 360) % 360;\n\n  // Approximate: Sun moves ~1\u00b0 per day, so 88\u00b0 \u2248 88 days\n  let searchJD = birthJulianDay - 88;\n\n  // Binary search to find exact moment\n  let low = searchJD - 5;\n  let high = searchJD + 5;\n\n  for (let i = 0; i < 50; i++) {\n    const mid = (low + high) / 2;\n    const sunLong = getPlanetPosition(swe, mid, swe.SE_SUN);\n\n    // Calculate angular difference\n    let diff = sunLong - targetLongitude;\n    if (diff > 180) diff -= 360;\n    if (diff < -180) diff += 360;\n\n    if (Math.abs(diff) < 0.0001) {\n      return mid;\n    }\n\n    if (diff > 0) {\n      high = mid;\n    } else {\n      low = mid;\n    }\n  }\n\n  return (low + high) / 2;\n}\n\n/**\n * Get all planetary activations for a given Julian Day\n */\nfunction getActivations(swe: SwissEPH, julianDay: number): Activations {\n  const planets: Array<{ name: Planet; code: number }> = [\n    { name: 'sun', code: swe.SE_SUN },\n    { name: 'moon', code: swe.SE_MOON },\n    { name: 'mercury', code: swe.SE_MERCURY },\n    { name: 'venus', code: swe.SE_VENUS },\n    { name: 'mars', code: swe.SE_MARS },\n    { name: 'jupiter', code: swe.SE_JUPITER },\n    { name: 'saturn', code: swe.SE_SATURN },\n    { name: 'uranus', code: swe.SE_URANUS },\n    { name: 'neptune', code: swe.SE_NEPTUNE },\n    { name: 'pluto', code: swe.SE_PLUTO },\n  ];\n\n  const activations: Partial<Activations> = {};\n\n  for (const { name, code } of planets) {\n    const longitude = getPlanetPosition(swe, julianDay, code);\n    const { gate, line } = longitudeToGateLine(longitude);\n    activations[name] = { gate, line };\n  }\n\n  // North Node\n  const northNodeLong = getPlanetPosition(swe, julianDay, swe.SE_TRUE_NODE);\n  const northNode = longitudeToGateLine(northNodeLong);\n  activations.north_node = northNode;\n\n  // South Node is always opposite (180\u00b0)\n  const southNodeLong = (northNodeLong + 180) % 360;\n  const southNode = longitudeToGateLine(southNodeLong);\n  activations.south_node = southNode;\n\n  // Earth is always opposite Sun (180\u00b0)\n  const sunLong = getPlanetPosition(swe, julianDay, swe.SE_SUN);\n  const earthLong = (sunLong + 180) % 360;\n  const earth = longitudeToGateLine(earthLong);\n  activations.earth = earth;\n\n  return activations as Activations;\n}\n\n/**\n * Calculate both Personality and Design activations\n */\nexport async function calculateActivations(birthDateUtc: Date): Promise<{\n  personality: Activations;\n  design: Activations;\n  designTime: Date;\n}> {\n  const swe = await getSwe();\n\n  const birthJD = dateToJulianDay(swe, birthDateUtc);\n  const designJD = calculateDesignTime(swe, birthJD);\n\n  const personality = getActivations(swe, birthJD);\n  const design = getActivations(swe, designJD);\n\n  // Convert design JD back to Date\n  const designResult = swe.swe_revjul(designJD, swe.SE_GREG_CAL);\n  const designTime = new Date(Date.UTC(\n    designResult.year,\n    designResult.month - 1,\n    designResult.day,\n    Math.floor(designResult.hour),\n    Math.floor((designResult.hour % 1) * 60),\n    Math.floor(((designResult.hour % 1) * 60 % 1) * 60)\n  ));\n\n  return { personality, design, designTime };\n}\n\n/**\n * Calculate current transit positions\n */\nexport async function calculateTransits(dateUtc: Date = new Date()): Promise<Activations> {\n  const swe = await getSwe();\n  const jd = dateToJulianDay(swe, dateUtc);\n  return getActivations(swe, jd);\n}\n",
+        "numLines": 181,
+        "startLine": 1,
+        "totalLines": 181
+      }
+    },
+    "tool_use_id": "toolu_01DWitJNo3iUkFhVUDvy1hqY"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/Users/nickmitchell/intangible-me/src/lib/calculation/ephemeris.ts",
+      "old_string": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses public WASM file served as a static asset\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // Construct absolute URL to the public WASM file\n    // In production (Vercel), use VERCEL_URL; in development, use localhost\n    const baseUrl = process.env.VERCEL_URL\n      ? `https://${process.env.VERCEL_URL}`\n      : 'http://localhost:3000';\n    const wasmUrl = `${baseUrl}/swisseph.wasm`;\n\n    sweInstance = await SwissEPH.init(wasmUrl);\n  }\n  return sweInstance;\n}",
+      "new_string": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\nimport { readFileSync } from 'fs';\nimport path from 'path';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses WASM file from public directory via filesystem read\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // Read WASM file from public directory (works in both dev and Vercel)\n    const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');\n    const wasmBuffer = readFileSync(wasmPath);\n\n    // Create a data URL from the WASM buffer\n    const wasmBase64 = wasmBuffer.toString('base64');\n    const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;\n\n    sweInstance = await SwissEPH.init(wasmDataUrl);\n  }\n  return sweInstance;\n}"
+    },
+    "tool_response": {
+      "filePath": "/Users/nickmitchell/intangible-me/src/lib/calculation/ephemeris.ts",
+      "oldString": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses public WASM file served as a static asset\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // Construct absolute URL to the public WASM file\n    // In production (Vercel), use VERCEL_URL; in development, use localhost\n    const baseUrl = process.env.VERCEL_URL\n      ? `https://${process.env.VERCEL_URL}`\n      : 'http://localhost:3000';\n    const wasmUrl = `${baseUrl}/swisseph.wasm`;\n\n    sweInstance = await SwissEPH.init(wasmUrl);\n  }\n  return sweInstance;\n}",
+      "newString": "import SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\nimport { readFileSync } from 'fs';\nimport path from 'path';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses WASM file from public directory via filesystem read\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // Read WASM file from public directory (works in both dev and Vercel)\n    const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');\n    const wasmBuffer = readFileSync(wasmPath);\n\n    // Create a data URL from the WASM buffer\n    const wasmBase64 = wasmBuffer.toString('base64');\n    const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;\n\n    sweInstance = await SwissEPH.init(wasmDataUrl);\n  }\n  return sweInstance;\n}",
+      "originalFile": "/**\n * Swiss Ephemeris Wrapper\n *\n * Calculates planetary positions for Human Design chart generation.\n * Uses sweph-wasm, a WebAssembly implementation of Swiss Ephemeris\n * that works across all platforms including serverless environments.\n */\n\nimport SwissEPH from 'sweph-wasm';\nimport { longitudeToGateLine } from './mandala';\nimport type { Activation, Activations, Planet } from '@/types';\n\n// Singleton instance of SwissEPH\nlet sweInstance: SwissEPH | null = null;\n\n/**\n * Initialize SwissEPH WASM module (singleton pattern)\n * Uses public WASM file served as a static asset\n */\nasync function getSwe(): Promise<SwissEPH> {\n  if (!sweInstance) {\n    // Construct absolute URL to the public WASM file\n    // In production (Vercel), use VERCEL_URL; in development, use localhost\n    const baseUrl = process.env.VERCEL_URL\n      ? `https://${process.env.VERCEL_URL}`\n      : 'http://localhost:3000';\n    const wasmUrl = `${baseUrl}/swisseph.wasm`;\n\n    sweInstance = await SwissEPH.init(wasmUrl);\n  }\n  return sweInstance;\n}\n\n// Calculation flags\nconst SEFLG_SWIEPH = 2; // Use Swiss Ephemeris\nconst SEFLG_SPEED = 256; // Include speed\n\n/**\n * Convert Date to Julian Day\n */\nfunction dateToJulianDay(swe: SwissEPH, date: Date): number {\n  const year = date.getUTCFullYear();\n  const month = date.getUTCMonth() + 1;\n  const day = date.getUTCDate();\n  const hour = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;\n\n  return swe.swe_julday(year, month, day, hour, swe.SE_GREG_CAL);\n}\n\n/**\n * Get planetary position at a given Julian Day\n * Returns longitude in degrees\n */\nfunction getPlanetPosition(swe: SwissEPH, julianDay: number, planet: number): number {\n  const result = swe.swe_calc_ut(julianDay, planet, SEFLG_SWIEPH | SEFLG_SPEED);\n  // Result is array: [longitude, latitude, distance, lonSpeed, latSpeed, distSpeed]\n  return result[0];\n}\n\n/**\n * Calculate the Design time (88\u00b0 solar arc before birth)\n *\n * This finds the exact moment when the Sun was 88\u00b0 behind its birth position.\n */\nfunction calculateDesignTime(swe: SwissEPH, birthJulianDay: number): number {\n  const birthSunLongitude = getPlanetPosition(swe, birthJulianDay, swe.SE_SUN);\n  const targetLongitude = (birthSunLongitude - 88 + 360) % 360;\n\n  // Approximate: Sun moves ~1\u00b0 per day, so 88\u00b0 \u2248 88 days\n  let searchJD = birthJulianDay - 88;\n\n  // Binary search to find exact moment\n  let low = searchJD - 5;\n  let high = searchJD + 5;\n\n  for (let i = 0; i < 50; i++) {\n    const mid = (low + high) / 2;\n    const sunLong = getPlanetPosition(swe, mid, swe.SE_SUN);\n\n    // Calculate angular difference\n    let diff = sunLong - targetLongitude;\n    if (diff > 180) diff -= 360;\n    if (diff < -180) diff += 360;\n\n    if (Math.abs(diff) < 0.0001) {\n      return mid;\n    }\n\n    if (diff > 0) {\n      high = mid;\n    } else {\n      low = mid;\n    }\n  }\n\n  return (low + high) / 2;\n}\n\n/**\n * Get all planetary activations for a given Julian Day\n */\nfunction getActivations(swe: SwissEPH, julianDay: number): Activations {\n  const planets: Array<{ name: Planet; code: number }> = [\n    { name: 'sun', code: swe.SE_SUN },\n    { name: 'moon', code: swe.SE_MOON },\n    { name: 'mercury', code: swe.SE_MERCURY },\n    { name: 'venus', code: swe.SE_VENUS },\n    { name: 'mars', code: swe.SE_MARS },\n    { name: 'jupiter', code: swe.SE_JUPITER },\n    { name: 'saturn', code: swe.SE_SATURN },\n    { name: 'uranus', code: swe.SE_URANUS },\n    { name: 'neptune', code: swe.SE_NEPTUNE },\n    { name: 'pluto', code: swe.SE_PLUTO },\n  ];\n\n  const activations: Partial<Activations> = {};\n\n  for (const { name, code } of planets) {\n    const longitude = getPlanetPosition(swe, julianDay, code);\n    const { gate, line } = longitudeToGateLine(longitude);\n    activations[name] = { gate, line };\n  }\n\n  // North Node\n  const northNodeLong = getPlanetPosition(swe, julianDay, swe.SE_TRUE_NODE);\n  const northNode = longitudeToGateLine(northNodeLong);\n  activations.north_node = northNode;\n\n  // South Node is always opposite (180\u00b0)\n  const southNodeLong = (northNodeLong + 180) % 360;\n  const southNode = longitudeToGateLine(southNodeLong);\n  activations.south_node = southNode;\n\n  // Earth is always opposite Sun (180\u00b0)\n  const sunLong = getPlanetPosition(swe, julianDay, swe.SE_SUN);\n  const earthLong = (sunLong + 180) % 360;\n  const earth = longitudeToGateLine(earthLong);\n  activations.earth = earth;\n\n  return activations as Activations;\n}\n\n/**\n * Calculate both Personality and Design activations\n */\nexport async function calculateActivations(birthDateUtc: Date): Promise<{\n  personality: Activations;\n  design: Activations;\n  designTime: Date;\n}> {\n  const swe = await getSwe();\n\n  const birthJD = dateToJulianDay(swe, birthDateUtc);\n  const designJD = calculateDesignTime(swe, birthJD);\n\n  const personality = getActivations(swe, birthJD);\n  const design = getActivations(swe, designJD);\n\n  // Convert design JD back to Date\n  const designResult = swe.swe_revjul(designJD, swe.SE_GREG_CAL);\n  const designTime = new Date(Date.UTC(\n    designResult.year,\n    designResult.month - 1,\n    designResult.day,\n    Math.floor(designResult.hour),\n    Math.floor((designResult.hour % 1) * 60),\n    Math.floor(((designResult.hour % 1) * 60 % 1) * 60)\n  ));\n\n  return { personality, design, designTime };\n}\n\n/**\n * Calculate current transit positions\n */\nexport async function calculateTransits(dateUtc: Date = new Date()): Promise<Activations> {\n  const swe = await getSwe();\n  const jd = dateToJulianDay(swe, dateUtc);\n  return getActivations(swe, jd);\n}\n",
+      "structuredPatch": [
+        {
+          "oldStart": 9,
+          "oldLines": 24,
+          "newStart": 9,
+          "newLines": 27,
+          "lines": [
+            " import SwissEPH from 'sweph-wasm';",
+            " import { longitudeToGateLine } from './mandala';",
+            " import type { Activation, Activations, Planet } from '@/types';",
+            "+import { readFileSync } from 'fs';",
+            "+import path from 'path';",
+            " ",
+            " // Singleton instance of SwissEPH",
+            " let sweInstance: SwissEPH | null = null;",
+            " ",
+            " /**",
+            "  * Initialize SwissEPH WASM module (singleton pattern)",
+            "- * Uses public WASM file served as a static asset",
+            "+ * Uses WASM file from public directory via filesystem read",
+            "  */",
+            " async function getSwe(): Promise<SwissEPH> {",
+            "   if (!sweInstance) {",
+            "-    // Construct absolute URL to the public WASM file",
+            "-    // In production (Vercel), use VERCEL_URL; in development, use localhost",
+            "-    const baseUrl = process.env.VERCEL_URL",
+            "-      ? `https://${process.env.VERCEL_URL}`",
+            "-      : 'http://localhost:3000';",
+            "-    const wasmUrl = `${baseUrl}/swisseph.wasm`;",
+            "+    // Read WASM file from public directory (works in both dev and Vercel)",
+            "+    const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');",
+            "+    const wasmBuffer = readFileSync(wasmPath);",
+            " ",
+            "-    sweInstance = await SwissEPH.init(wasmUrl);",
+            "+    // Create a data URL from the WASM buffer",
+            "+    const wasmBase64 = wasmBuffer.toString('base64');",
+            "+    const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;",
+            "+",
+            "+    sweInstance = await SwissEPH.init(wasmDataUrl);",
+            "   }",
+            "   return sweInstance;",
+            " }"
+          ]
+        }
+      ],
+      "userModified": false,
+      "replaceAll": false
+    },
+    "tool_use_id": "toolu_01EzbxfiLcejseiDbThMnYXn"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "npm run test 2>&1",
+      "timeout": 120000,
+      "description": "Test the filesystem-based WASM loading"
+    },
+    "tool_response": {
+      "stdout": "> intangible-me@0.1.0 test\n> vitest run\n\n\n\u001b[1m\u001b[46m RUN \u001b[49m\u001b[22m \u001b[36mv4.0.16 \u001b[39m\u001b[90m/Users/nickmitchell/intangible-me\u001b[39m\n\n \u001b[32m\u2713\u001b[39m tests/mandala.test.ts \u001b[2m(\u001b[22m\u001b[2m20 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 10\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m\u2713\u001b[39m tests/ephemeris.test.ts \u001b[2m(\u001b[22m\u001b[2m15 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 131\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m\u2713\u001b[39m tests/chart.test.ts \u001b[2m(\u001b[22m\u001b[2m22 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 159\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m3 passed\u001b[39m\u001b[22m\u001b[90m (3)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m57 passed\u001b[39m\u001b[22m\u001b[90m (57)\u001b[39m\n\u001b[2m   Start at \u001b[22m 00:09:06\n\u001b[2m   Duration \u001b[22m 347ms\u001b[2m (transform 154ms, setup 68ms, import 152ms, tests 301ms, environment 0ms)\u001b[22m",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "tool_use_id": "toolu_01VyZXHGmm13ijBDABWhRgxv"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "npm run build 2>&1",
+      "timeout": 120000,
+      "description": "Build to verify"
+    },
+    "tool_response": {
+      "stdout": "> intangible-me@0.1.0 build\n> next build\n\n\u25b2 Next.js 16.1.1 (Turbopack)\n- Environments: .env.local\n\n  Creating an optimized production build ...\n\u2713 Compiled successfully in 2.8s\n  Running TypeScript ...\n  Collecting page data using 9 workers ...\n[Error [BetterAuthError]: Invalid BETTER_AUTH_SECRET: must be at least 32 characters long for adequate security. Generate one with `npx @better-auth/cli secret` or `openssl rand -base64 32`.] {\n  cause: undefined\n}\n  Generating static pages using 9 workers (0/5) ...\n  Generating static pages using 9 workers (1/5) \r\n  Generating static pages using 9 workers (2/5) \r\n  Generating static pages using 9 workers (3/5) \r\n\u2713 Generating static pages using 9 workers (5/5) in 252.2ms\n  Finalizing page optimization ...\n\nRoute (app)\n\u250c \u25cb /\n\u251c \u25cb /_not-found\n\u251c \u0192 /api/auth/[...all]\n\u251c \u0192 /api/chart\n\u2514 \u0192 /api/geocode\n\n\n\u25cb  (Static)   prerendered as static content\n\u0192  (Dynamic)  server-rendered on demand",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "tool_use_id": "toolu_016sr95UT5FqQ2y38cPMViKg"
   }
 ]
