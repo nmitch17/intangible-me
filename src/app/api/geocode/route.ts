@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getTimezoneFromCoordinates } from '@/lib/timezone';
+import { nominatimRateLimiter, getClientIdentifier } from '@/lib/ratelimit';
+import { geocodingCache } from '@/lib/cache';
 
 const querySchema = z.object({
   q: z.string().min(2, 'Query must be at least 2 characters'),
@@ -25,10 +27,48 @@ interface NominatimResult {
 
 export async function GET(request: NextRequest) {
   try {
+    // Rate limiting check
+    const clientId = getClientIdentifier(request);
+    const rateLimit = nominatimRateLimiter.check(clientId);
+
+    if (!rateLimit.success) {
+      const retryAfter = Math.ceil((rateLimit.reset - Date.now()) / 1000);
+      return NextResponse.json(
+        {
+          error: 'Too many requests. Please try again in a moment.',
+          retryAfter,
+        },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': retryAfter.toString(),
+            'X-RateLimit-Limit': rateLimit.limit.toString(),
+            'X-RateLimit-Remaining': rateLimit.remaining.toString(),
+            'X-RateLimit-Reset': new Date(rateLimit.reset).toISOString(),
+          },
+        }
+      );
+    }
+
     const searchParams = request.nextUrl.searchParams;
     const query = searchParams.get('q');
 
     const validated = querySchema.parse({ q: query });
+
+    // Check cache first
+    const cacheKey = `geocode:${validated.q.toLowerCase()}`;
+    const cachedResult = geocodingCache.get(cacheKey);
+
+    if (cachedResult) {
+      return NextResponse.json(cachedResult, {
+        headers: {
+          'X-Cache': 'HIT',
+          'X-RateLimit-Limit': rateLimit.limit.toString(),
+          'X-RateLimit-Remaining': rateLimit.remaining.toString(),
+          'X-RateLimit-Reset': new Date(rateLimit.reset).toISOString(),
+        },
+      });
+    }
 
     const encodedQuery = encodeURIComponent(validated.q);
 
@@ -84,7 +124,17 @@ export async function GET(request: NextRequest) {
       timezone: getTimezoneFromCoordinates(result.lat, result.lng),
     }));
 
-    return NextResponse.json(resultsWithTimezone);
+    // Cache the result
+    geocodingCache.set(cacheKey, resultsWithTimezone);
+
+    return NextResponse.json(resultsWithTimezone, {
+      headers: {
+        'X-Cache': 'MISS',
+        'X-RateLimit-Limit': rateLimit.limit.toString(),
+        'X-RateLimit-Remaining': rateLimit.remaining.toString(),
+        'X-RateLimit-Reset': new Date(rateLimit.reset).toISOString(),
+      },
+    });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
