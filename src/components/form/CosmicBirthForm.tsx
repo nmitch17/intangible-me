@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { LocationResult } from '@/lib/maptiler';
+import { parseISO, isValid, formatISO } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
 interface CosmicBirthFormProps {
   onSubmit: (data: { datetime_utc: string; lat: number; lng: number }) => void;
@@ -42,14 +44,48 @@ export function CosmicBirthForm({ onSubmit, isLoading, error }: CosmicBirthFormP
       return;
     }
 
-    const dateInTz = new Date(`${birthDate}T${birthTime}:00`);
-    const utcString = dateInTz.toISOString();
+    // Validate date format (YYYY-MM-DD)
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    if (!datePattern.test(birthDate)) {
+      setValidationError('Invalid date format. Please use a valid date.');
+      return;
+    }
 
-    onSubmit({
-      datetime_utc: utcString,
-      lat: location.lat,
-      lng: location.lng,
-    });
+    // Validate time format (HH:MM)
+    const timePattern = /^\d{2}:\d{2}$/;
+    if (!timePattern.test(birthTime)) {
+      setValidationError('Invalid time format. Please use a valid time.');
+      return;
+    }
+
+    // Construct ISO string and validate it's a real date
+    const dateTimeString = `${birthDate}T${birthTime}:00`;
+    const parsedDate = parseISO(dateTimeString);
+
+    if (!isValid(parsedDate)) {
+      setValidationError('Invalid date or time. Please check your input and try again.');
+      return;
+    }
+
+    // Convert from local timezone to UTC
+    try {
+      const utcDate = zonedTimeToUtc(dateTimeString, timezone);
+
+      if (!isValid(utcDate)) {
+        setValidationError('Unable to convert date to UTC. Please try again.');
+        return;
+      }
+
+      const utcString = formatISO(utcDate);
+
+      onSubmit({
+        datetime_utc: utcString,
+        lat: location.lat,
+        lng: location.lng,
+      });
+    } catch (error) {
+      setValidationError('Invalid date or timezone. Please check your input and try again.');
+    }
   };
 
   // Location search effect
