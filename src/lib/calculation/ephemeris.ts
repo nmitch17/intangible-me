@@ -16,20 +16,64 @@ import path from 'path';
 let sweInstance: SwissEPH | null = null;
 
 /**
+ * Find WASM file using multiple fallback strategies for different environments
+ */
+function findWasmPath(): string {
+  const possiblePaths = [
+    // Vercel production: WASM in .next/static or .next/server
+    path.join(process.cwd(), '.next', 'static', 'swisseph.wasm'),
+    path.join(process.cwd(), '.next', 'server', 'swisseph.wasm'),
+    // Standard Next.js public directory
+    path.join(process.cwd(), 'public', 'swisseph.wasm'),
+    // Development: node_modules fallback
+    path.join(process.cwd(), 'node_modules', 'sweph-wasm', 'dist', 'wasm', 'swisseph.wasm'),
+    // Vercel serverless: root level
+    path.join(process.cwd(), 'swisseph.wasm'),
+  ];
+
+  // Try each path and return the first one that exists
+  for (const wasmPath of possiblePaths) {
+    try {
+      // Check if file exists and is readable
+      readFileSync(wasmPath);
+      return wasmPath;
+    } catch {
+      // Continue to next path
+      continue;
+    }
+  }
+
+  // If no path works, throw detailed error
+  throw new Error(
+    `SwissEph WASM file not found. Tried paths:\n${possiblePaths.map(p => `  - ${p}`).join('\n')}\n\n` +
+    `Current working directory: ${process.cwd()}\n` +
+    `Ensure the postinstall script ran successfully to copy the WASM file.`
+  );
+}
+
+/**
  * Initialize SwissEPH WASM module (singleton pattern)
  * Uses WASM file from public directory via filesystem read
+ * Supports multiple path resolution strategies for different deployment environments
  */
 async function getSwe(): Promise<SwissEPH> {
   if (!sweInstance) {
-    // Read WASM file from public directory (works in both dev and Vercel)
-    const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');
-    const wasmBuffer = readFileSync(wasmPath);
+    try {
+      // Find WASM file using fallback path strategies
+      const wasmPath = findWasmPath();
+      const wasmBuffer = readFileSync(wasmPath);
 
-    // Create a data URL from the WASM buffer
-    const wasmBase64 = wasmBuffer.toString('base64');
-    const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;
+      // Create a data URL from the WASM buffer
+      const wasmBase64 = wasmBuffer.toString('base64');
+      const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;
 
-    sweInstance = await SwissEPH.init(wasmDataUrl);
+      sweInstance = await SwissEPH.init(wasmDataUrl);
+    } catch (error) {
+      // Re-throw with context for debugging
+      throw new Error(
+        `Failed to initialize SwissEph WASM module: ${error instanceof Error ? error.message : String(error)}`
+      );
+    }
   }
   return sweInstance;
 }
