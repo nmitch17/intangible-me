@@ -221,24 +221,47 @@ for (const line of GATE_LINES) {
 
 /**
  * Get all lines for a specific gate
+ * @param gate Gate number (1-64)
+ * @returns Array of GateLineReference objects (lines 1-6)
+ * @throws Error if gate number is invalid
  */
 export function getGateLines(gate: number): GateLineReference[] {
+  if (!Number.isInteger(gate) || gate < 1 || gate > 64) {
+    throw new Error(`Invalid gate number: ${gate}. Must be an integer between 1 and 64.`);
+  }
   return GATE_LINES.filter(line => line.gate === gate);
 }
 
 /**
  * Get specific gate line
+ * @param gate Gate number (1-64)
+ * @param line Line number (1-6)
+ * @returns GateLineReference or undefined if not found
+ * @throws Error if gate or line number is invalid
  */
 export function getGateLine(gate: number, line: number): GateLineReference | undefined {
+  if (!Number.isInteger(gate) || gate < 1 || gate > 64) {
+    throw new Error(`Invalid gate number: ${gate}. Must be an integer between 1 and 64.`);
+  }
+  if (!Number.isInteger(line) || line < 1 || line > 6) {
+    throw new Error(`Invalid line number: ${line}. Must be an integer between 1 and 6.`);
+  }
   return GATE_LINE_MAP[`${gate}.${line}`];
 }
 
 /**
  * Get gate lines by gate numbers (useful for channel lookups)
+ * @param gates Array of gate numbers (each 1-64)
+ * @returns Record mapping gate numbers to their line arrays
+ * @throws Error if any gate number is invalid
  */
 export function getLinesByGates(gates: number[]): Record<number, GateLineReference[]> {
+  if (!Array.isArray(gates)) {
+    throw new Error('Gates parameter must be an array');
+  }
   const result: Record<number, GateLineReference[]> = {};
   for (const gate of gates) {
+    // getGateLines will validate each gate
     result[gate] = getGateLines(gate);
   }
   return result;

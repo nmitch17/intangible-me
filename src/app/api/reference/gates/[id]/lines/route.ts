@@ -3,7 +3,12 @@ import { z } from 'zod';
 import { getGateLines } from '@/lib/reference/lines';
 
 const paramsSchema = z.object({
-  id: z.string().regex(/^\d+$/, 'Gate ID must be a number'),
+  id: z.string()
+    .regex(/^\d+$/, 'Gate ID must be a number')
+    .transform(val => parseInt(val, 10))
+    .refine(val => val >= 1 && val <= 64, {
+      message: 'Gate ID must be between 1 and 64'
+    }),
 });
 
 /**
@@ -32,40 +37,32 @@ export async function GET(
 ) {
   try {
     const params = await context.params;
-    const validated = paramsSchema.parse(params);
-    const gateId = parseInt(validated.id, 10);
-
-    // Validate gate range
-    if (gateId < 1 || gateId > 64) {
-      return NextResponse.json(
-        { error: 'Gate ID must be between 1 and 64' },
-        { status: 400 }
-      );
-    }
+    const { id: gateId } = paramsSchema.parse(params);
 
     // Get lines for this gate
     const lines = getGateLines(gateId);
 
-    // Check if lines exist for this gate
+    // Return 404 if no data exists for this gate
     if (lines.length === 0) {
       return NextResponse.json(
         {
+          error: 'Line data not available for this gate',
           gate: gateId,
-          lines: [],
-          warning: 'Line data not yet available for this gate. See PRD Section 9 for implementation status.',
+          message: 'This gate does not have line descriptions yet. See PRD Section 9 for implementation status.'
         },
-        { status: 200 }
+        { status: 404 }
       );
     }
 
     // Check if all 6 lines are present
-    const complete = lines.length === 6;
+    const isComplete = lines.length === 6;
 
     return NextResponse.json({
       gate: gateId,
       lines,
-      complete,
-      ...(complete ? {} : { warning: 'Incomplete line data. Some lines missing.' }),
+      status: isComplete ? 'complete' : 'partial',
+      available: lines.length,
+      expected: 6,
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
