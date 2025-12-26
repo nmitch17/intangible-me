@@ -211,12 +211,20 @@ export interface ProfileReference {
   description?: string;
 }
 
+export interface GateLineReference {
+  gate: number;
+  line: number;
+  name: string;
+  description: string;
+}
+
 export interface ReferenceData {
   type?: TypeReference;
   authority?: AuthorityReference;
   profile?: ProfileReference;
   channels?: Record<string, ChannelReference>;
   gates?: Record<string, GateReference>;
+  lines?: Record<string, GateLineReference>;
 }
 
 // ============================================================================
