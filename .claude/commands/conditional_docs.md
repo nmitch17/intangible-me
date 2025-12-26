@@ -53,6 +53,16 @@ This prompt helps you determine what documentation you should read based on the 
     - When troubleshooting glass-morphism or backdrop-filter effects
     - When working with the page layout or parallax effects
 
+- app_docs/feature-solar-haze-ui-redesign.md
+  - Conditions:
+    - When working with the Solar Haze Portal design system
+    - When modifying claymorphic or neumorphic component styles
+    - When working with the warm color palette (solar-glow, haze-pink)
+    - When adding new animated background elements or sparkles
+    - When troubleshooting hydration mismatches in SSR components
+    - When modifying src/app/globals.css design tokens
+    - When working with Outfit, DM Serif Display, or JetBrains Mono fonts
+
 - app_docs/bug-wasm-fetch-failed-vercel-production.md
   - Conditions:
     - When working with the sweph-wasm library or ephemeris calculations

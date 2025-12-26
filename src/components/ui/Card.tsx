@@ -8,7 +8,7 @@ export function Card({ title, children, className = '' }: CardProps) {
   return (
     <div className={`chart-card p-6 ${className}`}>
       {title && (
-        <h3 className="text-lg font-semibold mb-4 text-white font-mono tracking-wide uppercase text-sm">
+        <h3 className="text-sm font-mono font-medium mb-4 text-solar-glow tracking-wider uppercase">
           {title}
         </h3>
       )}

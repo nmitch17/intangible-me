@@ -9,7 +9,7 @@ export function CircuitryBalance({ circuitry }: CircuitryBalanceProps) {
 
   if (total === 0) {
     return (
-      <p className="text-white/50 italic">
+      <p className="text-deep-cosmos/50 italic">
         No channels defined
       </p>
     );
@@ -29,12 +29,12 @@ export function CircuitryBalance({ circuitry }: CircuitryBalanceProps) {
         return (
           <div key={circuit.name} className="space-y-1">
             <div className="flex justify-between text-sm">
-              <span className="text-white/80">{circuit.name}</span>
-              <span className="text-white/50 font-mono text-xs">
+              <span className="text-deep-cosmos/80">{circuit.name}</span>
+              <span className="text-deep-cosmos/50 font-mono text-xs">
                 {circuit.count} channel{circuit.count !== 1 ? 's' : ''}
               </span>
             </div>
-            <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+            <div className="h-2 bg-deep-cosmos/10 rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-500"
                 style={{

@@ -42,14 +42,14 @@ export function ActivationsTable({ personality, design }: ActivationsTableProps)
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-white/10">
-            <th className="text-left py-2 px-3 font-mono text-xs uppercase tracking-wider text-white/50">
+          <tr className="border-b border-deep-cosmos/10">
+            <th className="text-left py-2 px-3 font-mono text-xs uppercase tracking-wider text-deep-cosmos/50">
               Planet
             </th>
-            <th className="text-center py-2 px-3 font-mono text-xs uppercase tracking-wider text-white">
+            <th className="text-center py-2 px-3 font-mono text-xs uppercase tracking-wider text-deep-cosmos">
               Personality
             </th>
-            <th className="text-center py-2 px-3 font-mono text-xs uppercase tracking-wider text-red-400">
+            <th className="text-center py-2 px-3 font-mono text-xs uppercase tracking-wider text-red-500">
               Design
             </th>
           </tr>
@@ -60,14 +60,14 @@ export function ActivationsTable({ personality, design }: ActivationsTableProps)
             const dAct = design[planet];
 
             return (
-              <tr key={planet} className="border-b border-white/5">
-                <td className="py-2 px-3 text-white/70">
+              <tr key={planet} className="border-b border-deep-cosmos/5">
+                <td className="py-2 px-3 text-deep-cosmos/70">
                   {planetDisplayNames[planet]}
                 </td>
-                <td className="py-2 px-3 text-center font-mono text-white">
+                <td className="py-2 px-3 text-center font-mono text-deep-cosmos">
                   {pAct.gate}.{pAct.line}
                 </td>
-                <td className="py-2 px-3 text-center font-mono text-red-400">
+                <td className="py-2 px-3 text-center font-mono text-red-500">
                   {dAct.gate}.{dAct.line}
                 </td>
               </tr>
