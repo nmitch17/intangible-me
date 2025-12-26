@@ -1,0 +1,6 @@
+{
+  "session_id": "e2089d52-35c7-4698-8039-1d2f3ec77eac",
+  "prompts": [
+    "<bash-notification>\n<shell-id>b2d995c</shell-id>\n<output-file>/tmp/claude/-Users-nickmitchell-intangible-me/tasks/b2d995c.output</output-file>\n<status>killed</status>\n<summary>Background command \"Start Next.js dev server\" was killed.</summary>\nRead the output file to retrieve the output.\n</bash-notification>\n<bash-notification>\n<shell-id>b1ee3c8</shell-id>\n<output-file>/tmp/claude/-Users-nickmitchell-intangible-me/tasks/b1ee3c8.output</output-file>\n<status>failed</status>\n<summary>Background command \"Start dev server on port 3003\" failed with exit code 137.</summary>\nRead the output file to retrieve the output.\n</bash-notification>"
+  ]
+}

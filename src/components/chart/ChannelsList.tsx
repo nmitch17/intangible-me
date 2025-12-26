@@ -14,7 +14,7 @@ const circuitVariants: Record<Circuit, 'purple' | 'orange' | 'blue'> = {
 export function ChannelsList({ channels }: ChannelsListProps) {
   if (channels.length === 0) {
     return (
-      <p className="text-gray-500 dark:text-gray-400 italic">
+      <p className="text-white/50 italic">
         No complete channels (Reflector design)
       </p>
     );
@@ -25,12 +25,12 @@ export function ChannelsList({ channels }: ChannelsListProps) {
       {channels.map((channel) => (
         <div
           key={channel.name}
-          className="flex flex-wrap items-center gap-2 p-2 bg-gray-50 dark:bg-gray-700/50 rounded"
+          className="flex flex-wrap items-center gap-2 p-3 bg-white/5 border border-white/10 rounded"
         >
-          <span className="font-medium text-gray-900 dark:text-gray-100">
+          <span className="font-mono font-medium text-nebula-cyan">
             {channel.gates[0]}-{channel.gates[1]}
           </span>
-          <span className="text-gray-600 dark:text-gray-300">{channel.name}</span>
+          <span className="text-white/80">{channel.name}</span>
           <Badge variant={circuitVariants[channel.circuit]}>{channel.circuit}</Badge>
           <Badge variant="gray">{channel.stream}</Badge>
         </div>

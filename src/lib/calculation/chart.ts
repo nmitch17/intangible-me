@@ -448,9 +448,9 @@ function getGateName(gate: number): string {
 /**
  * Calculate complete Human Design chart from birth data
  */
-export function calculateChart(birthDateUtc: Date): ChartData {
+export async function calculateChart(birthDateUtc: Date): Promise<ChartData> {
   // Calculate planetary activations
-  const { personality, design } = calculateActivations(birthDateUtc);
+  const { personality, design } = await calculateActivations(birthDateUtc);
   
   // Collect all activated gates
   const activatedGates = collectGates(personality, design);
@@ -495,14 +495,14 @@ export function calculateChart(birthDateUtc: Date): ChartData {
 /**
  * Full chart response with birth data
  */
-export function generateChartResponse(
+export async function generateChartResponse(
   datetimeUtc: string,
   lat: number,
   lng: number,
   timezone?: string
-): ChartResponse {
+): Promise<ChartResponse> {
   const birthDate = new Date(datetimeUtc);
-  const chart = calculateChart(birthDate);
+  const chart = await calculateChart(birthDate);
   
   return {
     birth: {

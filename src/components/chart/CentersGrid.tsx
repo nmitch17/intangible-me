@@ -38,21 +38,21 @@ export function CentersGrid({ centers }: CentersGridProps) {
         return (
           <div
             key={centerKey}
-            className={`p-3 rounded-lg border-2 ${
+            className={`p-3 rounded-lg border ${
               isDefined
-                ? 'border-[var(--hd-defined)] bg-green-50 dark:bg-green-900/20'
-                : 'border-dashed border-[var(--hd-undefined)] bg-gray-50 dark:bg-gray-800'
+                ? 'border-green-500/40 bg-green-500/10'
+                : 'border-dashed border-white/20 bg-white/5'
             }`}
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="font-medium text-gray-900 dark:text-gray-100">
+              <span className="font-medium text-white text-sm">
                 {centerDisplayNames[centerKey]}
               </span>
               <span
                 className={`text-xs px-2 py-0.5 rounded ${
                   isDefined
-                    ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100'
-                    : 'bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-400'
+                    ? 'bg-green-500/20 text-green-300'
+                    : 'bg-white/10 text-white/50'
                 }`}
               >
                 {isDefined ? 'Defined' : 'Open'}
@@ -63,7 +63,7 @@ export function CentersGrid({ centers }: CentersGridProps) {
                 {center.gates.map((gate) => (
                   <span
                     key={gate}
-                    className="text-xs bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-1.5 py-0.5 rounded"
+                    className="text-xs bg-white/10 text-white/70 px-1.5 py-0.5 rounded"
                   >
                     {gate}
                   </span>

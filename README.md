@@ -4,7 +4,7 @@ Comprehensive Human Design chart calculation and analysis platform.
 
 ## Stack
 
-- **Frontend**: Next.js 14 (App Router)
+- **Frontend**: Next.js 16.1.1 (App Router)
 - **Database**: Neon (Serverless Postgres)
 - **ORM**: Drizzle
 - **Auth**: Better Auth
@@ -58,7 +58,7 @@ Comprehensive Human Design chart calculation and analysis platform.
 
 ```bash
 git clone <repo>
-cd human-design-app
+cd intangible-me
 npm install
 ```
 

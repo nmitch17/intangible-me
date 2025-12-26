@@ -1,0 +1,8 @@
+{
+  "session_id": "a063bdf0-7a5a-4291-8bdb-1ee02b446e44",
+  "prompts": [
+    "How does the location search work? It's giving me some garbage options like the attahed images. \"New York City\" should obviously contain \"New York City, New York\" as the first returned option. It's not even on the list. ",
+    "/restart ",
+    "This is stull stupid results. How can we make this work great? Not returning New York City is ridiculous."
+  ]
+}

@@ -9,7 +9,7 @@ export function CircuitryBalance({ circuitry }: CircuitryBalanceProps) {
 
   if (total === 0) {
     return (
-      <p className="text-gray-500 dark:text-gray-400 italic">
+      <p className="text-white/50 italic">
         No channels defined
       </p>
     );
@@ -22,21 +22,21 @@ export function CircuitryBalance({ circuitry }: CircuitryBalanceProps) {
   ];
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {circuits.map((circuit) => {
         const percentage = total > 0 ? (circuit.count / total) * 100 : 0;
 
         return (
           <div key={circuit.name} className="space-y-1">
             <div className="flex justify-between text-sm">
-              <span className="text-gray-700 dark:text-gray-300">{circuit.name}</span>
-              <span className="text-gray-500 dark:text-gray-400">
+              <span className="text-white/80">{circuit.name}</span>
+              <span className="text-white/50 font-mono text-xs">
                 {circuit.count} channel{circuit.count !== 1 ? 's' : ''}
               </span>
             </div>
-            <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="h-2 bg-white/10 rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full transition-all duration-300"
+                className="h-full rounded-full transition-all duration-500"
                 style={{
                   width: `${percentage}%`,
                   backgroundColor: circuit.color,
