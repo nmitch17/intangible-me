@@ -35,21 +35,6 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          allowedTools: |
-            Bash(gh issue:*)
-            Bash(gh pr:*)
-            Bash(git add:*)
-            Bash(git commit:*)
-            Bash(git push:*)
-            Bash(git status:*)
-            Bash(git diff:*)
-            Bash(git log:*)
-            Bash(git rm:*)
-            Read
-            Edit
-            Write
-            Glob
-            Grep
 
           # This is an optional setting that allows Claude to read CI results on PRs
           additional_permissions: |
