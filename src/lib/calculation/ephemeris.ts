@@ -15,23 +15,126 @@ import path from 'path';
 // Singleton instance of SwissEPH
 let sweInstance: SwissEPH | null = null;
 
+// Mutex to prevent race conditions during initialization
+let initializationPromise: Promise<SwissEPH> | null = null;
+
+// Configuration for retry logic
+const MAX_RETRIES = 3;
+const RETRY_DELAY_MS = 1000;
+
+/**
+ * Custom error class for WASM initialization failures
+ * Exported to allow consumers to handle initialization errors specifically
+ */
+export class WasmInitializationError extends Error {
+  constructor(message: string, public readonly cause?: unknown) {
+    super(message);
+    this.name = 'WasmInitializationError';
+  }
+}
+
+/**
+ * Sleep utility for retry delays
+ */
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 /**
  * Initialize SwissEPH WASM module (singleton pattern)
  * Uses WASM file from public directory via filesystem read
+ *
+ * Features:
+ * - Comprehensive error handling with user-friendly messages
+ * - Retry logic for transient failures
+ * - Mutex/lock to prevent race conditions
+ *
+ * @throws {WasmInitializationError} If initialization fails after all retries
  */
 async function getSwe(): Promise<SwissEPH> {
-  if (!sweInstance) {
-    // Read WASM file from public directory (works in both dev and Vercel)
-    const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');
-    const wasmBuffer = readFileSync(wasmPath);
-
-    // Create a data URL from the WASM buffer
-    const wasmBase64 = wasmBuffer.toString('base64');
-    const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;
-
-    sweInstance = await SwissEPH.init(wasmDataUrl);
+  // Return existing instance if already initialized
+  if (sweInstance) {
+    return sweInstance;
   }
-  return sweInstance;
+
+  // If initialization is already in progress, wait for it
+  if (initializationPromise) {
+    return initializationPromise;
+  }
+
+  // Start initialization with mutex lock
+  initializationPromise = (async () => {
+    let lastError: unknown;
+
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        // Read WASM file from public directory (works in both dev and Vercel)
+        const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');
+
+        let wasmBuffer: Buffer;
+        try {
+          wasmBuffer = readFileSync(wasmPath);
+        } catch (error) {
+          throw new WasmInitializationError(
+            `Failed to read WASM file at ${wasmPath}. Please ensure the swisseph.wasm file exists in the public directory.`,
+            error
+          );
+        }
+
+        // Create a data URL from the WASM buffer
+        const wasmBase64 = wasmBuffer.toString('base64');
+        const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;
+
+        // Initialize SwissEPH WASM module
+        try {
+          sweInstance = await SwissEPH.init(wasmDataUrl);
+
+          // Verify the instance is valid by testing a basic operation
+          if (!sweInstance || typeof sweInstance.swe_julday !== 'function') {
+            throw new Error('WASM module initialization succeeded but instance is invalid');
+          }
+
+          return sweInstance;
+        } catch (error) {
+          throw new WasmInitializationError(
+            'Failed to initialize Swiss Ephemeris WASM module. The WASM file may be corrupted or incompatible.',
+            error
+          );
+        }
+      } catch (error) {
+        lastError = error;
+
+        // Log the error for debugging
+        console.error(`WASM initialization attempt ${attempt}/${MAX_RETRIES} failed:`, error);
+
+        // If this isn't the last attempt, wait before retrying
+        if (attempt < MAX_RETRIES) {
+          console.log(`Retrying in ${RETRY_DELAY_MS}ms...`);
+          await sleep(RETRY_DELAY_MS);
+        }
+      }
+    }
+
+    // All retries exhausted
+    initializationPromise = null; // Reset the lock to allow future attempts
+
+    const errorMessage = lastError instanceof WasmInitializationError
+      ? lastError.message
+      : 'An unexpected error occurred during WASM initialization';
+
+    throw new WasmInitializationError(
+      `${errorMessage} (Failed after ${MAX_RETRIES} attempts)`,
+      lastError
+    );
+  })();
+
+  try {
+    return await initializationPromise;
+  } catch (error) {
+    // Reset the promise on failure to allow retry in the future
+    initializationPromise = null;
+    throw error;
+  }
 }
 
 // Calculation flags
