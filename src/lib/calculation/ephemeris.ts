@@ -20,7 +20,11 @@ let sweInstance: SwissEPH | null = null;
  * Uses WASM file from public directory via filesystem read
  */
 async function getSwe(): Promise<SwissEPH> {
-  if (!sweInstance) {
+  if (sweInstance) {
+    return sweInstance;
+  }
+
+  try {
     // Read WASM file from public directory (works in both dev and Vercel)
     const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');
     const wasmBuffer = readFileSync(wasmPath);
@@ -30,8 +34,13 @@ async function getSwe(): Promise<SwissEPH> {
     const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;
 
     sweInstance = await SwissEPH.init(wasmDataUrl);
+    return sweInstance;
+  } catch (error) {
+    console.error('Failed to initialize Swiss Ephemeris WASM:', error);
+    throw new Error(
+      `Failed to load astronomical calculation engine: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
   }
-  return sweInstance;
 }
 
 // Calculation flags
