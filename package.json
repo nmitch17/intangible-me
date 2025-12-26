@@ -6,7 +6,7 @@
     "node": "20.x"
   },
   "scripts": {
-    "postinstall": "cp node_modules/sweph-wasm/dist/wasm/swisseph.wasm public/swisseph.wasm",
+    "postinstall": "node scripts/copy-wasm.js",
     "dev": "next dev",
     "build": "next build",
     "build:ci": "npm ci && npm run build",
