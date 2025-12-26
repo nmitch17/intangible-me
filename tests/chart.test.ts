@@ -11,9 +11,9 @@ import { CHANNELS } from '@/lib/reference/channels';
 
 describe('Chart Calculation', () => {
   describe('calculateChart', () => {
-    it('should calculate a complete chart from birth date', () => {
+    it('should calculate a complete chart from birth date', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       expect(chart).toHaveProperty('type');
       expect(chart).toHaveProperty('strategy');
@@ -30,9 +30,9 @@ describe('Chart Calculation', () => {
       expect(chart).toHaveProperty('circuitry');
     });
 
-    it('should return valid Human Design type', () => {
+    it('should return valid Human Design type', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       const validTypes = [
         'Manifestor',
@@ -44,9 +44,9 @@ describe('Chart Calculation', () => {
       expect(validTypes).toContain(chart.type);
     });
 
-    it('should return matching strategy for type', () => {
+    it('should return matching strategy for type', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       const typeStrategyMap: Record<string, string> = {
         'Manifestor': 'Inform',
@@ -59,9 +59,9 @@ describe('Chart Calculation', () => {
       expect(chart.strategy).toBe(typeStrategyMap[chart.type]);
     });
 
-    it('should return valid authority', () => {
+    it('should return valid authority', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       const validAuthorities = [
         'Emotional',
@@ -75,17 +75,17 @@ describe('Chart Calculation', () => {
       expect(validAuthorities).toContain(chart.authority);
     });
 
-    it('should return valid profile format', () => {
+    it('should return valid profile format', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       // Profile should be in format "X/Y" where X and Y are 1-6
       expect(chart.profile).toMatch(/^[1-6]\/[1-6]$/);
     });
 
-    it('should return valid definition type', () => {
+    it('should return valid definition type', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       const validDefinitions = [
         'None',
@@ -97,9 +97,9 @@ describe('Chart Calculation', () => {
       expect(validDefinitions).toContain(chart.definition);
     });
 
-    it('should have all 9 centers in the chart', () => {
+    it('should have all 9 centers in the chart', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       const centerNames = [
         'head', 'ajna', 'throat', 'g', 'ego',
@@ -113,9 +113,9 @@ describe('Chart Calculation', () => {
       }
     });
 
-    it('should have valid cross structure', () => {
+    it('should have valid cross structure', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       expect(chart.cross).toHaveProperty('name');
       expect(chart.cross).toHaveProperty('type');
@@ -130,9 +130,9 @@ describe('Chart Calculation', () => {
       expect(validQuarters).toContain(chart.cross.quarter);
     });
 
-    it('should have personality and design activations', () => {
+    it('should have personality and design activations', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       expect(chart.activations).toHaveProperty('personality');
       expect(chart.activations).toHaveProperty('design');
@@ -149,9 +149,9 @@ describe('Chart Calculation', () => {
       }
     });
 
-    it('should have valid circuitry counts', () => {
+    it('should have valid circuitry counts', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       expect(chart.circuitry).toHaveProperty('individual');
       expect(chart.circuitry).toHaveProperty('tribal');
@@ -162,10 +162,10 @@ describe('Chart Calculation', () => {
       expect(chart.circuitry.collective).toBeGreaterThanOrEqual(0);
     });
 
-    it('should produce consistent results for same input', () => {
+    it('should produce consistent results for same input', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart1 = calculateChart(birthDate);
-      const chart2 = calculateChart(birthDate);
+      const chart1 = await calculateChart(birthDate);
+      const chart2 = await calculateChart(birthDate);
 
       expect(chart1.type).toBe(chart2.type);
       expect(chart1.authority).toBe(chart2.authority);
@@ -175,11 +175,11 @@ describe('Chart Calculation', () => {
   });
 
   describe('Type Derivation Logic', () => {
-    it('should derive Reflector when no centers are defined', () => {
+    it('should derive Reflector when no centers are defined', async () => {
       // Reflectors are rare - this is a structural test
       // We verify the logic exists by checking type derivation works
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       // If no channels, should be Reflector
       if (chart.channels.length === 0) {
@@ -189,18 +189,18 @@ describe('Chart Calculation', () => {
       }
     });
 
-    it('should have sacral defined for Generators', () => {
+    it('should have sacral defined for Generators', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       if (chart.type === 'Generator' || chart.type === 'Manifesting Generator') {
         expect(chart.centers.sacral.defined).toBe(true);
       }
     });
 
-    it('should not have sacral defined for Manifestors and Projectors', () => {
+    it('should not have sacral defined for Manifestors and Projectors', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       if (chart.type === 'Manifestor' || chart.type === 'Projector') {
         expect(chart.centers.sacral.defined).toBe(false);
@@ -209,9 +209,9 @@ describe('Chart Calculation', () => {
   });
 
   describe('Authority Hierarchy', () => {
-    it('should have Emotional authority when Solar Plexus is defined', () => {
+    it('should have Emotional authority when Solar Plexus is defined', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       // Emotional authority takes precedence
       if (chart.centers.solar_plexus.defined && chart.type !== 'Reflector') {
@@ -219,9 +219,9 @@ describe('Chart Calculation', () => {
       }
     });
 
-    it('should have Lunar authority for Reflectors', () => {
+    it('should have Lunar authority for Reflectors', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       if (chart.type === 'Reflector') {
         expect(chart.authority).toBe('Lunar');
@@ -230,9 +230,9 @@ describe('Chart Calculation', () => {
   });
 
   describe('Channel Detection', () => {
-    it('should only include complete channels', () => {
+    it('should only include complete channels', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       for (const channel of chart.channels) {
         // Both gates of the channel should be in the activated gates
@@ -245,9 +245,9 @@ describe('Chart Calculation', () => {
       }
     });
 
-    it('should mark centers as defined when they have complete channels', () => {
+    it('should mark centers as defined when they have complete channels', async () => {
       const birthDate = new Date('1980-09-13T09:15:00Z');
-      const chart = calculateChart(birthDate);
+      const chart = await calculateChart(birthDate);
 
       // If there are channels, there should be defined centers
       if (chart.channels.length > 0) {
@@ -260,8 +260,8 @@ describe('Chart Calculation', () => {
   });
 
   describe('generateChartResponse', () => {
-    it('should generate complete response with birth data', () => {
-      const response = generateChartResponse(
+    it('should generate complete response with birth data', async () => {
+      const response = await generateChartResponse(
         '1980-09-13T09:15:00Z',
         34.0522,
         -118.2437,
@@ -277,8 +277,8 @@ describe('Chart Calculation', () => {
       expect(response.birth.timezone).toBe('America/Los_Angeles');
     });
 
-    it('should default timezone to UTC if not provided', () => {
-      const response = generateChartResponse(
+    it('should default timezone to UTC if not provided', async () => {
+      const response = await generateChartResponse(
         '1980-09-13T09:15:00Z',
         34.0522,
         -118.2437

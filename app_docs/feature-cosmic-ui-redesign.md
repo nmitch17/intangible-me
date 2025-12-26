@@ -26,8 +26,8 @@ Complete visual redesign of the Human Design chart calculator with a cosmic/spac
 - `src/app/layout.tsx`: Updated font configuration for cosmic theme
 - `src/components/form/CosmicBirthForm.tsx`: New form component with cosmic styling
 - `src/components/form/index.ts`: Added CosmicBirthForm export
-- `package.json`: Updated Next.js to v16.1.1, switched from sweph-wasm to swisseph
-- `src/lib/calculation/ephemeris.ts`: Refactored to use native swisseph package instead of WASM version
+- `package.json`: Updated Next.js to v16.1.1, uses sweph-wasm for WASM-based ephemeris
+- `src/lib/calculation/ephemeris.ts`: Uses sweph-wasm with async initialization for serverless compatibility
 - `src/components/chart/*.tsx`: Updated chart components to use cosmic theme styling
 - `tailwind.config.ts`: Added cosmic theme colors and utilities
 - `vitest.config.ts`: New test configuration file
@@ -78,7 +78,7 @@ Test coverage includes:
 
 ## Notes
 
-- The ephemeris library was switched from `sweph-wasm` to native `swisseph` for better cross-platform compatibility
+- The ephemeris library uses `sweph-wasm` (WebAssembly) for cross-platform compatibility, including serverless environments like Vercel
 - Next.js was upgraded to v16.1.1
 - The original `BirthDataForm` component is still available but `CosmicBirthForm` is now the default
 - Added Vitest testing framework with 57 comprehensive unit tests
