@@ -3,6 +3,7 @@
   "prompts": [
     "/test ",
     "/ship ",
-    "Continue"
+    "Continue",
+    "continue"
   ]
 }
