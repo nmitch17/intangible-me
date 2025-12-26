@@ -188,12 +188,22 @@ export interface ChannelReference {
   description?: string;
 }
 
+export interface CenterReference {
+  name: string;
+  key: CenterName;
+  theme: string;
+  definedDescription: string;
+  undefinedDescription: string;
+  notSelfTheme: string;
+}
+
 export interface TypeReference {
-  id: HumanDesignType;
+  name: HumanDesignType;
   strategy: Strategy;
   signature: string;
-  not_self: string;
-  description?: string;
+  notSelf: string;
+  description: string;
+  aura: string;
 }
 
 export interface AuthorityReference {
@@ -215,6 +225,7 @@ export interface ReferenceData {
   type?: TypeReference;
   authority?: AuthorityReference;
   profile?: ProfileReference;
+  centers?: Record<string, CenterReference>;
   channels?: Record<string, ChannelReference>;
   gates?: Record<string, GateReference>;
 }
