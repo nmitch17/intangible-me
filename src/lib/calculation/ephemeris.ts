@@ -14,24 +14,32 @@ import path from 'path';
 
 // Singleton instance of SwissEPH
 let sweInstance: SwissEPH | null = null;
+let initPromise: Promise<SwissEPH> | null = null;
 
 /**
  * Initialize SwissEPH WASM module (singleton pattern)
  * Uses WASM file from public directory via filesystem read
+ * Thread-safe: prevents race conditions with concurrent initialization
  */
 async function getSwe(): Promise<SwissEPH> {
-  if (!sweInstance) {
-    // Read WASM file from public directory (works in both dev and Vercel)
-    const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');
-    const wasmBuffer = readFileSync(wasmPath);
+  if (sweInstance) return sweInstance;
 
-    // Create a data URL from the WASM buffer
-    const wasmBase64 = wasmBuffer.toString('base64');
-    const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;
+  if (!initPromise) {
+    initPromise = (async () => {
+      // Read WASM file from public directory (works in both dev and Vercel)
+      const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');
+      const wasmBuffer = readFileSync(wasmPath);
 
-    sweInstance = await SwissEPH.init(wasmDataUrl);
+      // Create a data URL from the WASM buffer
+      const wasmBase64 = wasmBuffer.toString('base64');
+      const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;
+
+      sweInstance = await SwissEPH.init(wasmDataUrl);
+      return sweInstance;
+    })();
   }
-  return sweInstance;
+
+  return initPromise;
 }
 
 // Calculation flags
