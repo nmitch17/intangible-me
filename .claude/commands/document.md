@@ -10,6 +10,8 @@ documentation_screenshots_dir: $3 if provided, otherwise leave it blank
 
 ## Instructions
 
+Spawn subagents using `haiku` to complete the following steps 1, 2, and 3. The agents report their findings to the main opus agent, who writes the documentation.
+
 ### 1. Analyze Changes
 - Run `git diff origin/main --stat` to see files changed and lines modified
 - Run `git diff origin/main --name-only` to get the list of changed files

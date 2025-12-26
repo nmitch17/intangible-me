@@ -96,5 +96,47 @@
     "cwd": "/Users/nickmitchell/intangible-me",
     "hook_event_name": "SessionStart",
     "source": "clear"
+  },
+  {
+    "session_id": "a063bdf0-7a5a-4291-8bdb-1ee02b446e44",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/a063bdf0-7a5a-4291-8bdb-1ee02b446e44.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
+  },
+  {
+    "session_id": "24b46848-a70a-44f5-a327-baabf843adf2",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/24b46848-a70a-44f5-a327-baabf843adf2.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
+  },
+  {
+    "session_id": "d0eed45c-de5f-4c40-bfe3-5d013524ffe3",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/d0eed45c-de5f-4c40-bfe3-5d013524ffe3.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
+  },
+  {
+    "session_id": "e2089d52-35c7-4698-8039-1d2f3ec77eac",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/e2089d52-35c7-4698-8039-1d2f3ec77eac.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
+  },
+  {
+    "session_id": "8c086c7a-38a8-4660-8a62-2672735a8837",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/8c086c7a-38a8-4660-8a62-2672735a8837.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "8da985b4-d029-48e0-bab5-c75871e30a73",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/8da985b4-d029-48e0-bab5-c75871e30a73.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
   }
 ]

@@ -43,3 +43,12 @@ This prompt helps you determine what documentation you should read based on the 
     - When modifying location search functionality
     - When troubleshooting Nominatim API issues or rate limits
     - When working with OpenStreetMap data or location results
+
+- app_docs/feature-cosmic-ui-redesign.md
+  - Conditions:
+    - When working with the cosmic theme or visual styling
+    - When modifying src/app/globals.css or theme colors
+    - When working with the CosmicBirthForm component
+    - When implementing new UI components or animations
+    - When troubleshooting glass-morphism or backdrop-filter effects
+    - When working with the page layout or parallax effects

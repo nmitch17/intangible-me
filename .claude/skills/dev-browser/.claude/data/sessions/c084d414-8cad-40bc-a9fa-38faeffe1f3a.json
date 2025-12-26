@@ -1,0 +1,6 @@
+{
+  "session_id": "c084d414-8cad-40bc-a9fa-38faeffe1f3a",
+  "prompts": [
+    "I want you to test the image uploading and persistence using all the tools we have available to us: Pino logging, dev-browser skill, etc. Upload this image and test persistence and debug if it's not working as expected: /Users/nickmitchell/Downloads/Gemini_Generated_Image_aa5v6laa5v6laa5v.png"
+  ]
+}

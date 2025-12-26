@@ -42,14 +42,14 @@ export function ActivationsTable({ personality, design }: ActivationsTableProps)
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-200 dark:border-gray-700">
-            <th className="text-left py-2 px-3 font-medium text-gray-600 dark:text-gray-400">
+          <tr className="border-b border-white/10">
+            <th className="text-left py-2 px-3 font-mono text-xs uppercase tracking-wider text-white/50">
               Planet
             </th>
-            <th className="text-center py-2 px-3 font-medium" style={{ color: 'var(--hd-personality)' }}>
-              <span className="dark:text-gray-100">Personality</span>
+            <th className="text-center py-2 px-3 font-mono text-xs uppercase tracking-wider text-white">
+              Personality
             </th>
-            <th className="text-center py-2 px-3 font-medium" style={{ color: 'var(--hd-design)' }}>
+            <th className="text-center py-2 px-3 font-mono text-xs uppercase tracking-wider text-red-400">
               Design
             </th>
           </tr>
@@ -60,17 +60,14 @@ export function ActivationsTable({ personality, design }: ActivationsTableProps)
             const dAct = design[planet];
 
             return (
-              <tr key={planet} className="border-b border-gray-100 dark:border-gray-800">
-                <td className="py-2 px-3 text-gray-700 dark:text-gray-300">
+              <tr key={planet} className="border-b border-white/5">
+                <td className="py-2 px-3 text-white/70">
                   {planetDisplayNames[planet]}
                 </td>
-                <td className="py-2 px-3 text-center font-mono text-gray-900 dark:text-gray-100">
+                <td className="py-2 px-3 text-center font-mono text-white">
                   {pAct.gate}.{pAct.line}
                 </td>
-                <td
-                  className="py-2 px-3 text-center font-mono"
-                  style={{ color: 'var(--hd-design)' }}
-                >
+                <td className="py-2 px-3 text-center font-mono text-red-400">
                   {dAct.gate}.{dAct.line}
                 </td>
               </tr>

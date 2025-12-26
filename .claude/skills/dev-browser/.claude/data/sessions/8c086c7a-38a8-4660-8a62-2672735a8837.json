@@ -1,0 +1,7 @@
+{
+  "session_id": "8c086c7a-38a8-4660-8a62-2672735a8837",
+  "prompts": [
+    "/ship ",
+    "<bash-notification>\n<shell-id>b905c38</shell-id>\n<output-file>/tmp/claude/-Users-nickmitchell-intangible-me/tasks/b905c38.output</output-file>\n<status>killed</status>\n<summary>Background command \"Start dev-browser server\" was killed.</summary>\nRead the output file to retrieve the output.\n</bash-notification>"
+  ]
+}

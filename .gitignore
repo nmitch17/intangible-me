@@ -59,3 +59,9 @@ drizzle/meta/
 
 # Swiss Ephemeris data (if downloaded locally)
 ephe/
+
+# Dev browser cache
+.claude/skills/dev-browser/profiles/
+.claude/skills/dev-browser/tmp/
+.claude/skills/dev-browser/logs/
+.claude/skills/dev-browser/node_modules/

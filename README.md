@@ -58,7 +58,7 @@ Comprehensive Human Design chart calculation and analysis platform.
 
 ```bash
 git clone <repo>
-cd human-design-app
+cd intangible-me
 npm install
 ```
 

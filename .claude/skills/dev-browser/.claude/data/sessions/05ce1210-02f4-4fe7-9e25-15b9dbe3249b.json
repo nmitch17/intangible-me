@@ -1,0 +1,14 @@
+{
+  "session_id": "05ce1210-02f4-4fe7-9e25-15b9dbe3249b",
+  "prompts": [
+    "One thing. '/Users/nickmitchell/Library/Application Support/CleanShot/media/media_L4pL4S7lkX/CleanShot 2025-12-16 at 11.45.00@2x.png'\\\n\\\nSee the \"Ourchother Ethereum Wallet(Account)\" - This is MY crypto wallet. It isn't sent to or received from. Not sure how this works in the linked addresses tracking",
+    "Option A",
+    "Can we make the addresses chain agnostic? Specifically linking an evm wallet to a specific chain doesn't make sense. Sometimes I send or receive funds to a wallet on different chains. This is too specific",
+    "I have added a contractor (Pedro Roman) that we send payments to 0x0d28abfe1a576a8d7e5fabb658d69008dffeda66.\\\n\\\nHow does this sync or display correctly in transactions, transactions list, etc? I want to see his name.",
+    "Do this now: Auto-assign project_id to transactions paid to Pedro",
+    "Let's auto-exclude blockchain txs with value <$2",
+    "I don't want them visible in tx list. You can have a toggle that says \"Show dust\" that is false by default",
+    "/document ",
+    "<bash-notification>\n<shell-id>8a267b</shell-id>\n<status>killed</status>\n<summary>Background command \"Start Next.js development server\" was killed.</summary>\nUse BashOutput with bash_id=\"8a267b\" to retrieve the output.\n</bash-notification>\n<bash-notification>\n<shell-id>a20df6</shell-id>\n<status>failed</status>\n<summary>Background command \"Start dev-browser server\" failed with exit code 137.</summary>\nUse BashOutput with bash_id=\"a20df6\" to retrieve the output.\n</bash-notification>"
+  ]
+}
