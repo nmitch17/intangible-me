@@ -9,27 +9,24 @@
 import SwissEPH from 'sweph-wasm';
 import { longitudeToGateLine } from './mandala';
 import type { Activation, Activations, Planet } from '@/types';
-import { readFileSync } from 'fs';
-import path from 'path';
 
 // Singleton instance of SwissEPH
 let sweInstance: SwissEPH | null = null;
 
 /**
  * Initialize SwissEPH WASM module (singleton pattern)
- * Uses WASM file from public directory via filesystem read
+ * Uses HTTP URL to load WASM from public directory
  */
 async function getSwe(): Promise<SwissEPH> {
   if (!sweInstance) {
-    // Read WASM file from public directory (works in both dev and Vercel)
-    const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');
-    const wasmBuffer = readFileSync(wasmPath);
+    // Use HTTP URL to load WASM file from public directory
+    // This leverages CDN caching and eliminates base64 encoding overhead
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000';
+    const wasmUrl = `${baseUrl}/swisseph.wasm`;
 
-    // Create a data URL from the WASM buffer
-    const wasmBase64 = wasmBuffer.toString('base64');
-    const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;
-
-    sweInstance = await SwissEPH.init(wasmDataUrl);
+    sweInstance = await SwissEPH.init(wasmUrl);
   }
   return sweInstance;
 }
