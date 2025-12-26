@@ -174,5 +174,13 @@
     "hook_event_name": "Notification",
     "message": "Claude is waiting for your input",
     "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "3fcc017b-1b19-424e-9ad3-84d4af972cf6",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/3fcc017b-1b19-424e-9ad3-84d4af972cf6.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
   }
 ]

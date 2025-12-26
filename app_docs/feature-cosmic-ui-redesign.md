@@ -30,6 +30,8 @@ Complete visual redesign of the Human Design chart calculator with a cosmic/spac
 - `src/lib/calculation/ephemeris.ts`: Refactored to use native swisseph package instead of WASM version
 - `src/components/chart/*.tsx`: Updated chart components to use cosmic theme styling
 - `tailwind.config.ts`: Added cosmic theme colors and utilities
+- `vitest.config.ts`: New test configuration file
+- `tests/*.test.ts`: New test files for chart, ephemeris, and mandala calculations
 
 ### Key Changes
 
@@ -54,6 +56,20 @@ No additional configuration required. The cosmic theme is applied globally throu
 
 ## Testing
 
+### Unit Tests
+
+Run the test suite with:
+```bash
+npm test
+```
+
+Test coverage includes:
+- `tests/chart.test.ts`: 22 tests for complete chart calculation
+- `tests/ephemeris.test.ts`: 15 tests for Swiss Ephemeris integration
+- `tests/mandala.test.ts`: 20 tests for gate mapping
+
+### Manual Testing
+
 1. Verify nebula animations render smoothly
 2. Test parallax effect by moving mouse around the page
 3. Confirm form inputs show focus animation bar
@@ -65,3 +81,5 @@ No additional configuration required. The cosmic theme is applied globally throu
 - The ephemeris library was switched from `sweph-wasm` to native `swisseph` for better cross-platform compatibility
 - Next.js was upgraded to v16.1.1
 - The original `BirthDataForm` component is still available but `CosmicBirthForm` is now the default
+- Added Vitest testing framework with 57 comprehensive unit tests
+- Test scripts: `npm test` (run once), `npm run test:watch` (watch mode)
