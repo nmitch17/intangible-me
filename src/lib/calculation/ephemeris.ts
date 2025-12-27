@@ -9,8 +9,6 @@
 import SwissEPH from 'sweph-wasm';
 import { longitudeToGateLine } from './mandala';
 import type { Activation, Activations, Planet } from '@/types';
-import { readFileSync } from 'fs';
-import path from 'path';
 
 // Singleton instance of SwissEPH
 let sweInstance: SwissEPH | null = null;
@@ -21,6 +19,10 @@ let sweInstance: SwissEPH | null = null;
  */
 async function getSwe(): Promise<SwissEPH> {
   if (!sweInstance) {
+    // Dynamic imports to avoid bundling Node.js modules in client code
+    const { readFileSync } = await import('fs');
+    const path = await import('path');
+
     // Read WASM file from public directory (works in both dev and Vercel)
     const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');
     const wasmBuffer = readFileSync(wasmPath);
