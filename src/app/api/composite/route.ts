@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { calculateChart, collectGates, findChannels } from '@/lib/calculation/chart';
-import { getChannel } from '@/lib/reference/channels';
+import { getChannel, CHANNELS } from '@/lib/reference/channels';
+import { getGateCenter } from '@/lib/calculation/mandala';
 import type { Channel, ChartData, Definition } from '@/types';
 import { z } from 'zod';
 
 const chartRequestSchema = z.object({
   datetime_utc: z.string().datetime(),
-  lat: z.number().min(-90).max(90),
-  lng: z.number().min(-180).max(180),
 });
 
 const requestSchema = z.object({
@@ -26,7 +25,6 @@ function calculateCompositeDefinition(channels: Channel[]): Definition {
   const centers = new Set<string>();
 
   for (const channel of channels) {
-    const { getGateCenter } = require('@/lib/calculation/mandala');
     const centerA = getGateCenter(channel.gates[0]);
     const centerB = getGateCenter(channel.gates[1]);
 
@@ -84,7 +82,6 @@ function analyzeComposite(chartA: ChartData, chartB: ChartData) {
 
   // Find electromagnetic channels (one person has one gate, the other has the connecting gate)
   const electromagneticChannels: Channel[] = [];
-  const { CHANNELS } = require('@/lib/reference/channels');
 
   for (const channel of CHANNELS) {
     const [gate1, gate2] = channel.gates;
@@ -167,17 +164,31 @@ function analyzeComposite(chartA: ChartData, chartB: ChartData) {
 
 /**
  * Simple compatibility score calculation
+ *
+ * Scoring weights:
+ * - Electromagnetic channels: +3 points each (create energetic connection between partners)
+ * - Shared channels: +2 points each (common ground and understanding)
+ * - Dominance gates: -0.5 points each (potential for friction when both have same gate)
+ *
+ * The raw score is multiplied by 2 to normalize to a 0-100 scale.
+ * Typical scores: 0-30 (challenging), 30-60 (moderate), 60+ (highly compatible)
  */
 function calculateCompatibilityScore(
   electromagneticCount: number,
   sharedCount: number,
   dominanceCount: number
 ): number {
-  // Electromagnetic channels are highly desirable (3 points each)
-  // Shared channels indicate companionship (2 points each)
-  // Too many dominance gates can be challenging (-1 point each)
-  const score = (electromagneticCount * 3) + (sharedCount * 2) - (dominanceCount * 0.5);
-  return Math.max(0, Math.min(100, score * 2)); // Normalize to 0-100
+  const ELECTROMAGNETIC_WEIGHT = 3;   // Electromagnetic connections are most desirable
+  const SHARED_WEIGHT = 2;            // Shared channels indicate compatibility
+  const DOMINANCE_PENALTY = 0.5;      // Same gates can create dominance struggles
+  const NORMALIZATION_FACTOR = 2;     // Scale raw score to 0-100 range
+
+  const rawScore = (electromagneticCount * ELECTROMAGNETIC_WEIGHT) +
+                   (sharedCount * SHARED_WEIGHT) -
+                   (dominanceCount * DOMINANCE_PENALTY);
+
+  // Normalize to 0-100 and clamp to valid range
+  return Math.max(0, Math.min(100, rawScore * NORMALIZATION_FACTOR));
 }
 
 export async function POST(request: NextRequest) {

@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { calculateTransits } from '@/lib/calculation/ephemeris';
+import { calculateChart, findChannels, collectGates } from '@/lib/calculation/chart';
 import { z } from 'zod';
 
 const requestSchema = z.object({
   datetime_utc: z.string().datetime().optional(),
   natal_chart: z.object({
     datetime_utc: z.string().datetime(),
-    lat: z.number().min(-90).max(90),
-    lng: z.number().min(-180).max(180),
   }).optional(),
 });
 
@@ -30,9 +29,6 @@ export async function POST(request: NextRequest) {
 
     // If natal chart provided, calculate temporary channels
     if (validated.natal_chart) {
-      const { calculateChart } = await import('@/lib/calculation/chart');
-      const { findChannels, collectGates } = await import('@/lib/calculation/index');
-
       const natalChart = await calculateChart(new Date(validated.natal_chart.datetime_utc));
       const natalGates = new Set<number>();
 

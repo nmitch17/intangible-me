@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GATE_CENTERS } from '@/lib/calculation/mandala';
 import type { GateReference, CenterName } from '@/types';
+import { z } from 'zod';
+
+/**
+ * Query parameter validation schema
+ */
+const queryParamsSchema = z.object({
+  center: z.enum(['head', 'ajna', 'throat', 'g', 'ego', 'sacral', 'solar_plexus', 'spleen', 'root']).optional(),
+  page: z.coerce.number().int().positive().default(1),
+  limit: z.coerce.number().int().positive().max(100).default(64),
+});
 
 /**
  * Gate names mapping
@@ -49,33 +59,42 @@ function getAllGates(): GateReference[] {
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const center = searchParams.get('center');
-    const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '64');
+    const params = queryParamsSchema.parse({
+      center: searchParams.get('center'),
+      page: searchParams.get('page'),
+      limit: searchParams.get('limit'),
+    });
 
     let gates = getAllGates();
 
     // Filter by center if specified
-    if (center) {
-      gates = gates.filter(g => g.center === center);
+    if (params.center) {
+      gates = gates.filter(g => g.center === params.center);
     }
 
     // Pagination
     const total = gates.length;
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
+    const startIndex = (params.page - 1) * params.limit;
+    const endIndex = startIndex + params.limit;
     const paginatedGates = gates.slice(startIndex, endIndex);
 
     return NextResponse.json({
       data: paginatedGates,
       pagination: {
-        page,
-        limit,
+        page: params.page,
+        limit: params.limit,
         total,
-        total_pages: Math.ceil(total / limit),
+        total_pages: Math.ceil(total / params.limit),
       },
     });
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: 'Invalid query parameters', details: error.errors },
+        { status: 400 }
+      );
+    }
+
     console.error('Gates reference error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
