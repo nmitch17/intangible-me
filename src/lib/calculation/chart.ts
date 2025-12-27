@@ -34,31 +34,31 @@ import type {
 /**
  * Collect all activated gates from both personality and design
  */
-function collectGates(personality: Activations, design: Activations): Set<number> {
+export function collectGates(personality: Activations, design: Activations): Set<number> {
   const gates = new Set<number>();
-  
+
   for (const activation of Object.values(personality)) {
     gates.add(activation.gate);
   }
   for (const activation of Object.values(design)) {
     gates.add(activation.gate);
   }
-  
+
   return gates;
 }
 
 /**
  * Find all complete channels from activated gates
  */
-function findChannels(activatedGates: Set<number>): Channel[] {
+export function findChannels(activatedGates: Set<number>): Channel[] {
   const channels: Channel[] = [];
-  
+
   for (const channel of CHANNELS) {
     if (activatedGates.has(channel.gates[0]) && activatedGates.has(channel.gates[1])) {
       channels.push(channel);
     }
   }
-  
+
   return channels;
 }
 
