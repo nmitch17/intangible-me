@@ -70,3 +70,14 @@ This prompt helps you determine what documentation you should read based on the 
     - When modifying src/lib/calculation/ephemeris.ts
     - When deploying to Vercel or other serverless platforms
     - When working with the /api/chart endpoint and seeing 500 errors
+
+- app_docs/feature-sprint-1-api-endpoints.md
+  - Conditions:
+    - When working with the /api/transit endpoint
+    - When working with the /api/composite endpoint
+    - When working with reference APIs (/api/reference/gates, channels, types)
+    - When implementing relationship or compatibility analysis
+    - When adding or modifying validation test cases
+    - When working with planetary transit calculations
+    - When extending the composite chart analysis
+    - When troubleshooting API response validation
