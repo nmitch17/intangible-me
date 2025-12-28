@@ -70,3 +70,13 @@ This prompt helps you determine what documentation you should read based on the 
     - When modifying src/lib/calculation/ephemeris.ts
     - When deploying to Vercel or other serverless platforms
     - When working with the /api/chart endpoint and seeing 500 errors
+
+- app_docs/feature-cosmic-ui-redesign-sprint1.md
+  - Conditions:
+    - When working with the Sprint 1 API endpoints (composite, transit, reference)
+    - When modifying CopilotKit or Google Gemini adapter configuration
+    - When working with the CosmicBirthForm component or timezone handling
+    - When implementing rate limiting or response caching
+    - When running or extending the Vitest test suite
+    - When troubleshooting WASM loading in serverless environments
+    - When understanding the overall Solar Haze Portal design system

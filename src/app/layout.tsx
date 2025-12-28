@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Outfit, DM_Serif_Display, JetBrains_Mono } from 'next/font/google';
+import { CopilotKit } from '@copilotkit/react-core';
 import './globals.css';
 
 const outfit = Outfit({
@@ -33,7 +34,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} ${dmSerif.variable} ${jetbrainsMono.variable} font-sans`}>
-        {children}
+        <CopilotKit runtimeUrl="/api/copilotkit">
+          {children}
+        </CopilotKit>
       </body>
     </html>
   );

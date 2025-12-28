@@ -9,7 +9,7 @@ Comprehensive Human Design chart calculation and analysis platform.
 - **ORM**: Drizzle
 - **Auth**: Better Auth
 - **AI Chat**: CopilotKit
-- **AI Agent**: Pydantic AI (Python)
+- **AI Agent**: Mastra (TypeScript)
 - **Deployment**: Vercel
 
 ## Design System: Solar Haze Portal
@@ -95,9 +95,6 @@ Linear gradient from solar-glow to haze-pink with glow shadow.
 │   │       └── crosses.ts
 │   └── types/
 │       └── index.ts           # TypeScript types
-├── agent/                      # Pydantic AI agent (Python)
-│   ├── main.py
-│   └── requirements.txt
 ├── drizzle/                    # Database migrations
 └── public/
 ```
@@ -145,14 +142,6 @@ npm run db:migrate
 npm run dev
 ```
 
-### 5. (Optional) Run Python Agent
-
-```bash
-cd agent
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
-
 ## API Endpoints
 
 ### Chart Calculation
@@ -198,15 +187,6 @@ GET /api/reference/crosses
 Note: `swisseph` requires native compilation. For Vercel:
 - Use `serverComponentsExternalPackages` in `next.config.mjs`
 - May need to use Vercel Functions with Node.js runtime
-
-### Python Agent (Separate Service)
-
-Deploy to Railway, Render, or any Python-compatible platform:
-
-```bash
-cd agent
-# Deploy with your preferred platform
-```
 
 ## Swiss Ephemeris Note
 

@@ -135,3 +135,17 @@ export const channels = pgTable('channels', {
   stream: text('stream').notNull(),
   description: text('description'),
 });
+
+// ============================================================================
+// AI INTERPRETATION CACHE
+// ============================================================================
+
+export const interpretations = pgTable('interpretations', {
+  id: text('id').primaryKey(),
+  userId: text('user_id').references(() => users.id, { onDelete: 'cascade' }),
+  chartHash: text('chart_hash').notNull(), // Hash of datetime_utc + lat + lng
+  focus: text('focus'), // null = full reading, or "overview", "type", "authority", "channels", "cross"
+  interpretation: text('interpretation').notNull(),
+  model: text('model').default('gpt-5.2-2025-12-11'), // Track which model was used
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});

@@ -49,9 +49,9 @@ function convertToUTC(localDateTimeString: string, timezone: string): string {
   const tzAsUtc = Date.UTC(tzYear, tzMonth - 1, tzDay, tzHour, tzMinute, tzSecond);
   const offset = asIfUtc.getTime() - tzAsUtc;
 
-  // Apply the offset: if the input is meant to be in the target timezone,
-  // we need to adjust by this offset to get the true UTC time
-  const correctUtc = new Date(asIfUtc.getTime() - offset);
+  // Apply the offset: to convert from local time to UTC, we add the offset
+  // (offset is positive for timezones behind UTC, e.g., UTC-7 has offset of +7 hours)
+  const correctUtc = new Date(asIfUtc.getTime() + offset);
 
   return correctUtc.toISOString();
 }
@@ -193,27 +193,28 @@ export function CosmicBirthForm({ onSubmit, isLoading, error }: CosmicBirthFormP
           {displayError}
         </div>
       )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div className="solar-input-group">
+          <label>Birth Date</label>
+          <input
+            type="date"
+            value={birthDate}
+            onChange={(e) => setBirthDate(e.target.value)}
+            className="solar-input"
+            required
+          />
+        </div>
 
-      <div className="solar-input-group">
-        <label>Birth Date</label>
-        <input
-          type="date"
-          value={birthDate}
-          onChange={(e) => setBirthDate(e.target.value)}
-          className="solar-input"
-          required
-        />
-      </div>
-
-      <div className="solar-input-group">
-        <label>Birth Time</label>
-        <input
-          type="time"
-          value={birthTime}
-          onChange={(e) => setBirthTime(e.target.value)}
-          className="solar-input"
-          required
-        />
+        <div className="solar-input-group">
+          <label>Birth Time</label>
+          <input
+            type="time"
+            value={birthTime}
+            onChange={(e) => setBirthTime(e.target.value)}
+            className="solar-input"
+            required
+          />
+        </div>
       </div>
 
       <div ref={containerRef} className="solar-input-group">
