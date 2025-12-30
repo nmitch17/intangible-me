@@ -258,3 +258,12 @@ export interface CompositeResponse {
     };
   };
 }
+
+// ============================================================================
+// UI TYPES
+// ============================================================================
+
+export type SelectedElement =
+  | { type: 'center'; name: CenterName; defined: boolean }
+  | { type: 'gate'; number: number; center: CenterName }
+  | { type: 'channel'; gates: [number, number]; name: string; circuit: string };

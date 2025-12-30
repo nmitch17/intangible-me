@@ -1,0 +1,6 @@
+{
+  "session_id": "b6eefd06-7881-4642-bd71-d36078ab661b",
+  "prompts": [
+    "Create a new component on a new page /dashboard that is a 3d bodygraph using threejs that displays the user's chart info in the 3d interactive bodygraph. When you click on a center or gate or channel, it rotates and zooms in on the area that is selected and highlighted and shows an info and interpretation display. There's a zoom out interaction when zoomed in."
+  ]
+}

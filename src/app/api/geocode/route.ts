@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { getTimezoneFromCoordinates } from '@/lib/timezone';
+import { getTimezoneFromCoordinates } from '@/lib/timezone-server';
 import { nominatimRateLimiter, getClientIdentifier } from '@/lib/ratelimit';
 import { geocodingCache } from '@/lib/cache';
 

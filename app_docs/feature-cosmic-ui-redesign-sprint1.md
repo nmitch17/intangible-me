@@ -67,8 +67,7 @@ This major feature release introduces the "Solar Haze Portal" design system - a 
 ## Configuration
 
 ### Environment Variables
-- `GOOGLE_GENERATIVE_AI_API_KEY`: Required for CopilotKit chat functionality
-- `MAPTILER_API_KEY`: Required for location search geocoding
+- `GOOGLE_GENERATIVE_AI_API_KEY`: Required for CopilotKit chat functionality (Google Gemini)
 
 ### Build Scripts
 - `postinstall`: Automatically copies WASM files to public directory
@@ -89,7 +88,7 @@ Tests cover:
 
 ## Notes
 
-- The Python agent scaffolding was removed - agent functionality migrated to TypeScript with Mastra
-- WASM files must be in `/public/wasm/` directory for production builds
+- The Python agent scaffolding was removed - agent functionality uses CopilotKit with Google Gemini
+- WASM file must be at `/public/swisseph.wasm` for production builds (copied via postinstall script)
 - Rate limiting is applied to geocoding endpoint (10 requests/minute per IP)
 - Sparkle particles are generated client-side to avoid hydration mismatches

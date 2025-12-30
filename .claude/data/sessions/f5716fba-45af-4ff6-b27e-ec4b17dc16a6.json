@@ -1,0 +1,10 @@
+{
+  "session_id": "f5716fba-45af-4ff6-b27e-ec4b17dc16a6",
+  "prompts": [
+    "Ok there's some weird stuff happening here. The currently deployed version of the app is \ncalculating charts correctly. See Image #1 for the correct chart I just calculated on \nintangibleme.com. Then I just calculated the same chart on localhost for the current local \nbuild and it's wrong. This is the firat time in development that a chart has been wrong. See \nImage #2 for the wrong one in this current local build. \n  \u23bf  [Image #1]\n  \u23bf  [Image #2]",
+    "/start ",
+    "/restart ",
+    "/test ",
+    "Write tests for the AI agent we built. How would you not test that?"
+  ]
+}

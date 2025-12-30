@@ -1,0 +1,6 @@
+{
+  "session_id": "20c7eebe-b730-4fb8-8dba-a9a1f05dc02f",
+  "prompts": [
+    "/feature \"Let's refactor and use Google Typescript ADK instead of Mastra. Mastra just is not working. Use the copilotkit mcp server for context and search the latest docs about Google ADK.\\\n\\\nCopilotkit ADK docs: https://docs.copilotkit.ai/adk/quickstart\\\nADK docs: https://google.github.io/adk-docs/llms.txt\\\nTypescript ADK quickstart: https://google.github.io/adk-docs/get-started/typescript/\""
+  ]
+}

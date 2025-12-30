@@ -1,0 +1,7 @@
+{
+  "session_id": "782fae44-3abd-4025-96fd-f9866ffb295b",
+  "prompts": [
+    "Update the bodygraph to use the visual style in Image #1.\\\n\\\nNot the background color, but the centers. Also make sure that all channels show all the time, but show them as filled or not filled. When not filled, they should be light and translucent - empty.\\\n\\\nUse threejs skill",
+    "Let's remove the 3d aspects of the bodygraph. Make it 2d, but retain the same funcitonality. Also, make the background the same soft, multicolor background that's on the main app @src/app/page.tsx "
+  ]
+}

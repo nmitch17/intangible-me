@@ -1,0 +1,20 @@
+{
+  "name": "creating-skills",
+  "description": "Creates and refines Claude skills with proper SKILL.md structure, YAML frontmatter, and bundled resources. Use when creating new skills, updating existing skills, or needing guidance on skill best practices.",
+  "version": "1.1.0",
+  "author": {
+    "name": "White Rabbit Development Team"
+  },
+  "license": "SEE LICENSE.txt",
+  "keywords": [
+    "skills",
+    "development",
+    "tools",
+    "packaging",
+    "templates",
+    "skill-creator"
+  ],
+  "skills": [
+    "."
+  ]
+}

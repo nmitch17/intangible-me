@@ -1,0 +1,7 @@
+{
+  "session_id": "d1975ae4-08f8-4636-b248-63ad81ccb0d1",
+  "prompts": [
+    "Review documentation in @app_docs/ and @.claude/commands/conditional_docs.md \\\n\\\nWe flip flopped back and forth on how to serve and use the wasm as well as using mastra for the agent framework and then switching to google adk. Remove irrelevant and/or conflicting documentation. Spawn subagents to research, gather info, and validate changes to fortify our documentation.",
+    "/ship "
+  ]
+}
