@@ -1,0 +1,7 @@
+{
+  "session_id": "f0cb483f-026b-4b04-a52e-fbc1eb163df3",
+  "prompts": [
+    "review the codebase",
+    "/chore \"Come up with a plan to address 1, 2, 4, 5: move gate data to /lib/reference/gates.ts, 6 & 7: remove @src/components/chart/Bodygraph3D.tsx and related code, 8: clean up, 10: fix, 11: fix, and fix the drizzle dependency issue\""
+  ]
+}

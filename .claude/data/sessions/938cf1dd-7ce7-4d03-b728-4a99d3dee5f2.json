@@ -1,0 +1,14 @@
+{
+  "session_id": "938cf1dd-7ce7-4d03-b728-4a99d3dee5f2",
+  "prompts": [
+    "AI_LoadAPIKeyError: Google Generative AI API key is missing. Pass it using the 'apiKey' parameter or the GEMINI_API_KEY environment variable.",
+    "This occurs when I send a message in copilotkit chat. Figure this out. We already have a GEMINI_API_KEY set in .env.local",
+    "/restart ",
+    "'/Users/nickmitchell/Downloads/copilotkit-events-1766915418117.json' I'M STILL GETTING THIS AFTER RESTARTING THE DEV SERVER AND CHANGING ALL REFERENCES AWAY FROM THIS NAMING CONVENTION FOR THE API KEY",
+    "This is what's in env: GEMINI_API_KEY=AIzaSyAO0I5Ua10DqRQ....",
+    "What should we do with this code in @src/app/api/copilotkit/route.ts\\\n\\\nexport async function POST(req: NextRequest) {\n  // Create the adapter inside the handler to ensure env vars are loaded\n  const serviceAdapter = new GoogleGenerativeAIAdapter({\n    model: 'gemini-3-flash-preview',\n    apiKey: process.env.GEMINI_API_KEY,\n  });",
+    "/restart ",
+    "/document ",
+    "/ship "
+  ]
+}

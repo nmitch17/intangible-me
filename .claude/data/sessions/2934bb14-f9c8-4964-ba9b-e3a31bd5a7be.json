@@ -1,0 +1,6 @@
+{
+  "session_id": "2934bb14-f9c8-4964-ba9b-e3a31bd5a7be",
+  "prompts": [
+    "<bash-notification>\n<shell-id>b84feb4</shell-id>\n<output-file>/tmp/claude/-Users-nickmitchell-intangible-me/tasks/b84feb4.output</output-file>\n<status>killed</status>\n<summary>Background command \"Start dev-browser\" was killed.</summary>\nRead the output file to retrieve the output.\n</bash-notification>\n<bash-notification>\n<shell-id>b99f284</shell-id>\n<output-file>/tmp/claude/-Users-nickmitchell-intangible-me/tasks/b99f284.output</output-file>\n<status>failed</status>\n<summary>Background command \"Start dev server\" failed with exit code 137.</summary>\nRead the output file to retrieve the output.\n</bash-notification>"
+  ]
+}

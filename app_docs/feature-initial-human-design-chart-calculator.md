@@ -74,7 +74,7 @@ Required in `.env.local`:
 - `DATABASE_URL` - Neon connection string (for future features)
 - `BETTER_AUTH_SECRET` - Auth secret (for future features)
 - `BETTER_AUTH_URL` - App URL (for future features)
-- `OPENAI_API_KEY` - For CopilotKit (for future features)
+- `GOOGLE_GENERATIVE_AI_API_KEY` - For CopilotKit chat with Google Gemini
 
 ### API Usage
 

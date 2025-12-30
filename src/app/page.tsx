@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
 import { CosmicBirthForm } from '@/components/form';
 import { ChartResult } from '@/components/chart';
+import { CopilotChat } from '@/components/chat';
 import type { ChartResponse } from '@/types';
 
 interface Sparkle {
@@ -49,6 +51,14 @@ export default function Home() {
 
       const result = await response.json();
       setChartData(result);
+
+      // Store in sessionStorage for dashboard access
+      try {
+        sessionStorage.setItem('chartData', JSON.stringify(result.chart));
+        sessionStorage.setItem('birthData', JSON.stringify(result.birth));
+      } catch (e) {
+        console.error('Failed to save chart to session storage:', e);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -100,35 +110,34 @@ export default function Home() {
           {/* Manifesto / Left Side */}
           <section className="text-center lg:text-left pointer-events-none">
             <div className="data-point justify-center lg:justify-start">
-              Cosmic Blueprint Generator
+              Live an empowered life
             </div>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-[0.95] tracking-[-0.02em] mb-6 text-white">
-              Discover<br />Your Design
+              Discover Your <br />Human Design
             </h1>
             <p className="font-sans font-light text-base text-white/70 max-w-[400px] leading-relaxed mx-auto lg:mx-0">
-              Your Human Design chart reveals the energetic blueprint you were born with.
-              Enter your birth details to unlock your unique cosmic configuration.
+              Your Human Design chart is the energetic blueprint you were born with. It reveals the unique gifts, challenges, and potential you carry within.
+              <br /><br />
+              Learn why you've never felt quite right in your own skin and the practical steps you can take right now to start living the life you were meant to live.
             </p>
           </section>
 
           {/* Form Card / Right Side */}
-          <section className="clay-card p-8 md:p-12">
-            <h2 className="font-mono text-xs tracking-[0.25em] mb-8 text-solar-glow text-center uppercase">
-              Birth Data
-            </h2>
+          <div className="prism-suspension">
+            <div className="glass-shroud" />
+            <section className="clay-card p-8 md:p-12">
+              <h2 className="font-mono text-xs tracking-[0.25em] mb-8 text-solar-glow text-center uppercase">
+                About You
+              </h2>
 
-            <CosmicBirthForm
-              onSubmit={handleSubmit}
-              isLoading={isLoading}
-              error={error}
-            />
+              <CosmicBirthForm
+                onSubmit={handleSubmit}
+                isLoading={isLoading}
+                error={error}
+              />
 
-            <div className="mt-8 flex justify-center">
-              <span className="font-mono text-[0.65rem] text-deep-cosmos/40 tracking-wider">
-                ACCURATE TO THE SECOND
-              </span>
-            </div>
-          </section>
+            </section>
+          </div>
         </div>
       </main>
 
@@ -139,24 +148,53 @@ export default function Home() {
           className="min-h-screen px-4 md:px-8 pb-16 pt-8"
         >
           <div className="max-w-5xl mx-auto animate-slideUp">
-            <div className="text-center mb-8">
-              <div className="data-point justify-center">
-                Chart Generated
+            <div className="prism-suspension">
+              <div className="glass-shroud-lg" />
+              <div className="text-center mb-8">
+                <div className="data-point justify-center">
+                  Chart Generated
+                </div>
+                <h2 className="font-display text-3xl md:text-4xl font-normal text-white">
+                  Your Human Design
+                </h2>
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-xl bg-gradient-to-r from-[#ff9d6c] to-[#f0a2b1] text-[#1a0f2e] font-medium text-sm hover:opacity-90 transition-opacity"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                  </svg>
+                  Explore 3D Bodygraph
+                </Link>
               </div>
-              <h2 className="font-display text-3xl md:text-4xl font-normal text-white">
-                Your Human Design
-              </h2>
-            </div>
 
-            <div className="space-y-6">
-              <ChartResult
-                chart={chartData.chart}
-                birth={chartData.birth}
-              />
+              <div className="prism-suspension">
+                <div className="space-y-6 relative z-[1]">
+                  <ChartResult
+                    chart={chartData.chart}
+                    birth={chartData.birth}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       )}
+
+      {/* CopilotKit Chat */}
+      <CopilotChat chart={chartData?.chart} />
     </>
   );
 }

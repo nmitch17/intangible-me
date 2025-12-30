@@ -1,0 +1,8 @@
+{
+  "session_id": "d26eeaa8-37c6-4fea-afd0-51d3fc041d7e",
+  "prompts": [
+    "Pull main",
+    "Pull main and merge with our local version that's slightly ahead on some ui changes",
+    "Update @specs/feature-mastra-copilotkit-openai-assistant.md with e2e testing plan for using dev-browser skill to test and validate work."
+  ]
+}

@@ -5,3 +5,4 @@ export { ChannelsList } from './ChannelsList';
 export { ActivationsTable } from './ActivationsTable';
 export { CircuitryBalance } from './CircuitryBalance';
 export { ChartResult } from './ChartResult';
+export { InterpretationPanel } from './InterpretationPanel';

@@ -1,0 +1,8 @@
+{
+  "session_id": "d9c53cfb-318c-4bc7-8c10-bcfa1d9125bc",
+  "prompts": [
+    "Use the mastra-copilot skill to analyze our previous integration of mastra agent and tell me why it wasn't working, and what you would do differently if we were to come up with a plan and get Mastra integrated and working perfectly now.",
+    "Not yet. We previously built and wired Mastra to copilotkit and our app accoring to @specs/feature-mastra-copilotkit-openai-assistant.md and it didn't work at all. I need to know that you know why this failed.",
+    "Create a plan according to @.claude/commands/chore.md to reimplement mastra correctly."
+  ]
+}
