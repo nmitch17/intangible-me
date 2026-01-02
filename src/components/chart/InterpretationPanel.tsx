@@ -143,13 +143,20 @@ export function InterpretationPanel({ chart }: InterpretationPanelProps) {
   }, [sections]);
 
   const generateInterpretation = useCallback(async (section: InterpretationSection) => {
-    if (sections[section].isGenerated) return;
+    // Check if already generated or loading using functional setState
+    let shouldProceed = false;
+    setSections((prev) => {
+      if (prev[section].isGenerated || prev[section].isLoading) {
+        return prev; // Don't proceed
+      }
+      shouldProceed = true;
+      return {
+        ...prev,
+        [section]: { ...prev[section], isLoading: true },
+      };
+    });
 
-    // Set loading state
-    setSections((prev) => ({
-      ...prev,
-      [section]: { ...prev[section], isLoading: true },
-    }));
+    if (!shouldProceed) return;
 
     try {
       const prompt = buildSectionPrompt(section, chart);
@@ -172,7 +179,7 @@ export function InterpretationPanel({ chart }: InterpretationPanelProps) {
         [section]: { content, isLoading: false, isGenerated: true },
       }));
     }
-  }, [chart, sections]);
+  }, [chart]);
 
   const sectionLabels: Record<InterpretationSection, string> = {
     overview: 'Overview',
