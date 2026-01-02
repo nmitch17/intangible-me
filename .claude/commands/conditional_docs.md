@@ -74,3 +74,12 @@ This prompt helps you determine what documentation you should read based on the 
     - When unsure which documentation is current for a feature
     - When adding new documentation files
     - When understanding the current tech stack (agent framework, geocoding, design system)
+
+- app_docs/feature-generate-reading.md
+  - Conditions:
+    - When working with AI-powered chart interpretation features
+    - When modifying the InterpretationPanel component
+    - When working with the /api/generate-reading endpoint
+    - When implementing new reading sections or prompt templates
+    - When troubleshooting Gemini API integration for readings
+    - When working with src/lib/prompts/reading-prompts.ts

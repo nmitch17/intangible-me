@@ -1,19 +1,21 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import { useCopilotReadable } from '@copilotkit/react-core';
 import type { ChartData } from '@/types';
+import { buildSectionPrompt, type InterpretationSection } from '@/lib/prompts/reading-prompts';
 
 interface InterpretationPanelProps {
   chart: ChartData;
 }
-
-type InterpretationSection = 'overview' | 'type' | 'authority' | 'channels' | 'cross';
 
 interface SectionState {
   content: string;
   isLoading: boolean;
   isGenerated: boolean;
 }
+
+const SESSION_STORAGE_KEY = 'hd-reading-sections';
 
 // Fallback interpretations when AI is unavailable
 function getFallbackInterpretation(section: InterpretationSection, chart: ChartData): string {
@@ -70,35 +72,106 @@ Explore your Cross further through the chat!`,
   return fallbacks[section];
 }
 
+// Load sections from sessionStorage
+function loadSavedSections(): Record<InterpretationSection, SectionState> | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const saved = sessionStorage.getItem(SESSION_STORAGE_KEY);
+    if (saved) {
+      return JSON.parse(saved);
+    }
+  } catch {
+    // Ignore parse errors
+  }
+  return null;
+}
+
+// Save sections to sessionStorage
+function saveSections(sections: Record<InterpretationSection, SectionState>) {
+  if (typeof window === 'undefined') return;
+  try {
+    sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(sections));
+  } catch {
+    // Ignore storage errors
+  }
+}
+
+// Call the dedicated reading generation API
+async function callAI(prompt: string): Promise<string> {
+  const response = await fetch('/api/generate-reading', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      prompt,
+      systemPrompt: 'You are a warm and insightful Human Design expert. Provide personalized, meaningful interpretations that help people understand their unique design. Write in flowing prose, speaking directly to the person.',
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ error: 'Unknown error' }));
+    throw new Error(error.error || `API error: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.content || '';
+}
+
 export function InterpretationPanel({ chart }: InterpretationPanelProps) {
   const [activeSection, setActiveSection] = useState<InterpretationSection>('overview');
-  const [sections, setSections] = useState<Record<InterpretationSection, SectionState>>({
-    overview: { content: '', isLoading: false, isGenerated: false },
-    type: { content: '', isLoading: false, isGenerated: false },
-    authority: { content: '', isLoading: false, isGenerated: false },
-    channels: { content: '', isLoading: false, isGenerated: false },
-    cross: { content: '', isLoading: false, isGenerated: false },
+  const [sections, setSections] = useState<Record<InterpretationSection, SectionState>>(() => {
+    const saved = loadSavedSections();
+    return saved || {
+      overview: { content: '', isLoading: false, isGenerated: false },
+      type: { content: '', isLoading: false, isGenerated: false },
+      authority: { content: '', isLoading: false, isGenerated: false },
+      channels: { content: '', isLoading: false, isGenerated: false },
+      cross: { content: '', isLoading: false, isGenerated: false },
+    };
   });
+
+  // Share chart context with CopilotKit (for the chat widget)
+  useCopilotReadable({
+    description: "User's Human Design chart for interpretation",
+    value: chart,
+  });
+
+  // Save sections whenever they change
+  useEffect(() => {
+    saveSections(sections);
+  }, [sections]);
 
   const generateInterpretation = useCallback(async (section: InterpretationSection) => {
     if (sections[section].isGenerated) return;
 
+    // Set loading state
     setSections((prev) => ({
       ...prev,
       [section]: { ...prev[section], isLoading: true },
     }));
 
-    // For now, use fallback content (AI integration can be added when GOOGLE_GENERATIVE_AI_API_KEY is configured)
-    // This provides immediate value while the full AI system is being set up
-    const content = getFallbackInterpretation(section, chart);
+    try {
+      const prompt = buildSectionPrompt(section, chart);
+      const content = await callAI(prompt);
 
-    // Simulate slight delay for better UX
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    setSections((prev) => ({
-      ...prev,
-      [section]: { content, isLoading: false, isGenerated: true },
-    }));
+      if (content && content.length > 50) {
+        setSections((prev) => ({
+          ...prev,
+          [section]: { content, isLoading: false, isGenerated: true },
+        }));
+      } else {
+        throw new Error('Empty or short response');
+      }
+    } catch (error) {
+      console.error('Error generating interpretation:', error);
+      // Fall back to static content on error
+      const content = getFallbackInterpretation(section, chart);
+      setSections((prev) => ({
+        ...prev,
+        [section]: { content, isLoading: false, isGenerated: true },
+      }));
+    }
   }, [chart, sections]);
 
   const sectionLabels: Record<InterpretationSection, string> = {
@@ -120,7 +193,7 @@ export function InterpretationPanel({ chart }: InterpretationPanelProps) {
             className={`px-4 py-2 rounded-full text-sm font-mono uppercase tracking-wider transition-all ${
               activeSection === section
                 ? 'bg-gradient-to-r from-solar-glow to-haze-pink text-white shadow-lg'
-                : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-800'
             }`}
           >
             {sectionLabels[section]}
@@ -132,11 +205,11 @@ export function InterpretationPanel({ chart }: InterpretationPanelProps) {
       </div>
 
       {/* Content Area */}
-      <div className="min-h-[300px] p-6 rounded-3xl bg-white/5 border border-white/10">
+      <div className="min-h-[300px] p-6 rounded-3xl bg-gray-50 border border-gray-200">
         {!sections[activeSection].isGenerated && !sections[activeSection].isLoading ? (
           <div className="flex flex-col items-center justify-center h-full min-h-[200px] text-center">
-            <p className="text-white/60 mb-4">
-              COMING SOON: Generate an interpretation of your {sectionLabels[activeSection].toLowerCase()}
+            <p className="text-gray-500 mb-4">
+              Generate an AI-powered interpretation of your {sectionLabels[activeSection].toLowerCase()}
             </p>
             <button
               onClick={() => generateInterpretation(activeSection)}
@@ -148,44 +221,42 @@ export function InterpretationPanel({ chart }: InterpretationPanelProps) {
         ) : sections[activeSection].isLoading ? (
           <div className="flex flex-col items-center justify-center h-full min-h-[200px]">
             <div className="w-8 h-8 border-2 border-solar-glow border-t-transparent rounded-full animate-spin mb-4" />
-            <p className="text-black/60 font-mono text-sm uppercase tracking-wider">
+            <p className="text-gray-500 font-mono text-sm uppercase tracking-wider">
               Generating interpretation...
             </p>
           </div>
         ) : (
-          <div className="prose prose-invert max-w-none">
-            <div className="text-white/90 leading-relaxed whitespace-pre-wrap">
-              {sections[activeSection].content}Coming soon...
-            </div>
+          <div className="text-gray-800 leading-relaxed whitespace-pre-wrap text-base">
+            {sections[activeSection].content}
           </div>
         )}
       </div>
 
       {/* Quick Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="p-4 rounded-2xl bg-white/5 text-center">
+        <div className="p-4 rounded-2xl bg-gray-50 text-center border border-gray-100">
           <div className="text-xs font-mono text-solar-glow uppercase tracking-wider mb-1">
             Type
           </div>
-          <div className="text-white font-medium">{chart.type}</div>
+          <div className="text-gray-800 font-medium">{chart.type}</div>
         </div>
-        <div className="p-4 rounded-2xl bg-white/5 text-center">
+        <div className="p-4 rounded-2xl bg-gray-50 text-center border border-gray-100">
           <div className="text-xs font-mono text-solar-glow uppercase tracking-wider mb-1">
             Authority
           </div>
-          <div className="text-white font-medium">{chart.authority}</div>
+          <div className="text-gray-800 font-medium">{chart.authority}</div>
         </div>
-        <div className="p-4 rounded-2xl bg-white/5 text-center">
+        <div className="p-4 rounded-2xl bg-gray-50 text-center border border-gray-100">
           <div className="text-xs font-mono text-solar-glow uppercase tracking-wider mb-1">
             Profile
           </div>
-          <div className="text-white font-medium">{chart.profile}</div>
+          <div className="text-gray-800 font-medium">{chart.profile}</div>
         </div>
-        <div className="p-4 rounded-2xl bg-white/5 text-center">
+        <div className="p-4 rounded-2xl bg-gray-50 text-center border border-gray-100">
           <div className="text-xs font-mono text-solar-glow uppercase tracking-wider mb-1">
             Definition
           </div>
-          <div className="text-white font-medium">{chart.definition}</div>
+          <div className="text-gray-800 font-medium">{chart.definition}</div>
         </div>
       </div>
     </div>
