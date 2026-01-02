@@ -32,7 +32,7 @@ function checkRateLimit(identifier: string): { allowed: boolean; retryAfter?: nu
 export async function POST(req: NextRequest) {
   try {
     // Rate limiting based on IP address
-    const identifier = req.ip || req.headers.get('x-forwarded-for') || 'anonymous';
+    const identifier = req.headers.get('x-forwarded-for') || 'anonymous';
     const rateLimit = checkRateLimit(identifier);
 
     if (!rateLimit.allowed) {
