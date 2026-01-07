@@ -83,3 +83,17 @@ This prompt helps you determine what documentation you should read based on the 
     - When implementing new reading sections or prompt templates
     - When troubleshooting Gemini API integration for readings
     - When working with src/lib/prompts/reading-prompts.ts
+
+- app_docs/feature-observability-testing-foundation.md
+  - Conditions:
+    - When adding logging or tracing to any component
+    - When working with src/lib/observability/ modules
+    - When implementing metrics or analytics
+    - When working with health check endpoints (/api/health/*)
+    - When working with PostHog integration
+    - When writing or modifying tests in tests/
+    - When troubleshooting calculation errors or performance issues
+    - When understanding alert thresholds or SLA targets
+    - When responding to incidents (refer to docs/RUNBOOKS.md)
+    - When modifying the calculation algorithm (update CALCULATION_VERSION)
+    - When working with test fixtures in tests/fixtures/
