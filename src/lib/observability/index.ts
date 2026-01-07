@@ -28,7 +28,7 @@ export {
   type PostHogEventType,
 } from './posthog-server';
 
-// Events and Metrics
+// Events
 export {
   ErrorCategory,
   Operation,
@@ -39,3 +39,45 @@ export {
   type AIEventProperties,
   type APIEventProperties,
 } from './events';
+
+// Metrics
+export {
+  metrics,
+  recordChartCalculation,
+  recordTransitCalculation,
+  recordCompositeCalculation,
+  recordAIGeneration,
+  recordAPIRequest,
+  recordDatabaseQuery,
+  recordRateLimitHit,
+  recordError,
+  updateCacheMetrics,
+  startTimer,
+} from './metrics';
+
+// Audit
+export {
+  CALCULATION_VERSION,
+  ALGORITHM_CHANGELOG,
+  getVersionInfo,
+  hashInput,
+  hashResult,
+  auditChartCalculation,
+  auditAIGeneration,
+  auditAuthEvent,
+  auditDataAccess,
+  verifyCalculationIntegrity,
+  isVersionCompatible,
+  type AuditEntry,
+  type ChartAuditEntry,
+} from './audit';
+
+// Alerting
+export {
+  AlertThresholds,
+  AlertRules,
+  SLATargets,
+  checkAlertConditions,
+  getPostHogAlertConfig,
+  type AlertRule,
+} from './alerting';
