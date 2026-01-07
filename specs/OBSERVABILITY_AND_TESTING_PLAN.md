@@ -238,24 +238,146 @@ interface LogEntry {
 
 ---
 
-## Part 3: Error Tracking & Distributed Tracing
+## Part 3: Error Tracking, Analytics & Observability Platform
 
-### 3.1 Sentry Integration
+### 3.1 PostHog Integration
 
-**Why Sentry:**
-- Free tier supports 5K errors/month
-- Excellent Next.js integration
-- Distributed tracing built-in
-- Performance monitoring included
-- Source maps for stack traces
+**Why PostHog (instead of Sentry):**
+- **Generous Free Tier**: 1 million events/month free (vs Sentry's 5K errors)
+- **All-in-One Platform**: Combines multiple tools we'd otherwise need separately
+- **LLM Analytics**: Built-in tracking for AI/LLM usage (perfect for our Gemini integration)
+- **Product Analytics**: User behavior, funnels, retention
+- **Session Replay**: Debug user issues with recordings
+- **Feature Flags**: Roll out changes safely
+- **A/B Testing**: Experiment with UI/UX changes
+- **Error Tracking**: Exception monitoring with stack traces
+- **Web Analytics**: Privacy-friendly alternative to Google Analytics
+- **Excellent Next.js Integration**: Official SDK with App Router support
 
 **Installation:**
 ```bash
-npm install @sentry/nextjs
-npx @sentry/wizard@latest -i nextjs
+npm install posthog-js posthog-node
 ```
 
-### 3.2 Error Categories
+**Configuration:**
+```typescript
+// src/lib/observability/posthog.ts
+import { PostHog } from 'posthog-node';
+
+// Server-side client
+export const posthog = new PostHog(process.env.POSTHOG_API_KEY!, {
+  host: process.env.POSTHOG_HOST || 'https://us.i.posthog.com',
+  flushAt: 1,  // Flush immediately in serverless
+  flushInterval: 0,
+});
+
+// Client-side initialization in _app.tsx or layout.tsx
+import posthog from 'posthog-js';
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+  api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+  capture_pageview: true,
+  capture_pageleave: true,
+  autocapture: true,
+});
+```
+
+### 3.2 PostHog Event Categories
+
+```typescript
+// Custom events for Human Design platform
+enum PostHogEvent {
+  // Calculation Events
+  CHART_CALCULATED = 'chart_calculated',
+  TRANSIT_CALCULATED = 'transit_calculated',
+  COMPOSITE_CALCULATED = 'composite_calculated',
+
+  // AI Events (LLM Analytics)
+  AI_READING_REQUESTED = 'ai_reading_requested',
+  AI_READING_COMPLETED = 'ai_reading_completed',
+  AI_READING_FAILED = 'ai_reading_failed',
+
+  // User Journey Events
+  CHART_SAVED = 'chart_saved',
+  CHART_SHARED = 'chart_shared',
+  READING_VIEWED = 'reading_viewed',
+
+  // Error Events
+  CALCULATION_ERROR = 'calculation_error',
+  VALIDATION_ERROR = 'validation_error',
+  API_ERROR = 'api_error',
+
+  // Feature Usage
+  FEATURE_USED = 'feature_used',
+}
+
+// Example usage
+posthog.capture(PostHogEvent.CHART_CALCULATED, {
+  type: 'generator',
+  authority: 'sacral',
+  profile: '4/6',
+  calculation_time_ms: 45,
+  $set: { last_chart_type: 'generator' },  // Update user properties
+});
+```
+
+### 3.3 LLM Analytics Integration
+
+PostHog's LLM analytics track AI usage automatically:
+
+```typescript
+// Track AI reading generation
+posthog.capture('$ai_generation', {
+  $ai_model: 'gemini-3-flash',
+  $ai_provider: 'google',
+  $ai_input_tokens: 1200,
+  $ai_output_tokens: 850,
+  $ai_latency_ms: 2300,
+  $ai_success: true,
+
+  // Custom properties
+  chart_type: 'generator',
+  reading_focus: 'authority',
+});
+```
+
+### 3.4 Feature Flags for Safe Rollouts
+
+```typescript
+// Check feature flag before using new calculation logic
+const useNewEphemeris = await posthog.isFeatureEnabled(
+  'new-ephemeris-algorithm',
+  userId
+);
+
+if (useNewEphemeris) {
+  return calculateWithNewAlgorithm(birthData);
+} else {
+  return calculateWithLegacyAlgorithm(birthData);
+}
+
+// A/B test different UI layouts
+const variant = await posthog.getFeatureFlag('chart-display-variant', userId);
+// Returns: 'control' | 'bodygraph-3d' | 'bodygraph-classic'
+```
+
+### 3.5 Session Replay for Debugging
+
+PostHog automatically records user sessions (with privacy controls):
+
+```typescript
+// Mask sensitive data
+posthog.init(key, {
+  session_recording: {
+    maskAllInputs: true,
+    maskTextContent: true,
+    // Only record calculation flows
+    recordHeaders: false,
+    recordBody: false,
+  },
+});
+```
+
+### 3.6 Error Categories for Tracking
 
 ```typescript
 enum ErrorCategory {
@@ -279,9 +401,17 @@ enum ErrorCategory {
   AUTH_ERROR = 'auth_error',
   UNKNOWN_ERROR = 'unknown_error',
 }
+
+// Capture errors in PostHog
+posthog.capture('$exception', {
+  $exception_message: error.message,
+  $exception_type: ErrorCategory.EPHEMERIS_ERROR,
+  $exception_stack_trace_raw: error.stack,
+  birth_datetime: birthData.datetime_utc,  // Context for debugging
+});
 ```
 
-### 3.3 Distributed Tracing Spans
+### 3.7 Distributed Tracing Spans
 
 ```
 [HTTP Request] ─────────────────────────────────────────────────────▶
@@ -605,7 +735,7 @@ Track per-operation costs:
 - [ ] Set up structured logging (Pino)
 - [ ] Add correlation ID middleware
 - [ ] Create health check endpoints
-- [ ] Set up Sentry error tracking
+- [ ] Set up PostHog (error tracking + analytics + feature flags)
 
 ### Phase 2: Testing (Week 2)
 - [ ] Gather 50+ verified chart fixtures
@@ -626,9 +756,10 @@ Track per-operation costs:
 - [ ] Create load testing suite
 
 ### Phase 5: Monitoring & Alerting (Week 5)
-- [ ] Configure Sentry alerts
+- [ ] Configure PostHog alerts and dashboards
 - [ ] Set up uptime monitoring
-- [ ] Create SLA dashboards
+- [ ] Create SLA dashboards in PostHog
+- [ ] Configure A/B tests for UI experiments
 - [ ] Document runbooks
 
 ---
@@ -638,12 +769,26 @@ Track per-operation costs:
 | Need | Recommendation | Rationale |
 |------|----------------|-----------|
 | Logging | **Pino** | Fastest Node.js logger, JSON native |
-| Error Tracking | **Sentry** | Best Next.js integration, free tier |
-| Metrics | **Custom + Vercel Analytics** | Avoid vendor lock-in |
-| Tracing | **Sentry Performance** | Included with error tracking |
+| Observability Platform | **PostHog** | All-in-one: errors, analytics, feature flags, A/B tests |
+| LLM Analytics | **PostHog** | Built-in AI/LLM tracking for Gemini usage |
+| Product Analytics | **PostHog** | User funnels, retention, behavior tracking |
+| Feature Flags | **PostHog** | Safe rollouts, included in platform |
+| A/B Testing | **PostHog** | Experiment framework, included in platform |
+| Session Replay | **PostHog** | Debug user issues with recordings |
 | Load Testing | **k6** | Modern, scriptable, free |
 | Test Framework | **Vitest** (existing) | Already configured |
 | Rate Limit Store | **Upstash Redis** | Serverless, Vercel-native |
+
+### PostHog Free Tier Limits (Generous)
+
+| Feature | Free Limit |
+|---------|------------|
+| Events | 1 million/month |
+| Session Replays | 5,000/month |
+| Feature Flags | Unlimited |
+| A/B Tests | Unlimited |
+| Surveys | 250 responses/month |
+| Data retention | 1 year |
 
 ---
 
@@ -655,8 +800,9 @@ src/
 │   ├── observability/
 │   │   ├── index.ts           # Main exports
 │   │   ├── logger.ts          # Pino logger setup
+│   │   ├── posthog.ts         # PostHog client (server + client)
+│   │   ├── events.ts          # Custom event definitions
 │   │   ├── metrics.ts         # Metrics collection
-│   │   ├── tracing.ts         # Distributed tracing
 │   │   ├── correlation.ts     # Correlation ID handling
 │   │   └── audit.ts           # Audit logging
 │   └── ...
@@ -751,10 +897,90 @@ This plan provides:
 
 1. **100% Test Coverage** on calculation logic with 50+ verified fixtures
 2. **Structured Logging** with correlation IDs for request tracing
-3. **Error Tracking** with Sentry for production debugging
+3. **PostHog Observability Platform**:
+   - Error tracking with full context
+   - Product analytics (funnels, retention, user behavior)
+   - LLM analytics for AI reading generation
+   - Feature flags for safe rollouts
+   - A/B testing for experiments
+   - Session replay for debugging
 4. **Metrics Collection** for business and performance insights
 5. **Health Monitoring** for operational visibility
 6. **Audit Trail** for calculation accountability
 7. **Load Testing** for capacity planning
 
+**Why PostHog over Sentry:**
+- 200x more free events (1M vs 5K)
+- Consolidates 5+ tools into 1 platform
+- Built-in LLM analytics for your AI features
+- Feature flags included (would need LaunchDarkly otherwise)
+- Product analytics included (would need Mixpanel/Amplitude otherwise)
+
 For a system handling thousands of requests/hour for a multi-million dollar business, this foundation ensures reliability, debuggability, and accountability.
+
+---
+
+## Appendix C: PostHog Dashboards to Create
+
+### 1. Operations Dashboard
+- Charts calculated per hour/day
+- Error rate trend
+- API latency P50/P95/P99
+- Rate limit hits
+- Active users (real-time)
+
+### 2. Product Analytics Dashboard
+- User funnel: Landing → Chart Created → Reading Generated → Saved
+- Retention cohorts (7-day, 30-day)
+- Feature adoption rates
+- Most calculated chart types
+- Geographic distribution
+
+### 3. AI/LLM Dashboard
+- AI readings generated per day
+- Token usage (input/output)
+- AI latency distribution
+- AI error rate
+- Cost tracking (estimated from tokens)
+
+### 4. Business Metrics Dashboard
+- New users per day
+- Charts per user
+- Conversion rates
+- Revenue attribution (if applicable)
+
+---
+
+## Appendix D: Environment Variables
+
+```bash
+# PostHog Configuration
+POSTHOG_API_KEY=phc_xxxxxxxxxxxxx          # Server-side key (secret)
+NEXT_PUBLIC_POSTHOG_KEY=phc_xxxxxxxxxxxxx  # Client-side key (public)
+POSTHOG_HOST=https://us.i.posthog.com      # US or EU region
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
+
+# Feature Flags (optional overrides for local dev)
+POSTHOG_FEATURE_FLAGS_ENABLED=true
+
+# Logging
+LOG_LEVEL=info                              # debug | info | warn | error
+LOG_FORMAT=json                             # json | pretty (dev only)
+
+# Redis (for persistent rate limiting)
+UPSTASH_REDIS_REST_URL=https://xxx.upstash.io
+UPSTASH_REDIS_REST_TOKEN=xxxxx
+```
+
+---
+
+## Appendix E: PostHog Feature Flags to Create
+
+| Flag Name | Purpose | Default |
+|-----------|---------|---------|
+| `new-ephemeris-v2` | Roll out ephemeris algorithm updates | false |
+| `ai-readings-enabled` | Kill switch for AI readings | true |
+| `session-recording` | Enable session replay | true |
+| `bodygraph-3d` | New 3D bodygraph visualization | false |
+| `composite-charts` | Enable composite/relationship charts | true |
+| `practitioner-mode` | Enable practitioner features | false |
