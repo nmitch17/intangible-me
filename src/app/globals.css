@@ -3,12 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 250, 250, 250;
-  --background-end-rgb: 255, 255, 255;
+  /* Solar Haze Portal colors */
+  --solar-glow: #ff9d6c;
+  --haze-pink: #f0a2b1;
+  --deep-cosmos: #2e1a47;
+  --clay-surface: #ffffff;
+  --glass-shine: rgba(255, 255, 255, 0.25);
+  --soft-shadow: rgba(74, 34, 122, 0.45);
+  --input-bg: #f7f3ff;
+  --text-primary: #2e1a47;
+  --text-secondary: rgba(46, 26, 71, 0.7);
+  --text-muted: rgba(46, 26, 71, 0.5);
 
-  /* Human Design colors */
-  --hd-personality: #1a1a1a;
+  /* Human Design colors - updated for light theme */
+  --hd-personality: #2e1a47;
   --hd-design: #d63031;
   --hd-defined: #00b894;
   --hd-undefined: #b2bec3;
@@ -17,20 +25,504 @@
   --hd-collective: #0984e3;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 10, 10, 10;
-    --background-end-rgb: 20, 20, 20;
-  }
+* {
+  cursor: default;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-    to bottom,
-    rgb(var(--background-start-rgb)),
-    rgb(var(--background-end-rgb))
-  );
+  background: radial-gradient(ellipse at 50% 20%, #4a227a 0%, #2e1a47 100%);
+  color: var(--text-primary);
   min-height: 100vh;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Solar Haze Background */
+.solar-haze-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(ellipse at 50% 20%, #4a227a 0%, #2e1a47 100%);
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: drift 20s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  background: var(--solar-glow);
+  top: -150px;
+  right: -100px;
+  opacity: 0.5;
+}
+
+.orb-2 {
+  width: 600px;
+  height: 600px;
+  background: var(--haze-pink);
+  bottom: -200px;
+  left: -150px;
+  opacity: 0.4;
+  animation-delay: -7s;
+}
+
+.orb-3 {
+  width: 400px;
+  height: 400px;
+  background: #8b5cf6;
+  top: 40%;
+  left: 30%;
+  opacity: 0.3;
+  animation-delay: -14s;
+}
+
+/* Grain Overlay */
+.grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.04;
+}
+
+/* Sparkle Particles */
+.sparkle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.4;
+  animation: sparkle 4s infinite;
+}
+
+/* Claymorphic Card */
+.clay-card {
+  background: var(--clay-surface);
+  border-radius: 60px;
+  position: relative;
+  box-shadow:
+    25px 25px 60px var(--soft-shadow),
+    -15px -15px 50px rgba(255, 255, 255, 0.6),
+    inset 8px 8px 16px rgba(255, 255, 255, 0.8),
+    inset -8px -8px 16px rgba(74, 34, 122, 0.05);
+  border: 1px solid rgba(255, 255, 255, 1);
+  transition: box-shadow 0.4s ease;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Glass Shroud - Glassmorphism overlay behind clay card */
+.glass-shroud {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  bottom: -15px;
+  left: -15px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 70px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 0;
+  pointer-events: none;
+  mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+}
+
+/* Wrapper for clay card with glass shroud */
+.prism-suspension {
+  position: relative;
+}
+
+/* Large glass shroud for grouping multiple cards */
+.glass-shroud-lg {
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  bottom: -25px;
+  left: -25px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 70px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 0;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 70% at center, black 50%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at center, black 50%, transparent 100%);
+}
+
+.clay-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--glass-shine), transparent);
+}
+
+.clay-card:hover {
+  box-shadow:
+    30px 30px 70px var(--soft-shadow),
+    -18px -18px 55px rgba(255, 255, 255, 0.7),
+    inset 8px 8px 16px rgba(255, 255, 255, 0.8),
+    inset -8px -8px 16px rgba(74, 34, 122, 0.05);
+}
+
+/* Neumorphic Input Styling */
+.solar-input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.solar-input-group label {
+  display: block;
+  font-family: var(--font-jetbrains), 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--solar-glow);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.6rem;
+  margin-left: 1.5rem;
+  font-weight: 500;
+}
+
+.solar-input {
+  width: 100%;
+  background: var(--input-bg);
+  border: none;
+  border-radius: 30px;
+  padding: 1.1rem 1.5rem;
+  color: var(--text-primary);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 1rem;
+  outline: none;
+  box-shadow:
+    inset 5px 5px 12px rgba(74, 34, 122, 0.08),
+    inset -5px -5px 12px rgba(255, 255, 255, 0.9);
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.solar-input:focus {
+  background: #ffffff;
+  box-shadow:
+    inset 3px 3px 8px rgba(74, 34, 122, 0.06),
+    inset -3px -3px 8px rgba(255, 255, 255, 1),
+    0 0 0 3px rgba(255, 157, 108, 0.25);
+}
+
+.solar-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Solar Gradient Button */
+.solar-button {
+  width: 100%;
+  background: linear-gradient(145deg, var(--solar-glow), #f87a3b);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 1.2rem 2rem;
+  font-family: var(--font-jetbrains), 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  position: relative;
+  box-shadow:
+    0 12px 35px rgba(255, 157, 108, 0.35),
+    0 4px 15px rgba(240, 162, 177, 0.25),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.3),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease in-out;
+  /* NO transform effects */
+}
+
+.solar-button:hover {
+  box-shadow:
+    0 16px 45px rgba(255, 157, 108, 0.45),
+    0 6px 20px rgba(240, 162, 177, 0.35),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.4),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.08);
+  transform: scale(1.02);
+  transition: box-shadow 0.3s ease, transform 0.3s ease in-out;
+  cursor: pointer;
+}
+
+.solar-button:active {
+  box-shadow:
+    0 6px 20px rgba(255, 157, 108, 0.3),
+    0 2px 10px rgba(240, 162, 177, 0.2),
+    inset 5px 5px 10px rgba(0, 0, 0, 0.1),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.2);
+}
+
+.solar-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.solar-button:disabled:hover {
+  box-shadow:
+    0 12px 35px rgba(255, 157, 108, 0.35),
+    0 4px 15px rgba(240, 162, 177, 0.25),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.3),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Data Point Styling */
+.data-point {
+  font-family: var(--font-jetbrains), 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--solar-glow);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.data-point::before {
+  content: '';
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--solar-glow), var(--haze-pink));
+  border-radius: 2px;
+}
+
+/* JetBrains Mono typography utility */
+.font-mono {
+  font-family: var(--font-jetbrains), 'JetBrains Mono', monospace;
+}
+
+/* Chart Card - claymorphic variant for results */
+.chart-card {
+  background: var(--clay-surface);
+  border-radius: 40px;
+  box-shadow:
+    15px 15px 40px var(--soft-shadow),
+    -10px -10px 35px rgba(255, 255, 255, 0.4),
+    inset 6px 6px 24px rgba(205, 193, 193, 0.7),
+    inset -6px -6px 24px rgba(74, 34, 122, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Location dropdown styling */
+.solar-dropdown {
+  background: var(--clay-surface);
+  border-radius: 20px;
+  box-shadow:
+    10px 10px 30px var(--soft-shadow),
+    -6px -6px 20px rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Animations */
+@keyframes drift {
+  from { transform: translate(0, 0) rotate(0deg); }
+  to { transform: translate(60px, 40px) rotate(8deg); }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.6; transform: scale(1); }
+}
+
+.animate-slideUp {
+  animation: slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-reveal {
+  animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Scrollbar styling for light theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(46, 26, 71, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--solar-glow), var(--haze-pink));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ff8a50, #e8899b);
+}
+
+/* ============================================================================
+   COPILOTKIT THEME OVERRIDES - Solar Haze Portal
+   ============================================================================ */
+
+/* CopilotKit Popup Container */
+.copilotkit-popup {
+  --copilot-kit-background-color: rgba(13, 7, 26, 0.95) !important;
+  --copilot-kit-primary-color: #ff9d6c !important;
+  --copilot-kit-secondary-color: #f0a2b1 !important;
+  --copilot-kit-response-button-background-color: rgba(255, 157, 108, 0.15) !important;
+  --copilot-kit-response-button-text-color: #ff9d6c !important;
+}
+
+/* Main popup window */
+[data-copilotkit-popup] {
+  background: rgba(13, 7, 26, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 157, 108, 0.2) !important;
+  border-radius: 24px !important;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(255, 157, 108, 0.15) !important;
+}
+
+/* Header */
+[data-copilotkit-popup] header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 157, 108, 0.15) !important;
+  padding: 1rem 1.25rem !important;
+}
+
+[data-copilotkit-popup] header h1 {
+  font-family: var(--font-jetbrains), 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.2em !important;
+  color: #ff9d6c !important;
+}
+
+/* Messages area */
+[data-copilotkit-popup] [data-copilotkit-messages] {
+  background: transparent !important;
+  padding: 1rem !important;
+}
+
+/* User message bubbles */
+[data-copilotkit-popup] [data-copilotkit-user-message] {
+  background: linear-gradient(135deg, rgba(255, 157, 108, 0.2), rgba(240, 162, 177, 0.15)) !important;
+  border: 1px solid rgba(255, 157, 108, 0.3) !important;
+  border-radius: 18px 18px 4px 18px !important;
+  color: white !important;
+}
+
+/* Assistant message bubbles */
+[data-copilotkit-popup] [data-copilotkit-assistant-message] {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 18px 18px 18px 4px !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Input area */
+[data-copilotkit-popup] [data-copilotkit-input-container] {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-top: 1px solid rgba(255, 157, 108, 0.15) !important;
+  padding: 0.75rem 1rem !important;
+}
+
+[data-copilotkit-popup] textarea,
+[data-copilotkit-popup] input[type="text"] {
+  background: rgba(247, 243, 255, 0.08) !important;
+  border: 1px solid rgba(255, 157, 108, 0.2) !important;
+  border-radius: 20px !important;
+  color: white !important;
+  font-family: var(--font-outfit), system-ui, sans-serif !important;
+  padding: 0.75rem 1.25rem !important;
+}
+
+[data-copilotkit-popup] textarea::placeholder,
+[data-copilotkit-popup] input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+[data-copilotkit-popup] textarea:focus,
+[data-copilotkit-popup] input[type="text"]:focus {
+  outline: none !important;
+  border-color: rgba(255, 157, 108, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(255, 157, 108, 0.15) !important;
+}
+
+/* Send button */
+[data-copilotkit-popup] button[type="submit"] {
+  background: linear-gradient(135deg, #ff9d6c, #f0a2b1) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  color: white !important;
+  box-shadow:
+    0 4px 15px rgba(255, 157, 108, 0.35),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+[data-copilotkit-popup] button[type="submit"]:hover {
+  transform: scale(1.05) !important;
+  box-shadow:
+    0 6px 20px rgba(255, 157, 108, 0.45),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Floating button trigger */
+[data-copilotkit-popup-trigger] {
+  background: linear-gradient(135deg, #ff9d6c, #f0a2b1) !important;
+  border: none !important;
+  box-shadow:
+    0 8px 30px rgba(255, 157, 108, 0.4),
+    0 4px 15px rgba(240, 162, 177, 0.3),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.3s ease !important;
+}
+
+[data-copilotkit-popup-trigger]:hover {
+  transform: scale(1.1) !important;
+  box-shadow:
+    0 12px 40px rgba(255, 157, 108, 0.5),
+    0 6px 20px rgba(240, 162, 177, 0.4),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Loading indicator */
+[data-copilotkit-popup] [data-copilotkit-loading] {
+  color: #ff9d6c !important;
+}
+
+/* Close button */
+[data-copilotkit-popup] button[aria-label="Close"] {
+  color: rgba(255, 255, 255, 0.6) !important;
+  transition: color 0.2s ease !important;
+}
+
+[data-copilotkit-popup] button[aria-label="Close"]:hover {
+  color: #ff9d6c !important;
 }

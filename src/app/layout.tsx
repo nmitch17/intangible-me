@@ -1,8 +1,25 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Outfit, DM_Serif_Display, JetBrains_Mono } from 'next/font/google';
+import { CopilotKit } from '@copilotkit/react-core';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+  weight: ['300', '500'],
+});
+
+const dmSerif = DM_Serif_Display({
+  weight: ['400'],
+  subsets: ['latin'],
+  variable: '--font-dm-serif',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains',
+  weight: ['400', '500'],
+});
 
 export const metadata: Metadata = {
   title: 'Human Design Chart Calculator',
@@ -16,8 +33,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {children}
+      <body className={`${outfit.variable} ${dmSerif.variable} ${jetbrainsMono.variable} font-sans`}>
+        <CopilotKit runtimeUrl="/api/copilotkit">
+          {children}
+        </CopilotKit>
       </body>
     </html>
   );

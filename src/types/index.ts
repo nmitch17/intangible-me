@@ -246,7 +246,24 @@ export interface CompositeResponse {
   analysis: {
     electromagnetic: Channel[];
     compromise_gates: number[];
+    dominance_gates: number[];
     shared_channels: Channel[];
+    combined_channels: Channel[];
     combined_definition: Definition;
+    companionship_analysis: {
+      electromagnetic_count: number;
+      shared_channel_count: number;
+      dominance_gate_count: number;
+      compatibility_score: number;
+    };
   };
 }
+
+// ============================================================================
+// UI TYPES
+// ============================================================================
+
+export type SelectedElement =
+  | { type: 'center'; name: CenterName; defined: boolean }
+  | { type: 'gate'; number: number; center: CenterName }
+  | { type: 'channel'; gates: [number, number]; name: string; circuit: string };

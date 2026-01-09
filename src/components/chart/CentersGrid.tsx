@@ -38,21 +38,21 @@ export function CentersGrid({ centers }: CentersGridProps) {
         return (
           <div
             key={centerKey}
-            className={`p-3 rounded-lg border-2 ${
+            className={`p-3 rounded-xl border ${
               isDefined
-                ? 'border-[var(--hd-defined)] bg-green-50 dark:bg-green-900/20'
-                : 'border-dashed border-[var(--hd-undefined)] bg-gray-50 dark:bg-gray-800'
+                ? 'border-green-300 bg-green-50'
+                : 'border-dashed border-gray-300 bg-gray-50'
             }`}
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="font-medium text-gray-900 dark:text-gray-100">
+              <span className="font-medium text-deep-cosmos text-sm">
                 {centerDisplayNames[centerKey]}
               </span>
               <span
-                className={`text-xs px-2 py-0.5 rounded ${
+                className={`text-xs px-2 py-0.5 rounded-full ${
                   isDefined
-                    ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100'
-                    : 'bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-400'
+                    ? 'bg-green-100 text-green-700'
+                    : 'bg-gray-100 text-gray-500'
                 }`}
               >
                 {isDefined ? 'Defined' : 'Open'}
@@ -63,7 +63,7 @@ export function CentersGrid({ centers }: CentersGridProps) {
                 {center.gates.map((gate) => (
                   <span
                     key={gate}
-                    className="text-xs bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-1.5 py-0.5 rounded"
+                    className="text-xs bg-deep-cosmos/10 text-deep-cosmos/70 px-1.5 py-0.5 rounded"
                   >
                     {gate}
                   </span>

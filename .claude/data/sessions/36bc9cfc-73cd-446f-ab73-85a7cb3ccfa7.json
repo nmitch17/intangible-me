@@ -1,0 +1,6 @@
+{
+  "session_id": "36bc9cfc-73cd-446f-ab73-85a7cb3ccfa7",
+  "prompts": [
+    "Create an issue that replaces nominatim with a more robust geocoding package. Google or something production grade with higher rate limits. Include some options to consider in the issue and note that nominatim has a hard 1 req/min limit and must be replaced in production."
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "session_id": "b082d0ce-214e-4e4f-90c5-3dd0172c15d5",
+  "prompts": [
+    "The add client task modal doesn't have any ui elements to select and add these new blocks. Was that worked on or accounted for in the original spec?"
+  ]
+}

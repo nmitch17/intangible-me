@@ -1,0 +1,7 @@
+{
+  "session_id": "f579cdbf-a0d0-4266-8ada-ccd5367f9f28",
+  "prompts": [
+    "Create a custom slash command called `/test`\\\n    \\\n    It should run all tests, verify build by running `nvm use 20 && npm ci && npm run lint &&\n  npm test && npm run build` and if the recent uncommitted\n    changes changed or modified or added and UI changes, it should create an e2e test plan to\n  use\n    dev-browser skill. These tests should be specced out to be run in small parallel batches\n    using multiple async parallel agents. Use haiku model to run the tests.",
+    "Update it to first identify any testing needed and write tests to validate the work done that needs testing. If unit tests don't exist, then running npm test wont do anything. Also, change all the commands to use bun instead of npm"
+  ]
+}

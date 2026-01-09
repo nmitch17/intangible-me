@@ -86,5 +86,565 @@
     "hook_event_name": "Notification",
     "message": "Claude is waiting for your input",
     "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "fbe4708f-c6ca-4614-afab-e41b0367f11d",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/fbe4708f-c6ca-4614-afab-e41b0367f11d.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "a063bdf0-7a5a-4291-8bdb-1ee02b446e44",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/a063bdf0-7a5a-4291-8bdb-1ee02b446e44.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "a063bdf0-7a5a-4291-8bdb-1ee02b446e44",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/a063bdf0-7a5a-4291-8bdb-1ee02b446e44.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "a063bdf0-7a5a-4291-8bdb-1ee02b446e44",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/a063bdf0-7a5a-4291-8bdb-1ee02b446e44.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "24b46848-a70a-44f5-a327-baabf843adf2",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/24b46848-a70a-44f5-a327-baabf843adf2.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "24b46848-a70a-44f5-a327-baabf843adf2",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/24b46848-a70a-44f5-a327-baabf843adf2.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "24b46848-a70a-44f5-a327-baabf843adf2",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/24b46848-a70a-44f5-a327-baabf843adf2.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "d0eed45c-de5f-4c40-bfe3-5d013524ffe3",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/d0eed45c-de5f-4c40-bfe3-5d013524ffe3.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "d0eed45c-de5f-4c40-bfe3-5d013524ffe3",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/d0eed45c-de5f-4c40-bfe3-5d013524ffe3.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "8da985b4-d029-48e0-bab5-c75871e30a73",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/8da985b4-d029-48e0-bab5-c75871e30a73.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "8da985b4-d029-48e0-bab5-c75871e30a73",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/8da985b4-d029-48e0-bab5-c75871e30a73.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "3fcc017b-1b19-424e-9ad3-84d4af972cf6",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/3fcc017b-1b19-424e-9ad3-84d4af972cf6.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "0d35bde6-3302-40bf-89bb-84bdfc0268b3",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/0d35bde6-3302-40bf-89bb-84bdfc0268b3.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "a5b04c78-ce52-4de7-8b9c-ef9ecc363121",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/a5b04c78-ce52-4de7-8b9c-ef9ecc363121.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "a5b04c78-ce52-4de7-8b9c-ef9ecc363121",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/a5b04c78-ce52-4de7-8b9c-ef9ecc363121.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "a3afb852-688f-4968-9dd7-86b3de2b9c10",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/a3afb852-688f-4968-9dd7-86b3de2b9c10.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "a3afb852-688f-4968-9dd7-86b3de2b9c10",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/a3afb852-688f-4968-9dd7-86b3de2b9c10.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "c93f8a61-ade4-4571-ae73-949f9a5acc97",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/c93f8a61-ade4-4571-ae73-949f9a5acc97.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "5ce519c7-48fe-431b-93cb-0e49099cb3e9",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/5ce519c7-48fe-431b-93cb-0e49099cb3e9.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude Code needs your approval for the plan",
+    "notification_type": "permission_prompt"
+  },
+  {
+    "session_id": "5ce519c7-48fe-431b-93cb-0e49099cb3e9",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/5ce519c7-48fe-431b-93cb-0e49099cb3e9.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "5ce519c7-48fe-431b-93cb-0e49099cb3e9",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/5ce519c7-48fe-431b-93cb-0e49099cb3e9.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "5ce519c7-48fe-431b-93cb-0e49099cb3e9",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/5ce519c7-48fe-431b-93cb-0e49099cb3e9.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "5ce519c7-48fe-431b-93cb-0e49099cb3e9",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/5ce519c7-48fe-431b-93cb-0e49099cb3e9.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "cd783ed0-1066-4d08-b4ba-eec16e882b1d",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/cd783ed0-1066-4d08-b4ba-eec16e882b1d.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "5ce519c7-48fe-431b-93cb-0e49099cb3e9",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/5ce519c7-48fe-431b-93cb-0e49099cb3e9.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "36bc9cfc-73cd-446f-ab73-85a7cb3ccfa7",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/36bc9cfc-73cd-446f-ab73-85a7cb3ccfa7.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "ce71c2f1-fe48-4061-a5ed-019eee2fe148",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/ce71c2f1-fe48-4061-a5ed-019eee2fe148.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "f5716fba-45af-4ff6-b27e-ec4b17dc16a6",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/f5716fba-45af-4ff6-b27e-ec4b17dc16a6.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "f5716fba-45af-4ff6-b27e-ec4b17dc16a6",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/f5716fba-45af-4ff6-b27e-ec4b17dc16a6.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "f5716fba-45af-4ff6-b27e-ec4b17dc16a6",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/f5716fba-45af-4ff6-b27e-ec4b17dc16a6.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "f5716fba-45af-4ff6-b27e-ec4b17dc16a6",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/f5716fba-45af-4ff6-b27e-ec4b17dc16a6.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "960efb9b-8a50-4c93-9894-59d327f4e18c",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/960efb9b-8a50-4c93-9894-59d327f4e18c.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "960efb9b-8a50-4c93-9894-59d327f4e18c",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/960efb9b-8a50-4c93-9894-59d327f4e18c.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "960efb9b-8a50-4c93-9894-59d327f4e18c",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/960efb9b-8a50-4c93-9894-59d327f4e18c.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "3bae7693-069f-46f1-b168-7b764117e9c5",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/3bae7693-069f-46f1-b168-7b764117e9c5.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "960efb9b-8a50-4c93-9894-59d327f4e18c",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/960efb9b-8a50-4c93-9894-59d327f4e18c.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "3bae7693-069f-46f1-b168-7b764117e9c5",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/3bae7693-069f-46f1-b168-7b764117e9c5.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "d9c53cfb-318c-4bc7-8c10-bcfa1d9125bc",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/d9c53cfb-318c-4bc7-8c10-bcfa1d9125bc.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "d9c53cfb-318c-4bc7-8c10-bcfa1d9125bc",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/d9c53cfb-318c-4bc7-8c10-bcfa1d9125bc.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "d9c53cfb-318c-4bc7-8c10-bcfa1d9125bc",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/d9c53cfb-318c-4bc7-8c10-bcfa1d9125bc.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "efccfd94-d411-447b-9fe6-3f069ecc4332",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/efccfd94-d411-447b-9fe6-3f069ecc4332.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "efccfd94-d411-447b-9fe6-3f069ecc4332",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/efccfd94-d411-447b-9fe6-3f069ecc4332.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "efccfd94-d411-447b-9fe6-3f069ecc4332",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/efccfd94-d411-447b-9fe6-3f069ecc4332.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "20c7eebe-b730-4fb8-8dba-a9a1f05dc02f",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/20c7eebe-b730-4fb8-8dba-a9a1f05dc02f.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "938cf1dd-7ce7-4d03-b728-4a99d3dee5f2",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/938cf1dd-7ce7-4d03-b728-4a99d3dee5f2.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "938cf1dd-7ce7-4d03-b728-4a99d3dee5f2",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/938cf1dd-7ce7-4d03-b728-4a99d3dee5f2.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "938cf1dd-7ce7-4d03-b728-4a99d3dee5f2",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/938cf1dd-7ce7-4d03-b728-4a99d3dee5f2.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "b6eefd06-7881-4642-bd71-d36078ab661b",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/b6eefd06-7881-4642-bd71-d36078ab661b.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude Code needs your attention",
+    "notification_type": "permission_prompt"
+  },
+  {
+    "session_id": "b6eefd06-7881-4642-bd71-d36078ab661b",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/b6eefd06-7881-4642-bd71-d36078ab661b.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude Code needs your approval for the plan",
+    "notification_type": "permission_prompt"
+  },
+  {
+    "session_id": "b6eefd06-7881-4642-bd71-d36078ab661b",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/b6eefd06-7881-4642-bd71-d36078ab661b.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "782fae44-3abd-4025-96fd-f9866ffb295b",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/782fae44-3abd-4025-96fd-f9866ffb295b.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "05a5158a-d519-421c-87a3-a4f9bded4419",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/05a5158a-d519-421c-87a3-a4f9bded4419.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "05a5158a-d519-421c-87a3-a4f9bded4419",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/05a5158a-d519-421c-87a3-a4f9bded4419.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "f0cb483f-026b-4b04-a52e-fbc1eb163df3",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/f0cb483f-026b-4b04-a52e-fbc1eb163df3.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "e3853639-7c98-4991-adfb-82030e8baa10",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/e3853639-7c98-4991-adfb-82030e8baa10.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "d1975ae4-08f8-4636-b248-63ad81ccb0d1",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/d1975ae4-08f8-4636-b248-63ad81ccb0d1.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "d1975ae4-08f8-4636-b248-63ad81ccb0d1",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/d1975ae4-08f8-4636-b248-63ad81ccb0d1.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "18f054a6-afc7-4b16-b8cc-1e3ccea6a8ca",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/18f054a6-afc7-4b16-b8cc-1e3ccea6a8ca.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude Code needs your attention",
+    "notification_type": "permission_prompt"
+  },
+  {
+    "session_id": "18f054a6-afc7-4b16-b8cc-1e3ccea6a8ca",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/18f054a6-afc7-4b16-b8cc-1e3ccea6a8ca.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude Code needs your approval for the plan",
+    "notification_type": "permission_prompt"
+  },
+  {
+    "session_id": "18f054a6-afc7-4b16-b8cc-1e3ccea6a8ca",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/18f054a6-afc7-4b16-b8cc-1e3ccea6a8ca.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "afb5b89d-f9e0-4338-8cd6-8114f4d49aab",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/afb5b89d-f9e0-4338-8cd6-8114f4d49aab.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "83a2c9be-fe88-4a39-a43e-3c29d8feaf5f",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/83a2c9be-fe88-4a39-a43e-3c29d8feaf5f.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "83a2c9be-fe88-4a39-a43e-3c29d8feaf5f",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/83a2c9be-fe88-4a39-a43e-3c29d8feaf5f.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
+  },
+  {
+    "session_id": "83a2c9be-fe88-4a39-a43e-3c29d8feaf5f",
+    "transcript_path": "/Users/nickmitchell/.claude/projects/-Users-nickmitchell-intangible-me/83a2c9be-fe88-4a39-a43e-3c29d8feaf5f.jsonl",
+    "cwd": "/Users/nickmitchell/intangible-me",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input",
+    "notification_type": "idle_prompt"
   }
 ]

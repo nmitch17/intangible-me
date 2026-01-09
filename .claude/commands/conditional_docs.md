@@ -21,14 +21,6 @@ This prompt helps you determine what documentation you should read based on the 
     - When troubleshooting type, authority, or definition calculations
     - When extending reference data (channels, crosses, gates)
 
-- app_docs/chore-location-search-maptiler.md
-  - Conditions:
-    - When working with the LocationSearch component
-    - When modifying the geocoding API route (/api/geocode)
-    - When working with MapTiler integration or location-related features
-    - When updating the BirthDataForm component
-    - When troubleshooting location search or coordinate issues
-
 - app_docs/chore-auto-timezone-from-location.md
   - Conditions:
     - When working with timezone detection or selection
@@ -41,5 +33,53 @@ This prompt helps you determine what documentation you should read based on the 
   - Conditions:
     - When working with the geocoding API route (/api/geocode)
     - When modifying location search functionality
+    - When working with the LocationSearch component
     - When troubleshooting Nominatim API issues or rate limits
     - When working with OpenStreetMap data or location results
+
+- app_docs/feature-solar-haze-ui-redesign.md
+  - Conditions:
+    - When working with the Solar Haze Portal design system
+    - When modifying claymorphic or neumorphic component styles
+    - When working with the warm color palette (solar-glow, haze-pink)
+    - When adding new animated background elements or sparkles
+    - When troubleshooting hydration mismatches in SSR components
+    - When modifying src/app/globals.css design tokens or theme colors
+    - When working with Outfit, DM Serif Display, or JetBrains Mono fonts
+    - When working with the CosmicBirthForm component
+    - When implementing new UI components or animations
+    - When working with the page layout or visual effects
+
+- app_docs/bug-wasm-fetch-failed-vercel-production.md
+  - Conditions:
+    - When working with the sweph-wasm library or ephemeris calculations
+    - When troubleshooting WASM loading issues in production
+    - When modifying src/lib/calculation/ephemeris.ts
+    - When deploying to Vercel or other serverless platforms
+    - When working with the /api/chart endpoint and seeing 500 errors
+
+- app_docs/feature-cosmic-ui-redesign-sprint1.md
+  - Conditions:
+    - When working with the Sprint 1 API endpoints (composite, transit, reference)
+    - When modifying CopilotKit or Google Gemini adapter configuration
+    - When working with the CosmicBirthForm component or timezone handling
+    - When implementing rate limiting or response caching
+    - When running or extending the Vitest test suite
+    - When troubleshooting WASM loading in serverless environments
+    - When understanding the overall API architecture
+
+- app_docs/chore-documentation-cleanup.md
+  - Conditions:
+    - When reviewing documentation accuracy or consistency
+    - When unsure which documentation is current for a feature
+    - When adding new documentation files
+    - When understanding the current tech stack (agent framework, geocoding, design system)
+
+- app_docs/feature-generate-reading.md
+  - Conditions:
+    - When working with AI-powered chart interpretation features
+    - When modifying the InterpretationPanel component
+    - When working with the /api/generate-reading endpoint
+    - When implementing new reading sections or prompt templates
+    - When troubleshooting Gemini API integration for readings
+    - When working with src/lib/prompts/reading-prompts.ts

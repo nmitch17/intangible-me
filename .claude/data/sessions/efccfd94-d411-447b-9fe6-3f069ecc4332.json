@@ -1,0 +1,9 @@
+{
+  "session_id": "efccfd94-d411-447b-9fe6-3f069ecc4332",
+  "prompts": [
+    "/implement specs/chore-reimplement-mastra-correctly.md",
+    "## Error Type\nRuntime Error\n\n## Error Message\nuseAgent: Agent 'default' not found after runtime sync (runtimeUrl=/api/copilotkit). Known agents: [hdGuide] Verify your runtime /info and/or agents__unsafe_dev_only.\n\n\n    at RootLayout (src/app/layout.tsx:37:9)\n\n## Code Frame\n  35 |     <html lang=\"en\">\n  36 |       <body className={`${outfit.variable} ${dmSerif.variable} ${jetbrainsMono.variable} font-sans`}>\n> 37 |         <CopilotKit runtimeUrl=\"/api/copilotkit\">\n     |         ^\n  38 |           {children}\n  39 |         </CopilotKit>\n  40 |       </body>\n\nNext.js version: 16.1.1 (Turbopack)\n",
+    "The chat is not initiating. use playwright via the dev-browser skill to try chatting with the agent and fix until it works perfectly",
+    "What the fuck?"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "session_id": "8c086c7a-38a8-4660-8a62-2672735a8837",
+  "prompts": [
+    "Getting this: react-dom.development.js:38560 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools\n:3003/api/chart:1  Failed to load resource: the server responded with a status of 500 (Internal Server Error)\nhot-reloader-client.js:187 [Fast Refresh] rebuilding\nhot-reloader-client.js:44 [Fast Refresh] done in 11ms\n\\\n\\\nUse the dev browser skill to fix",
+    "Continue",
+    "Why Nextjs 14.2? It's newest stable version is 16.1.1",
+    "The sweph package is what we started with before you decided we couldn';t use that and installed sweph-wasm. Look at git history and let's revert the codebase to before we switched out these packages."
+  ]
+}

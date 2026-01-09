@@ -4,13 +4,63 @@ Comprehensive Human Design chart calculation and analysis platform.
 
 ## Stack
 
-- **Frontend**: Next.js 14 (App Router)
+- **Frontend**: Next.js 16.1.1 (App Router)
 - **Database**: Neon (Serverless Postgres)
 - **ORM**: Drizzle
 - **Auth**: Better Auth
 - **AI Chat**: CopilotKit
-- **AI Agent**: Pydantic AI (Python)
+- **AI Agent**: Mastra (TypeScript)
 - **Deployment**: Vercel
+
+## Design System: Solar Haze Portal
+
+The app uses a custom "Solar Haze Portal" design system featuring claymorphism, neumorphic inputs, and warm gradient accents.
+
+### Colors
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--solar-glow` | `#ff9d6c` | Primary accent, buttons, labels |
+| `--haze-pink` | `#f0a2b1` | Secondary accent, gradients |
+| `--deep-cosmos` | `#2e1a47` | Text, dark backgrounds |
+| `--clay-surface` | `#ffffff` | Card backgrounds |
+| `--input-bg` | `#f7f3ff` | Form input backgrounds |
+
+### Typography
+
+- **Outfit** (300, 500): Primary sans-serif for body text
+- **DM Serif Display**: Elegant serif for display headings
+- **JetBrains Mono**: Monospace for labels and data points
+
+### Components
+
+#### Claymorphic Cards
+White surfaces with soft inset/outset shadows creating a 3D clay-like appearance.
+- Large cards: 60px border-radius
+- Chart cards: 40px border-radius
+
+#### Neumorphic Inputs
+Inset shadows on light purple backgrounds (#f7f3ff) for a pressed-in effect.
+- Border radius: 30px
+- No borders, shadow-based depth
+
+#### Gradient Buttons
+Linear gradient from solar-glow to haze-pink with glow shadow.
+- Static position on hover (shadow changes only)
+- No size or position transforms
+
+### Background
+
+- Radial gradient from #4a227a to #2e1a47
+- Three animated blurred orbs (orange, pink, purple)
+- Sparkle particles
+- 4% opacity grain overlay
+
+### Animations
+
+- **drift**: 20s ambient orb movement
+- **slideUp**: 1.2s card entrance animation
+- **sparkle**: Particle fade effect
 
 ## Project Structure
 
@@ -45,9 +95,6 @@ Comprehensive Human Design chart calculation and analysis platform.
 │   │       └── crosses.ts
 │   └── types/
 │       └── index.ts           # TypeScript types
-├── agent/                      # Pydantic AI agent (Python)
-│   ├── main.py
-│   └── requirements.txt
 ├── drizzle/                    # Database migrations
 └── public/
 ```
@@ -58,7 +105,7 @@ Comprehensive Human Design chart calculation and analysis platform.
 
 ```bash
 git clone <repo>
-cd human-design-app
+cd intangible-me
 npm install
 ```
 
@@ -93,14 +140,6 @@ npm run db:migrate
 
 ```bash
 npm run dev
-```
-
-### 5. (Optional) Run Python Agent
-
-```bash
-cd agent
-pip install -r requirements.txt
-uvicorn main:app --reload
 ```
 
 ## API Endpoints
@@ -149,15 +188,6 @@ Note: `swisseph` requires native compilation. For Vercel:
 - Use `serverComponentsExternalPackages` in `next.config.mjs`
 - May need to use Vercel Functions with Node.js runtime
 
-### Python Agent (Separate Service)
-
-Deploy to Railway, Render, or any Python-compatible platform:
-
-```bash
-cd agent
-# Deploy with your preferred platform
-```
-
 ## Swiss Ephemeris Note
 
 The `swisseph` npm package wraps the Swiss Ephemeris C library. It works in:
@@ -184,3 +214,4 @@ It does NOT work in:
 ## License
 
 MIT
+test

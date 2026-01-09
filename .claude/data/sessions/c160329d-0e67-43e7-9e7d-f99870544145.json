@@ -1,0 +1,6 @@
+{
+  "session_id": "c160329d-0e67-43e7-9e7d-f99870544145",
+  "prompts": [
+    "<bash-notification>\n<shell-id>bc88676</shell-id>\n<output-file>/tmp/claude/-Users-nickmitchell-intangible-me/tasks/bc88676.output</output-file>\n<status>killed</status>\n<summary>Background command \"Start dev server on port 3003\" was killed.</summary>\nRead the output file to retrieve the output.\n</bash-notification>"
+  ]
+}

@@ -6,6 +6,7 @@ import { CentersGrid } from './CentersGrid';
 import { ChannelsList } from './ChannelsList';
 import { ActivationsTable } from './ActivationsTable';
 import { CircuitryBalance } from './CircuitryBalance';
+import { InterpretationPanel } from './InterpretationPanel';
 
 interface ChartResultProps {
   chart: ChartData;
@@ -24,20 +25,22 @@ export function ChartResult({ chart, birth }: ChartResultProps) {
   });
 
   return (
-    <div className="space-y-6 mt-8">
-      <div className="text-center text-sm text-gray-500 dark:text-gray-400">
-        Chart calculated for {formattedDate}
-      </div>
+    <div className="space-y-10">
 
       <Card>
         <ChartOverview chart={chart} />
+      </Card>
+
+      {/* AI Interpretation Panel */}
+      <Card title="AI Reading">
+        <InterpretationPanel chart={chart} />
       </Card>
 
       <Card title="Incarnation Cross">
         <IncarnationCross cross={chart.cross} />
       </Card>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-10">
         <Card title="Energy Centers">
           <CentersGrid centers={chart.centers} />
         </Card>

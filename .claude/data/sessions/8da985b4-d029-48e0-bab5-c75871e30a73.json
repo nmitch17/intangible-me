@@ -1,0 +1,11 @@
+{
+  "session_id": "8da985b4-d029-48e0-bab5-c75871e30a73",
+  "prompts": [
+    "/ship ",
+    "Push and complete your tasks\\\n\n",
+    "Do the tasks",
+    "<bash-notification>\n<shell-id>b75bcfd</shell-id>\n<output-file>/tmp/claude/-Users-nickmitchell-intangible-me/tasks/b75bcfd.output</output-file>\n<status>failed</status>\n<summary>Background command \"Push feature branch\" failed with exit code 137.</summary>\nRead the output file to retrieve the output.\n</bash-notification>",
+    "I'm running git push -u origin feature/cosmic-ui-redesign in another terminal. The upload speed is just VERY slow on my rural internet connextion I'm on. It will take a while.",
+    "How can we remove what's unnecessary? We don't need to push or commit screenshots. In fact, we can just delete them,"
+  ]
+}

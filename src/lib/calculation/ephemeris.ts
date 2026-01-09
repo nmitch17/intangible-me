@@ -1,32 +1,47 @@
 /**
- * Swiss Ephemeris Wrapper (WebAssembly)
+ * Swiss Ephemeris Wrapper
  *
  * Calculates planetary positions for Human Design chart generation.
- * Uses sweph-wasm which is Swiss Ephemeris compiled to WebAssembly.
+ * Uses sweph-wasm, a WebAssembly implementation of Swiss Ephemeris
+ * that works across all platforms including serverless environments.
  */
 
 import SwissEPH from 'sweph-wasm';
 import { longitudeToGateLine } from './mandala';
-import type { Activations, Planet } from '@/types';
+import type { Activation, Activations, Planet } from '@/types';
+import { readFileSync } from 'fs';
+import path from 'path';
 
-// Singleton instance - initialized lazily
+// Singleton instance of SwissEPH
 let sweInstance: SwissEPH | null = null;
 
 /**
- * Get or initialize the Swiss Ephemeris instance
+ * Initialize SwissEPH WASM module (singleton pattern)
+ * Uses WASM file from public directory via filesystem read
  */
 async function getSwe(): Promise<SwissEPH> {
   if (!sweInstance) {
-    sweInstance = await SwissEPH.init();
+    // Read WASM file from public directory (works in both dev and Vercel)
+    const wasmPath = path.join(process.cwd(), 'public', 'swisseph.wasm');
+    const wasmBuffer = readFileSync(wasmPath);
+
+    // Create a data URL from the WASM buffer
+    const wasmBase64 = wasmBuffer.toString('base64');
+    const wasmDataUrl = `data:application/wasm;base64,${wasmBase64}`;
+
+    sweInstance = await SwissEPH.init(wasmDataUrl);
   }
   return sweInstance;
 }
 
+// Calculation flags
+const SEFLG_SWIEPH = 2; // Use Swiss Ephemeris
+const SEFLG_SPEED = 256; // Include speed
+
 /**
  * Convert Date to Julian Day
  */
-async function dateToJulianDay(date: Date): Promise<number> {
-  const swe = await getSwe();
+function dateToJulianDay(swe: SwissEPH, date: Date): number {
   const year = date.getUTCFullYear();
   const month = date.getUTCMonth() + 1;
   const day = date.getUTCDate();
@@ -37,28 +52,24 @@ async function dateToJulianDay(date: Date): Promise<number> {
 
 /**
  * Get planetary position at a given Julian Day
+ * Returns longitude in degrees
  */
-async function getPlanetPosition(julianDay: number, planet: number): Promise<number> {
-  const swe = await getSwe();
-
-  // swe_calc_ut returns array: [longitude, latitude, distance, lonSpd, latSpd, distSpd]
-  const result = swe.swe_calc_ut(julianDay, planet, swe.SEFLG_SWIEPH | swe.SEFLG_SPEED);
-
-  // Index 0 is longitude
+function getPlanetPosition(swe: SwissEPH, julianDay: number, planet: number): number {
+  const result = swe.swe_calc_ut(julianDay, planet, SEFLG_SWIEPH | SEFLG_SPEED);
+  // Result is array: [longitude, latitude, distance, lonSpeed, latSpeed, distSpeed]
   return result[0];
 }
 
 /**
- * Calculate the Design time (88 solar arc before birth)
+ * Calculate the Design time (88° solar arc before birth)
  *
- * This finds the exact moment when the Sun was 88 behind its birth position.
+ * This finds the exact moment when the Sun was 88° behind its birth position.
  */
-async function calculateDesignTime(birthJulianDay: number): Promise<number> {
-  const swe = await getSwe();
-  const birthSunLongitude = await getPlanetPosition(birthJulianDay, swe.SE_SUN);
+function calculateDesignTime(swe: SwissEPH, birthJulianDay: number): number {
+  const birthSunLongitude = getPlanetPosition(swe, birthJulianDay, swe.SE_SUN);
   const targetLongitude = (birthSunLongitude - 88 + 360) % 360;
 
-  // Approximate: Sun moves ~1 per day, so 88 ≈ 88 days
+  // Approximate: Sun moves ~1° per day, so 88° ≈ 88 days
   let searchJD = birthJulianDay - 88;
 
   // Binary search to find exact moment
@@ -67,7 +78,7 @@ async function calculateDesignTime(birthJulianDay: number): Promise<number> {
 
   for (let i = 0; i < 50; i++) {
     const mid = (low + high) / 2;
-    const sunLong = await getPlanetPosition(mid, swe.SE_SUN);
+    const sunLong = getPlanetPosition(swe, mid, swe.SE_SUN);
 
     // Calculate angular difference
     let diff = sunLong - targetLongitude;
@@ -91,9 +102,7 @@ async function calculateDesignTime(birthJulianDay: number): Promise<number> {
 /**
  * Get all planetary activations for a given Julian Day
  */
-async function getActivations(julianDay: number): Promise<Activations> {
-  const swe = await getSwe();
-
+function getActivations(swe: SwissEPH, julianDay: number): Activations {
   const planets: Array<{ name: Planet; code: number }> = [
     { name: 'sun', code: swe.SE_SUN },
     { name: 'moon', code: swe.SE_MOON },
@@ -110,23 +119,23 @@ async function getActivations(julianDay: number): Promise<Activations> {
   const activations: Partial<Activations> = {};
 
   for (const { name, code } of planets) {
-    const longitude = await getPlanetPosition(julianDay, code);
+    const longitude = getPlanetPosition(swe, julianDay, code);
     const { gate, line } = longitudeToGateLine(longitude);
     activations[name] = { gate, line };
   }
 
   // North Node
-  const northNodeLong = await getPlanetPosition(julianDay, swe.SE_TRUE_NODE);
+  const northNodeLong = getPlanetPosition(swe, julianDay, swe.SE_TRUE_NODE);
   const northNode = longitudeToGateLine(northNodeLong);
   activations.north_node = northNode;
 
-  // South Node is always opposite (180)
+  // South Node is always opposite (180°)
   const southNodeLong = (northNodeLong + 180) % 360;
   const southNode = longitudeToGateLine(southNodeLong);
   activations.south_node = southNode;
 
-  // Earth is always opposite Sun (180)
-  const sunLong = await getPlanetPosition(julianDay, swe.SE_SUN);
+  // Earth is always opposite Sun (180°)
+  const sunLong = getPlanetPosition(swe, julianDay, swe.SE_SUN);
   const earthLong = (sunLong + 180) % 360;
   const earth = longitudeToGateLine(earthLong);
   activations.earth = earth;
@@ -143,11 +152,12 @@ export async function calculateActivations(birthDateUtc: Date): Promise<{
   designTime: Date;
 }> {
   const swe = await getSwe();
-  const birthJD = await dateToJulianDay(birthDateUtc);
-  const designJD = await calculateDesignTime(birthJD);
 
-  const personality = await getActivations(birthJD);
-  const design = await getActivations(designJD);
+  const birthJD = dateToJulianDay(swe, birthDateUtc);
+  const designJD = calculateDesignTime(swe, birthJD);
+
+  const personality = getActivations(swe, birthJD);
+  const design = getActivations(swe, designJD);
 
   // Convert design JD back to Date
   const designResult = swe.swe_revjul(designJD, swe.SE_GREG_CAL);
@@ -167,6 +177,7 @@ export async function calculateActivations(birthDateUtc: Date): Promise<{
  * Calculate current transit positions
  */
 export async function calculateTransits(dateUtc: Date = new Date()): Promise<Activations> {
-  const jd = await dateToJulianDay(dateUtc);
-  return getActivations(jd);
+  const swe = await getSwe();
+  const jd = dateToJulianDay(swe, dateUtc);
+  return getActivations(swe, jd);
 }
