@@ -34,3 +34,34 @@ body {
   );
   min-height: 100vh;
 }
+
+/* Subtle gradient text for headings */
+.gradient-heading {
+  background: linear-gradient(
+    135deg,
+    #27272a 0%,
+    #3f3f46 25%,
+    #52525b 50%,
+    #3f3f46 75%,
+    #27272a 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  .gradient-heading {
+    background: linear-gradient(
+      135deg,
+      #f8f8f8 0%,
+      #e4e4e7 25%,
+      #d4d4d8 50%,
+      #e4e4e7 75%,
+      #fafafa 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
