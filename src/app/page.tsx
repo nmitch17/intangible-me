@@ -112,7 +112,7 @@ export default function Home() {
             <div className="data-point justify-center lg:justify-start">
               Live an empowered life
             </div>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-[0.95] tracking-[-0.02em] mb-6 text-white">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-[0.95] tracking-[-0.02em] mb-6 text-gradient-solar">
               Discover Your <br />Human Design
             </h1>
             <p className="font-sans font-light text-base text-white/70 max-w-[400px] leading-relaxed mx-auto lg:mx-0">

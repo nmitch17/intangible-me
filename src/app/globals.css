@@ -312,6 +312,24 @@ body {
   font-family: var(--font-jetbrains), 'JetBrains Mono', monospace;
 }
 
+/* Gradient text for headlines - subtle Solar Haze theme */
+.text-gradient-solar {
+  background: linear-gradient(135deg, #ffffff 0%, var(--solar-glow) 50%, var(--haze-pink) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Dark mode variant - slightly more vibrant for contrast */
+@media (prefers-color-scheme: dark) {
+  .text-gradient-solar {
+    background: linear-gradient(135deg, #ffffff 0%, var(--solar-glow) 40%, var(--haze-pink) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
 /* Chart Card - claymorphic variant for results */
 .chart-card {
   background: var(--clay-surface);
