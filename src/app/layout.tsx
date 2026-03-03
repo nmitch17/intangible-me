@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Outfit, DM_Serif_Display, JetBrains_Mono } from 'next/font/google';
 import { CopilotKit } from '@copilotkit/react-core';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 const outfit = Outfit({
@@ -37,6 +38,7 @@ export default function RootLayout({
         <CopilotKit runtimeUrl="/api/copilotkit">
           {children}
         </CopilotKit>
+        <Analytics />
       </body>
     </html>
   );
